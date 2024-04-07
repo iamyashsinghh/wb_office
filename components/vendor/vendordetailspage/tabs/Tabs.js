@@ -175,6 +175,7 @@ const Wrapper = styled.section`
       }
     }
   }
+  
   .set-max-width{
     max-width: 340px;
   }

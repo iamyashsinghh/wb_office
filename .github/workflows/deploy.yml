@@ -1,23 +1,25 @@
 name: Deploy
 
+# Trigger the workflow on push and
+# pull request events on the master branch
 on:
   push:
-    branches: ["main"]
+    branches: ["master"]
   pull_request:
-    branches: ["main"]
+    branches: ["master"]
 
+# Authenticate to the the server via ssh
+# and run our deployment script
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Deploy to Server
-        uses: appleboy/ssh-action@v0.1.4 # Updated to use a specific version
+        uses: appleboy/ssh-action@master
         with:
-          host: 185.199.52.112
-          username: root
-          port: 22
-          key: -----BEGIN OPENSSH PRIVATE KEY-----b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZWQyNTUxOQAAACBjyT2RSCzu5gRhFbmuEm99Y8WYtoMBVIHQYbeC5po9JgAAAJh9k98HfZPfBwAAAAtzc2gtZWQyNTUxOQAAACBjyT2RSCzu5gRhFbmuEm99Y8WYtoMBVIHQYbeC5po9JgAAAEBmnOG5DJPqfe++YSYrg8Pp7Sm9q11Z8BJnsYuHZxmxomPJPZFILO7mBGEVua4Sb31jxZi2gwFUgdBht4Lmmj0mAAAAEGdpdGFjdGlvbmF1dG9kZXABAgMEBQ==-----END OPENSSH PRIVATE KEY-----
-          script: >
-            cd ~/var/www/wb_new/yash/wb_office && 
-            ./.scripts/deploy.sh
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          script: "cd ~/wb_office && ./.scripts/deploy.sh"

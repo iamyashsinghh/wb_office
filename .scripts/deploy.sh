@@ -3,7 +3,7 @@ set -e
 
 echo "Deployment started..."
 
-git pull origin master
+git pull
 echo "New changes copied to server !"
 
 echo "Installing Dependencies..."

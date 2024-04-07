@@ -14,10 +14,10 @@ jobs:
       - name: Deploy to Server
         uses: appleboy/ssh-action@v0.1.4 # Updated to use a specific version
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
-          key: ${{ secrets.SSHKEY }}
+          host: 185.199.52.112
+          username: root
+          port: 22
+          key: -----BEGIN OPENSSH PRIVATE KEY-----b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZWQyNTUxOQAAACBjyT2RSCzu5gRhFbmuEm99Y8WYtoMBVIHQYbeC5po9JgAAAJh9k98HfZPfBwAAAAtzc2gtZWQyNTUxOQAAACBjyT2RSCzu5gRhFbmuEm99Y8WYtoMBVIHQYbeC5po9JgAAAEBmnOG5DJPqfe++YSYrg8Pp7Sm9q11Z8BJnsYuHZxmxomPJPZFILO7mBGEVua4Sb31jxZi2gwFUgdBht4Lmmj0mAAAAEGdpdGFjdGlvbmF1dG9kZXABAgMEBQ==-----END OPENSSH PRIVATE KEY-----
           script: >
             cd ~/var/www/wb_new/yash/wb_office && 
             ./.scripts/deploy.sh

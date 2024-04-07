@@ -22,4 +22,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          script: "cd ~/var/www/wb_new/yash/wb_office && ./.scripts/deploy.sh"
+          script: "cd /var/www/wb_new/yash/wb_office && ./.scripts/deploy.sh"

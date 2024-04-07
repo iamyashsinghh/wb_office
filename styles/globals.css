@@ -1,0 +1,27 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap'); */
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Noto+Sans&family=Poppins:wght@400;500;800&family=Roboto:wght@400;700&display=swap");
+/* width */
+::-webkit-scrollbar {
+  width: 5px !important;
+  border-radius: 20px;
+}
+
+/* Track background color */
+::-webkit-scrollbar-track {
+  background: #bdbcbc;
+  border-radius: 20px;
+}
+
+/* normal color */
+::-webkit-scrollbar-thumb {
+  transition: 5s all ease-in-out;
+  background: #b88a24;
+  border-radius: 0 0 20px 20px;
+}
+
+/* on hover */
+::-webkit-scrollbar-thumb:hover {
+  transition: 5s all ease-in-out;
+  background: #ecbc56;
+}

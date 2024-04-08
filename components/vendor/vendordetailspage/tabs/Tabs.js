@@ -1,16 +1,16 @@
 import styled from "styled-components";
-import { keyframes } from "styled-components";
 import { useState } from "react";
 import { IoIosCall } from 'react-icons/io'
 import { useGlobalContext } from "@/context/MyContext";
 import CallingRequest from "@/lib/request/callingrequest/CallingRequest";
 
-export default function Tabs({ vendor, openLeadsModel }) {
+export default function Tabs({ vendor,openLeadsModel}) {
+
     // console.log(vendor.package_option.split(","))
     // console.log(vendor.package_option)
 
     // const packages = vendor.package_option.split(",").filter(pack=>pack);
-    const packages = vendor.package_option?.split(",").map((item) => item.trim()).filter((item) => item)
+    const packages = vendor.package_option?.split(",").map((item)=>item.trim()).filter((item)=>item)
 
     // console.log(packages)
 
@@ -18,7 +18,7 @@ export default function Tabs({ vendor, openLeadsModel }) {
 
     // console.log(packages)
 
-    async function handleAnchorClick(e, slug) {
+    async function handleAnchorClick(e,slug) {
         e.stopPropagation();
         await CallingRequest(slug);
 
@@ -59,7 +59,7 @@ export default function Tabs({ vendor, openLeadsModel }) {
                             activeTabId === 2 && (<>
                                 <div className="first-grid-container">
                                     <h2 className="label">Address</h2>
-                                    <p className="info set-max-width">{vendor.vendor_address}</p>
+                                    <p className="info">{vendor.vendor_address}</p>
                                 </div>
                                 <div className="secound-grid-container">
                                     <h2 className="label">Phone</h2>
@@ -86,8 +86,8 @@ export default function Tabs({ vendor, openLeadsModel }) {
 
 
                         <div className="action-btns">
-                            <button className="venue-card-btn" onClick={(e) => { openLeadsModel() }}>Get Quotation</button>
-                            <a href={`tel:0${vendor.phone}`} onClick={(e) => { handleAnchorClick(e, vendor?.slug) }} className="call-btn" aria-label="call icon ">
+                            <button className="venue-card-btn" onClick={(e) => {openLeadsModel()} }>Get Quotation</button>
+                            <a href={`tel:0${vendor.phone}`} onClick={(e)=>{handleAnchorClick(e,vendor?.slug)}} className="call-btn" aria-label="call icon ">
                                 <IoIosCall className="call-icon" />
                             </a>
 
@@ -100,141 +100,136 @@ export default function Tabs({ vendor, openLeadsModel }) {
         </Wrapper>
     )
 }
-const slideIn = keyframes`
-from {
-  transform: translateY(20px);
-}
-to {
-  transform: translateY(0);
-}
-`;
-  const fadeIn = keyframes`
-from {
-  opacity: 0;
-}
-to {
-  opacity: 1;
-}
-`;
+
 
 const Wrapper = styled.section`
-  background-color: var(--bg-color);
-  animation: ${fadeIn} 0.5s ease-out forwards;
 
-  .tabs-container {
-    .tab-btn-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      animation: ${slideIn} 0.5s ease-out forwards;
+background-color: var(--bg-color);
 
-      .tab-btn {
-        text-align: center;
-        color: var(--primary-color);
-        font-size: 1.8rem;
-        font-family: "Poppins";
-        font-weight: 500;
-        padding: 1rem;
-        cursor: pointer;
-        background-color: transparent;
-        outline: none;
-        border: none;
-        transition: background-color 0.3s, color 0.3s;
+.tabs-container{
+    /* width: 100%; */
+    /* border: 1px solid black; */
+    border: 2px solid var(--primary-color);
 
-        &:hover {
-          color: white;
-          background-color: var(--primary-color);
-          animation: none;
+    .tab-btn-container{
+        border-bottom:2px solid var(--primary-color);
+        display: grid;
+        grid-template-columns:repeat(3,1fr);
+
+        .tab-btn{
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-family: "Poppins";
+            font-weight: 500;
+            padding: 1rem;
+            cursor: pointer;
+            background-color: transparent;
+            outline: none;
+            border: none;
+            border-left: 2px solid var(--primary-color);
+
         }
-      }
-      .selected-tab-btn {
-        color: white;
-        background-color: var(--primary-color);
-        border-bottom: none;
-        animation: none;
-      }
+        .selected-tab-btn{
+            color: white;
+            background-color: var(--primary-color);
+            border-bottom: none;
+        }
     }
 
-    .tab-content-container {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      padding: 2rem;
-      animation: ${slideIn} 0.5s ease-out forwards;
+    .tab-content-container{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        padding: 2rem;
 
-      .label {
-        font-size: 2rem;
-        font-family: "Poppins";
-        font-weight: 500;
-        color: var(--primary-color);
-      }
-      .info {
-        font-size: 1.8rem;
-        font-family: "Poppins";
-        font-weight: 500;
-        color: var(--para);
-        list-style: inside;
-      }
+        .label{
+            font-size: 2rem;
+            font-family: "Poppins";
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        .info{
+            font-size: 1.8rem;
+            font-family: "Poppins";
+            font-weight: 500;
+            color: var(--para);
+            
+            list-style: inside;
+
+        }
+        
     }
-  }
-  
-  .set-max-width{
-    max-width: 340px;
-  }
+}
 
-  .action-btns {
+
+
+
+
+.action-btns{
+    /* padding: 2rem 1rem; */
     margin-top: 1rem;
+    /* padding-right: 3rem; */
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0rem 2rem 1rem 2rem;
+    padding: 0rem 2rem 1rem 2rem ;
     width: 100%;
-    animation: ${fadeIn} 0.8s ease-out forwards;
 
-    .venue-card-btn {
-      background: none;
-      border: 1px solid #F33232;
-      padding: 1rem 2.5rem;
-      text-transform: uppercase;
-      border-radius: 0.5rem;
-      font-size: 1.8rem;
-      cursor: pointer;
-      transition: all 0.3s linear;
-      color: #F33232;
+    .venue-card-btn{
+        border: none;
+        white-space: nowrap;
+        background:none;
+        border: 1px solid #F33232;
+        padding: 1rem 2.5rem;
+        text-transform: uppercase;
+        border-radius:.5rem;
+        font-size: 1.8rem;
+        /* width: 100%; */
+        cursor: pointer;
+        transition: all .3s linear;
+        color: #F33232;
 
-      &:hover {
-        background-color: #F33232;
-        color: white;
-        transform: translateY(-2px);
-      }
-    }
-    .call-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.2rem 0.8rem;
-      cursor: pointer;
-      transition: transform 0.3s;
-
-      .call-icon {
-        font-size: 30px;
-        color: var(--phone);
-        transition: color 0.3s;
-      }
-
-      &:hover {
-        transform: scale(1.1);
-
-        .call-icon {
-          color: white;
+        &:hover{
+            background-color: #F33232;
+            color: white;
         }
-      }
-    }
-  }
 
-  @media (max-width: 850px) {
-    .tab-content-container {
-      grid-template-columns: repeat(1, 1fr) !important;
-      gap: 2rem;
-      padding: 2rem;
     }
-  }
-`;
+    .call-btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid green;
+        padding: .2rem .8rem;
+        border-radius: .5rem;
+        cursor: pointer;
+        .call-icon{
+
+            font-size: 30px;
+            color:  var(--phone);
+        }
+
+        &:hover{
+            background-color:  var(--phone);
+
+            .call-icon{
+                color: white;
+            }
+        }
+
+    }
+
+
+}
+
+@media (max-width:850px) {
+    .tab-content-container{
+        
+        grid-template-columns: repeat(1,1fr) !important;
+        gap: 2rem;
+        padding: 2rem;
+    }
+    
+}
+
+`

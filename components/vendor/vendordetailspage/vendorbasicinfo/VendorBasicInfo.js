@@ -12,8 +12,8 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
 
     const [showSummary, setShowSumary] = useState(true);
 
-
     // const vendor_summary = parse(vendor.summary);
+    //newchange
 
 
 

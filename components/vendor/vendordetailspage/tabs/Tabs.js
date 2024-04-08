@@ -189,6 +189,7 @@ background-color: var(--bg-color);
         transition: all .3s linear;
         color: #F33232;
 
+        
         &:hover{
             background-color: #F33232;
             color: white;

@@ -13,6 +13,7 @@ export default function Tabs({ vendor,openLeadsModel}) {
     const packages = vendor.package_option?.split(",").map((item)=>item.trim()).filter((item)=>item)
 
     // console.log(packages)
+    
 
     const [activeTabId, setActiveTab] = useState(1);
 

@@ -1,9 +1,9 @@
 module.exports = {
   apps : [
       {
-        name: "wb-client",
+        name: "wb-client-yash-auto",
         script: "npm start",
-        port: 3001
+        port: 3002
       }
   ]
 }

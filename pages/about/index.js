@@ -48,8 +48,6 @@ export default function Page() {
                         <p className="desc">
                         Wedding Banquets give you a wide range of banquet halls that offer cost-effective plans for the event. We short-listed  50,000 venues on our website that are WB-assured and suitable for all occasions and events. You can pick and book the venue of your choice from wedding banquets, that matches your requirements and is in proximity to your locality. 
                         </p>
-
-
                     </div>
                 </article>
                 <article>

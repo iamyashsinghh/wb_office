@@ -16,8 +16,8 @@ export default function Page() {
                 <article className="header-article">
                     <div className="contant">
                         <h2 className="title"> About us </h2>
-                        <p className="desc">Wedding Banquets is one of India’s largest and most trusted Wedding Company, connecting engaged couples with local wedding professionals, including Wedding Venues and Vendors around Delhi NCR. Millions of couples from around the world can search, compare and book from a directory of over 500,000 Venues and vendors. Wedding Banquets disrupt the Event Management industry by providing a one-stop destination to discover and book venues and vendors.</p>
-                        <p className="desc">Find exclusively curated party packages, order party supplies and party gifts, along with managing events online, whether it is a birthday party, a corporate event, or a wedding. Our Team at Wedding Banquets is working round the clock to make sure that every event booked through Wedding Banquets upholds the highest professional quality.</p>
+                        <p className="desc">Wedding Banquets is one of India’s largest and most trusted Wedding Company, connecting wed-to-be couples with local wedding specialists, including Wedding Venues and Vendors around Delhi NCR. Millions of couples worldwide can search, compare, and book from a directory of over Pan India 50,000 Venues and vendors. Wedding banquets disrupt the event management industry by providing versatility for discovering and booking venues and vendors.</p>
+                        <p className="desc">Our team at Wedding Banquets works around the clock to ensure that every event booked through Wedding Banquets upholds the highest professional quality. Wedding management will be calm and uncomplicated when you choose us as your wedding planners. </p>
                     </div>
                     <div className="privacy-vector-image">
                         <Image
@@ -33,7 +33,7 @@ export default function Page() {
                     <div className="contant">
 
                         <h2 className="title">
-                            WHY ChOOSE US:
+                          Why Wedding Banquets?
                         </h2>
                     </div>
                 </article>
@@ -42,11 +42,11 @@ export default function Page() {
                     <div className="contant">
 
                         <h2 className="title">
-                            1. Beginning
+                            1. Wide Range of venues
                         </h2>
 
                         <p className="desc">
-                            Marriage is that the starting—the beginning of the family—and may be a life-long commitment. ”Marriage is that the starting—the beginning of the family—and may be a life-long commitment. It additionally provides a chance to grow in selflessness as you serve your better half and youngsters.
+                        Wedding Banquets give you a wide range of banquet halls that offer cost-effective plans for the event. We short-listed  50,000 venues on our website that are WB-assured and suitable for all occasions and events. You can pick and book the venue of your choice from wedding banquets, that matches your requirements and is in proximity to your locality. 
                         </p>
 
 
@@ -56,11 +56,11 @@ export default function Page() {
                     <div className="contant">
 
                         <h2 className="title">
-                            2. Purity
+                            2. Professional Vendors
                         </h2>
 
                         <p className="desc">
-                            Marriage is meant for purity. We have a tendency to face temptation nearly each minute and from all directions. The bond of marriage offers us the support to defeat temptation by partaking in deep, satisfying.
+                        We are determined to give you a smooth and fast-going experience of wedding arrangements. Wedding Banquets has an abundance of professional vendors that will provide 100% client satisfaction services. They are the experts who have years and years of experience and practice in making weddings unforgettable for hosts, guests, and even the stars. Thus we say we are the one-stop solution for all your wedding itinerary.
                         </p>
 
 
@@ -70,11 +70,11 @@ export default function Page() {
                     <div className="contant">
 
                         <h2 className="title">
-                            3. Oneness
+                            3. Vigilant Venue managers
                         </h2>
 
                         <p className="desc">
-                            When a man and woman unite, the “two become one.” A wedding may be a bond like no different. It offers us a life partner, a teammate, as we have a tendency to move through the challenges of life along.
+                        Management is the key point of every wedding. Proper, organized, and vigilant management makes a wedding perfect. Hence, to take this fragile and major responsibility, our managers are present at the wedding venues for you. They are those people who are proficient in managing events in any circumstances. Our venue managers will be present at the banquet halls to give you guided visits and won’t leave your side until they give your wedding their beautiful conclusion. 
                         </p>
 
 
@@ -84,11 +84,25 @@ export default function Page() {
                     <div className="contant">
 
                         <h2 className="title">
-                            4. Love
+                            4. Informative Social media and blogs
                         </h2>
 
                         <p className="desc">
-                            Marriage is meant to mirror our Creator’s unconditional love for us. It’s a love which will invariably be there and can ne'er leave us or desolate us. Once a person and girl love each other flatly, happiness and joy follow.
+                        If you are looking for wedding aesthetics like decor, trendy mandap setups, entrance ideas, and more, you should check our social media handles and blogs section. There, you will get lots of wedding inspiration for dresses for the bride and groom, decoration ideas, and entertainment ideas for your wedding event. You will also be updated with the celebrities and famous intellectuals' wedding news only at weddingbanquets.in 
+                        </p>
+
+
+                    </div>
+                </article>
+                <article>
+                    <div className="contant">
+
+                        <h2 className="title">
+                            5. Attentive customer support
+                        </h2>
+
+                        <p className="desc">
+                        It's convenient to have someone who can hear your problems at any time. We can’t disrupt anyone’s individual life, but as your wedding planners, it is our duty to hear you whenever you want. Wedding Banquets has attentive customer support (relationship managers) who will respond to your query or any wedding management problem within 24 hours. Our toll-free number line is available 24/7 but you can also send your queries or complaints on WhatsApp.  
                         </p>
 
 

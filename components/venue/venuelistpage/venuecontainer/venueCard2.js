@@ -237,9 +237,9 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 3fr 6fr;
   padding: 1rem;
-  max-width: 110rem;
+  //max-width: 110rem;
   /* max-height: 400px; */
-  margin: 0rem auto 1rem auto;
+  //margin: 0rem auto 1rem auto;
   gap: 1rem;
 
   .image-slider {

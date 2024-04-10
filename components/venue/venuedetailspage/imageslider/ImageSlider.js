@@ -124,7 +124,7 @@ z-index: 0;
 padding: 0px 0px !important;
 
 .slider-container{       
-    max-width: 155rem;
+    //max-width: 155rem;
     margin: auto;   
 }
 

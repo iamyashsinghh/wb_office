@@ -236,7 +236,7 @@ background-color: var(--bg-color);
     }
 
 .venue-list-container{
-    max-width: 155rem;
+    //max-width: 155rem;
     margin: auto;
     display: grid;
     grid-template-columns: 1fr 3fr;

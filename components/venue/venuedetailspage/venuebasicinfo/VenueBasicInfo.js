@@ -64,7 +64,7 @@ background-color: var(--bg-color);
 .basic-venue-info-container{
     /* padding: 1rem; */
     /* border: 2px solid red; */
-    max-width: 155rem;
+    //max-width: 155rem;
     margin: auto;
     display: grid;
     grid-template-columns: 7fr 3fr;

@@ -18,7 +18,7 @@ function Hero({ vendor_list, venue_list, venueCategogies, cities }) {
   let allVenues = venue_list.map((category) => category.name);
   let allVenuesSlug = venue_list.map((category) => category.slug);
   let allVendorsSlug = vendor_list.map((category) => category.slug);
-  const [backgroundImage, setBackgroundImage] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState("/banner/banner.png");
   const suggestions = [
     ...venueNames,
     ...vendorNames,
@@ -38,7 +38,6 @@ function Hero({ vendor_list, venue_list, venueCategogies, cities }) {
   useEffect(() => {
     const cityImagePath = `/banner/${selectedCity.toLowerCase()}.png`;
 
-    // Define an asynchronous function to check if the image exists
     async function checkImageExists(url) {
       try {
         const response = await fetch(url, { method: "HEAD" });

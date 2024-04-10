@@ -9,7 +9,7 @@ import { CheckFilter } from "@/components/miscellaneous/filter/CheckFilter";
 import BudgetRangeSlider from "@/components/miscellaneous/filter/BudgetSlider";
 
 
-function Filter({filterQuery,localities,venueCategories,city,category,locality}) {
+function Filter({ filterQuery, localities, venueCategories, city, category, locality }) {
     // console.log(localities)
 
     // console.log("From filter")
@@ -89,12 +89,12 @@ function Filter({filterQuery,localities,venueCategories,city,category,locality})
     const [perBudget, setPerBudget] = useState([100000, 1000000])
     const [perPlate, setPerPlate] = useState([100, 5000])
     const [selectedFoodPreferance, setSelectedFoodPreferance] = useState([""])
+    const [searchValue, setSearchValue] = useState(filterQuery.serch_value);
 
- 
 
     function handleApplyFilter() {
         const localitiesFilterArray = selectedLocalities.join(",")
-        router.push(`/${selectedCategories[0] || "banquet-halls"}/${city}/${localities.length >= 1 ? "all" : locality}?guest=${guest || ""}&per_budget=${perBudget.join(",")}&per_plate=${perPlate.toString()}&multi_localities=${localitiesFilterArray}&food_type=${selectedFoodPreferance[0]}`)
+        router.push(`/${selectedCategories[0] || "banquet-halls"}/${city}/${localities.length >= 1 ? "all" : locality}?guest=${guest || ""}&per_budget=${perBudget.join(",")}&per_plate=${perPlate.toString()}&multi_localities=${localitiesFilterArray}&food_type=${selectedFoodPreferance[0]}&serch_value=${searchValue.toString()}`)
 
     }
 
@@ -103,13 +103,13 @@ function Filter({filterQuery,localities,venueCategories,city,category,locality})
 
             <CheckFilter items={localities} name={"Localities"} list={selectedLocalities} setList={setSelectedLocalities} handleApplyFilter={handleApplyFilter} />
 
-            <BudgetRangeSlider perBudget={perBudget} setPerBudget={setPerBudget} perPlate={perPlate} setPerPlate={setPerPlate}  handleApplyFilter={handleApplyFilter} />
+            <BudgetRangeSlider perBudget={perBudget} setPerBudget={setPerBudget} perPlate={perPlate} setPerPlate={setPerPlate} handleApplyFilter={handleApplyFilter} />
 
             <CylenderFilter name={"Guest"} items={guestList} value={guest} setValue={setGuest} handleApplyFilter={handleApplyFilter} />
 
             <RedioFilter items={venueCategories} name={"Categories"} list={selectedCategories} setList={serSelectedCategories} handleApplyFilter={handleApplyFilter} />
 
-            <CheckFilter items={facilitiesItem} name={"Facilities"} list={facilities} setList={setFacilities} handleApplyFilter={handleApplyFilter}/>
+            <CheckFilter items={facilitiesItem} name={"Facilities"} list={facilities} setList={setFacilities} handleApplyFilter={handleApplyFilter} />
 
             <RedioFilter name={"Food Preferance"} items={meallist} list={selectedFoodPreferance} setList={setSelectedFoodPreferance} handleApplyFilter={handleApplyFilter} />
 

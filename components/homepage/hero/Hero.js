@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Image from "next/image";
-import SearchBar from "@/components/miscellaneous/Searchbar";
 import Offer from "@/components/miscellaneous/Offer";
 import SearchBar3 from "@/components/miscellaneous/SearchBar3";
 import { useGlobalContext } from "@/context/MyContext";
@@ -55,6 +54,7 @@ function Hero({ vendor_list, venue_list, venueCategogies, cities }) {
       setBackgroundImage(backgroundImage);
     });
   }, [selectedCity, setBackgroundImage]);
+
   return (
     <Section className="section-hero">
       <div className="hero-container">
@@ -91,7 +91,6 @@ function Hero({ vendor_list, venue_list, venueCategogies, cities }) {
           vendorObject={vendorObject}
         />
       </div>
-
       <Offer />
     </Section>
   );

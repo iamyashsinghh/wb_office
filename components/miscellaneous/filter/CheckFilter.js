@@ -83,7 +83,7 @@ export function CheckFilter({ name, items, list, setList ,handleApplyFilter}) {
 
         <div className="header-title">
 
-            <h2>{name}   <span className="badge-count">
+            <h2>{name}  <span className="badge-count">
                 {`(${items.length})`}
             </span></h2>
             <span className="clear-btn" onClick={handleClear}>Clear</span>
@@ -131,7 +131,6 @@ export function CheckFilter({ name, items, list, setList ,handleApplyFilter}) {
 
 
                 })
-
             }
             {
                 items?.length > 5 && (

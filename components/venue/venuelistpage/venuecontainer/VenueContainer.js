@@ -9,20 +9,41 @@ import { useGlobalContext } from "@/context/MyContext";
 import Filter from "../filter/Filter";
 import useLeadModel from "@/lib/hook/useLeadModel";
 import useCallConversion from "@/lib/hook/useCallConversion";
+import SearchBarVenue from "@/components/miscellaneous/SearchBarVenue";
 
 
-function VenueContainer({ city, lists, locality, category, count, localities, venueCategories, filterQuery }) {
+function VenueContainer({ city, lists, locality, category, count, localities, venueCategories, vendorCategories, data, filterQuery }) {
 
-    // console.log(localities)
-    // console.table(filterQuery)
-
-
-    const { setShowFilter } = useGlobalContext();
-    const {openLeadModel} = useLeadModel();         //To open lead model
-    const {callConversion} = useCallConversion();         //For call conversion
-    const [loading,setLoading] = useState(false);
-    
-
+    const { setShowFilter, selectedCity, cities } = useGlobalContext();
+    const { openLeadModel } = useLeadModel();         //To open lead model
+    const { callConversion } = useCallConversion();         //For call conversion
+    const [loading, setLoading] = useState(false);
+    const {venue_list, vendor_list} = data;
+    let venueObject = [];
+    let vendorObject = [];
+    let venueNames = venueCategories.map((category) => category.name);
+    let cityNames = cities.map((city) => city.name);
+    let vendorNames = vendorCategories.map((category) => category.name);
+    let vendorBrandNames = vendor_list.map((category) => category.brand_name);
+    let allVenues = venue_list.map((category) => category.name);
+    let allVenuesSlug = venue_list.map((category) => category.slug);
+    let allVendorsSlug = vendor_list.map((category) => category.slug);
+    const suggestions = [
+        ...venueNames,
+        ...vendorNames,
+        ...vendorBrandNames,
+        ...allVenues,
+    ];
+    for (let i = 0; i < allVenues.length; i++) {
+        let obj = {};
+        obj[allVenues[i]] = allVenuesSlug[i];
+        venueObject.push(obj);
+    }
+    for (let i = 0; i < vendorBrandNames.length; i++) {
+        let obj = {};
+        obj[vendorBrandNames[i]] = allVendorsSlug[i];
+        vendorObject.push(obj);
+    }
 
     let page = useRef(1)
 
@@ -40,10 +61,10 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
 
 
     //This will update the hasmore state.
-    useEffect(()=>{
+    useEffect(() => {
         setHasMore(venuelists.length >= count ? false : true)
 
-    },[venuelists])
+    }, [venuelists])
 
 
     //For infinity scroll to fetch more venues.
@@ -52,7 +73,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
         try {
             setLoading(true)
 
-            
+
             if (venuelists.length >= count) {
                 // console.log("Hy")
                 setHasMore(false)
@@ -61,24 +82,21 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
             page.current = page.current + 1;
 
             const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}/${page.current}?guest=${filterQuery.guest}&per_budget=${filterQuery.per_budget}&per_plate=${filterQuery.per_plate}&multi_localities=${filterQuery.multi_localities}`
-    
-    
+
+
             let newLists = await fetch(url)
             newLists = await newLists.json();
             newLists = newLists.data;
             setVenueList([...venuelists, ...newLists]);
-            
+
         } catch (error) {
             console.log(error)
             // 
-        }finally{
+        } finally {
             setLoading(false)
         }
 
     }
-
-
-
     return (
         <Section className="section section-venue-container">
             {/* <Heading text={'Wedding Banque t in Mumbai'} desc={"As you start with the wedding preparations and dive deeper to create the perfect fairytale wedding, one crucial element is the wedding venue. It can be exhausting, especially in Delhi, as the city is brimming with options."} /> */}
@@ -101,34 +119,40 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                     {/* //This filter component will not rerender when ever model open or colse, because we wrap this filter component with memo(), that means it will only re-render when the props in the filter component will change otherwise it will not re-render. */}
                     <Filter locality={locality} filterQuery={filterQuery} localities={localities} venueCategories={venueCategories} city={city} category={category} />
 
-              
                 </aside>
                 <main className="venues-list box">
                     {/* <Heading text={`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality} (${count})`} /> */}
+                    <div className="d-flex">
                     <h2 className="main-title">{`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality}`} <span className="count">{`(${count || 0})`}</span></h2>
-
-               
-
+                    <SearchBarVenue
+                      suggestions={suggestions}
+                      selectedCity={selectedCity}
+                      vendorBrandNames={vendorBrandNames}
+                      allVenues={allVenues}
+                      allVenuesSlug={allVenuesSlug}
+                      venueObject={venueObject}
+                      vendorObject={vendorObject}
+                    />
+                    </div>
                     {
-
                         venuelists?.map((item, index) => (
                             <>
                                 {/* <VenueCard key={index} venue={item} city={city} /> */}
-                                <VenueCard2 key={index} venue={item} city={city} openLeadModel={openLeadModel} callConversion={callConversion}/>
+                                <VenueCard2 key={index} venue={item} city={city} openLeadModel={openLeadModel} callConversion={callConversion} />
                             </>
 
                         ))
                     }
-                    
+
                     {
-                        loading ?<div style={{textAlign:"center"}}> <Spinner2/> </div> : null
+                        loading ? <div style={{ textAlign: "center" }}> <Spinner2 /> </div> : null
                     }
                     {/* Show the button only when the data are available */}
                     {
-                        hasMore ? ( <button className="load-more-btn" onClick={fetchMoreVenue}>View More</button>) : (<center style={{fontSize:"1.5rem"}}>You have seen it all</center>)
+                        hasMore ? (<button className="load-more-btn" onClick={fetchMoreVenue}>View More</button>) : (<center style={{ fontSize: "1.5rem" }}>You have seen it all</center>)
                     }
-                   
-            
+
+
 
                 </main>
             </div>
@@ -141,10 +165,13 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
 export default VenueContainer;
 
 const Section = styled.section`
-padding-top:0px !important
-;
+padding-top:0px !important;
 background-color: var(--bg-color);
-
+.d-flex{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .sticky-head{
         position: sticky;
         top: 8rem;
@@ -155,7 +182,7 @@ background-color: var(--bg-color);
         align-items: center;
         background-color: white;
         padding:1.5rem 2rem;
-        box-shadow:var(--shadow);
+        // box-shadow:var(--shadow);
         /* border-bottom: 1px solid gray;  */
         display: none;
 

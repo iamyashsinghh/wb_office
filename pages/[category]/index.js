@@ -1,7 +1,6 @@
 // This page is  for old URL.
 // If the url is the slug of city then it will be redirect to the home page of that city.
 // If the url is the slug of old website the it will redirect to the coressponding page, using the magic box.
-
 import Blog from "@/components/homepage/blog/Blog";
 import Contact from "@/components/homepage/contactUs/Contact";
 import Hero from "@/components/homepage/hero/Hero";

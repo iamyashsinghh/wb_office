@@ -10,7 +10,8 @@ import Footerdescription from "@/components/miscellaneous/pagedescription/PageDe
 export default function VenueListPage({ data }) {
   const { city, locality, category, localities, result, filterQuery } = data;
 
-  const { venueCategories } = useGlobalContext();
+  const { venueCategories, vendorCategories } = useGlobalContext();
+
 
   return (
     <>
@@ -40,6 +41,8 @@ export default function VenueListPage({ data }) {
         city={city}
         localities={localities}
         venueCategories={venueCategories}
+        vendorCategories={vendorCategories}
+        data={data}
         filterQuery={filterQuery}
       />
       {/* <FilterButton /> */}

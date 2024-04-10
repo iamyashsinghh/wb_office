@@ -30,6 +30,10 @@ export const MyContextProvider = ({ children }) => {
   const [venueCategories, setVenuesCategories] = useState([]);
   const [cityRoute, setCityRoute] = useState("");
 
+
+  //serch state routes 
+  const [searchSuggestions, setSearchSuggestions] = useState("");
+
   //This useEffect will run when we set the setRouteCity(city_slug), this will rediect to the /city url
   //I am setting city route when change with dropdwon on navbar and homepage dropdown, Because i want to that when a user change the city it will redirect to the /city page.
   //If a user is selecting the city and we are only setting the selectedCity state then the url will not be redirect. To rediect the url we have to update the CityRoute with new city slug.

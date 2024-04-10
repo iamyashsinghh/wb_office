@@ -27,41 +27,23 @@ function Venue(props) {
   }, [props.city]);
 
   const jsonLdData = {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    name: "Banquet Halls",
-    image: "https://weddingbanquets.in/fav-icon/favicon14.png",
-    brand: {
-      "@type": "Brand",
-      name: "Wedding Banquets",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "Organization",
+      "name": "Wedding Banquets",
+      "url": "https://weddingbanquets.in/"
     },
-    offers: {
-      "@type": "Offer",
-      url: "https://weddingbanquets.in/",
-      priceSpecification: {
-        "@type": "PriceSpecification",
-        price: 1000.0,
-        priceCurrency: "INR",
-        minPrice: "200",
-        maxPrice: "5500",
-      },
+    "author": {
+      "@type": "Person",
+      "name": "User"
     },
-    aggregateRating: {
+    "reviewRating": {
       "@type": "AggregateRating",
-      ratingValue: "4",
-      bestRating: "5",
-      worstRating: "3",
-      ratingCount: "3828",
-      reviewCount: "3828",
-    },
-    review: {
-      "@type": "Review",
-      reviewBody: "This is a fantastic banquet hall for weddings and events.",
-      author: {
-        "@type": "Person",
-        name: "Prince",
-      },
-    },
+      "ratingValue": 4.4,
+      "reviewCount": 3956,
+      "bestRating": 5.0,
+      "worstRating": 1.0
+    }
   };
 
   if (props.result.tag === "venues") {
@@ -74,7 +56,6 @@ function Venue(props) {
             content={props.result.meta?.meta_description}
           />
           <meta name="keywords" content={props.result.meta?.meta_keywords} />
-
           <meta property="og:title" content={props.result.meta?.meta_title} />
           <meta
             property="og:description"
@@ -150,25 +131,18 @@ export async function getServerSideProps({ query, req, res }) {
     let { category, city, locality } = query;
 
     //For filter
-    const { guest, per_plate, per_budget, multi_localities } = query;
+    const { guest, per_plate, per_budget, multi_localities , serch_value } = query;
 
     const filterQuery = {
       guest: guest || "",
       per_plate: per_plate || "",
       per_budget: per_budget || "",
       multi_localities: multi_localities || "",
+      serch_value: serch_value || "",
     };
 
-    // console.log(filterQuery);
-
-    const url = `${process.env.SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}?guest=${filterQuery.guest}&per_plate=${filterQuery.per_plate}&per_budget=${filterQuery.per_budget}&multi_localities=${filterQuery.multi_localities}`;
+    const url = `${process.env.SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}?guest=${filterQuery.guest}&per_plate=${filterQuery.per_plate}&per_budget=${filterQuery.per_budget}&multi_localities=${filterQuery.multi_localities}&serch_value=${filterQuery.serch_value}`;
     const getlocalitiesURL = `${process.env.SERVER_DOMAIN}/api/locations/${city}`;
-
-    // let response = await fetch(url)
-    // const result = await response.json();
-
-    // let localities = await fetch(getlocalitiesURL);
-    // localities = await localities.json();
 
     const fetchData = async (url) => {
       const response = await fetch(url);
@@ -211,7 +185,6 @@ export async function getServerSideProps({ query, req, res }) {
 
       // const data = await response.json();
       // console.log("locality data " + data)
-
       // return data;
     };
 
@@ -224,6 +197,18 @@ export async function getServerSideProps({ query, req, res }) {
     //     fetchData(getlocalitiesURL),
     // ]);
 
+      const url1 = `${process.env.SERVER_DOMAIN}/api/home_page/`;
+      let homePageData = await fetch(url1);
+      homePageData = await homePageData.json();
+
+      const url2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
+      let vendor_list = await fetch(url2);
+      vendor_list = await vendor_list.json();
+
+      const url3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
+      let venue_list = await fetch(url3);
+      venue_list = await venue_list.json();
+
     return {
       props: {
         result: result || null,
@@ -232,6 +217,8 @@ export async function getServerSideProps({ query, req, res }) {
         category: category || null,
         localities: localities || null,
         filterQuery,
+        vendor_list: vendor_list || null,
+        venue_list: venue_list || null,
       },
     };
   } catch (error) {

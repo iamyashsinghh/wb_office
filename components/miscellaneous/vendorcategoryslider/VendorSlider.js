@@ -29,7 +29,7 @@ export default function VendorSlider({ vendorCategories }) {
           slidesPerView={3}
           spaceBetween={10}
           freeMode={true}
-          loopAdditionalSlides={1}
+          // loopAdditionalSlides={1}
           breakpoints={{
             600: {
               slidesPerView: 4,

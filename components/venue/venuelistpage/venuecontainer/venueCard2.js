@@ -228,7 +228,6 @@ function VenueCard2({ venue, city, openLeadModel, callConversion }) {
     </Wrapper>
   );
 }
-// By changing the side filter section, now this will not re-render again and again
 export default memo(VenueCard2);
 
 const Wrapper = styled.div`

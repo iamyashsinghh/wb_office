@@ -123,7 +123,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                 <main className="venues-list box">
                     {/* <Heading text={`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality} (${count})`} /> */}
                     <div className="d-flex">
-                    <h2 className="main-title">{`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality}`} <span className="count">{`(${count || 0})`}</span></h2>
+                    <h1 className="venue-conatiner-h1 main-title">{`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality}`} <span className="count">{`(${count || 0})`}</span></h1>
                     <SearchBarVenue
                       suggestions={suggestions}
                       selectedCity={selectedCity}
@@ -171,6 +171,9 @@ background-color: var(--bg-color);
     display:flex;
     justify-content: space-between;
     align-items: center;
+}
+.venue-conatiner-h1{
+    font-weight: 500;
 }
 .sticky-head{
         position: sticky;

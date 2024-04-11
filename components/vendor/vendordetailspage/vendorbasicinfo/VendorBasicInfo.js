@@ -116,20 +116,7 @@ background-color: var(--bg-color);
             font-size: 1.8rem !important;
             color: var(--para) !important;
             font-weight: 400 !important;
-
-            ul,li{
-                margin-top: 1rem;
-                padding: 0px !important;
-                list-style:none !important;
-                margin-bottom: 10px;
-                font-family: "Poppins" !important;
-                font-size: 1.8rem !important;
-                color: var(--para) !important;
-                font-weight: 400 !important;
-                
-            }
         }
-
         .read-more-btn{
             color: var(--info-color);
             cursor: pointer;

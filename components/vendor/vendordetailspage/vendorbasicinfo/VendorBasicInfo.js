@@ -5,7 +5,7 @@ import { BiRupee } from 'react-icons/bi'
 import CallingRequest from "@/lib/request/callingrequest/CallingRequest";
 import Image from "next/image";
 import TabsComponent from "../tabsComponent/TabsComponent";
-import VendorSticyNav from "../vendorSticyNav/VendorSticyNav";
+import Tabs from "../tabs/Tabs";
 
 export default function VendorBasicInfo({ vendor, openLeadsModel }) {
 
@@ -23,9 +23,7 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                     <h1 className="v-name">{vendor.brand_name}</h1>
                 </div>
                 </div>
-                <div className="info-container sticy-nav">
-                <VendorSticyNav></VendorSticyNav>
-                </div>
+                <Tabs vendor={vendor} openLeadsModel={openLeadsModel} />
             <div className="info-container">
                 <TabsComponent images={vendor.images} />
                 <div className="package-card card">
@@ -48,8 +46,9 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                     </div>
                 </div>
             </div>
-            <div className="info-container">
+            <div className="info-container" id="vendor_basic_desc">
             <div className="card info-card">
+                    <h2 className="v-name">About {vendor.brand_name}</h2>
                     <div className="v-desc" dangerouslySetInnerHTML={{ __html: showSummary ? vendor.summary : vendor.summary.slice(0, 500) }}></div>
                 </div>
             </div>
@@ -63,11 +62,8 @@ const Wrapper = styled.section`
 background-color: var(--bg-color);
 position: relative;
 padding: 2rem 0;
-.sticy-nav{
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: white;
+.info-card{
+    margin-top:50px;
 }
 .info-container{
     padding: 0rem 1rem;

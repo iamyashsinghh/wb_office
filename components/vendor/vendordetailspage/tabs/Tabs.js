@@ -31,9 +31,9 @@ export default function Tabs({ vendor,openLeadsModel}) {
 
                 <div className="tabs-container">
                     <div className="tab-btn-container">
-                        <button className={`tab-btn ${activeTabId === 1 && "selected-tab-btn"}`} onClick={() => setActiveTab(1)}>Package</button>
+                        <button className={`tab-btn ${activeTabId === 1 && "selected-tab-btn"}`} onClick={() => setActiveTab(1)}>Pricing</button>
                         <button className={`tab-btn ${activeTabId === 2 && "selected-tab-btn"}`} onClick={() => setActiveTab(2)}>Contact Info</button>
-                        <button className={`tab-btn ${activeTabId === 3 && "selected-tab-btn"}`} onClick={() => setActiveTab(3)}>About</button>
+                        <a href="#vendor_basic_desc" className={`tab-btn ${activeTabId === 3 && "selected-tab-btn"}`}>About</a>
 
                     </div>
                     <div className="tab-content-container">
@@ -106,7 +106,9 @@ export default function Tabs({ vendor,openLeadsModel}) {
 const Wrapper = styled.section`
 
 background-color: var(--bg-color);
-
+ul li{
+    list-style: none !important;
+}
 .tabs-container{
     /* width: 100%; */
     /* border: 1px solid black; */

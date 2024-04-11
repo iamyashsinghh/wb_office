@@ -46,7 +46,6 @@ export default function VendorDetailsPage({ response }) {
       <BreadCrumb meta_title={vendor.meta_title} />
       <ImageSlider images={vendor.images} wb_assured={vendor?.wb_assured} />
       <VendorBasicInfo vendor={vendor} openLeadsModel={openLeadsModel} />
-      <Tabs vendor={vendor} openLeadsModel={openLeadsModel} />
       <HaveUsCallYou />
       <Policies />
       {similar_vendors && <SimilarVendors vendors={similar_vendors} />}

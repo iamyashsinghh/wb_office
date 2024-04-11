@@ -13,7 +13,7 @@ const TabsComponent = ({ images }) => {
   });
 
   return (
-    <Wrapper className="section info-section">
+    <Wrapper className="info-section">
       <div className="box container">
         <div className="tab-titles">
           <button
@@ -49,25 +49,24 @@ const Wrapper = styled.div`
     box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
   .tab-titles {
-    border-bottom: 2px solid lightGray;
+    // border-bottom: 2px solid lightGray;
   }
   .tab-button {
-    padding: 20px;
-    margin-right: 5px;
+    margin-left: 10px;
+    margin-top: 3px;
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 25px;
+    font-size: 20px;
     color: #870808;
     font-weight: 600;
   }
 
   .tab-button.active {
-    border-bottom: 3px solid #870808;
+    border-bottom: 2px solid #870808;
   }
 
   .tab-content {
-    padding: 0px 20px;
     height: auto;
   }
 `;

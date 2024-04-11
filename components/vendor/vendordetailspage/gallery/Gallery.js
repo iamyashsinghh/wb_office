@@ -24,7 +24,7 @@ function Gallery({ images }) {
   const showViewLess = visibleImages === images.length && visibleImages > 12;
 
   return (
-    <Wrapper className="section info-section">
+    <Wrapper className="info-section">
       <div className="container">
         {itemData.slice(0, visibleImages).map((item, i) => (
           <a key={i} onClick={()=>setOpen(true)} className="image-link">
@@ -100,7 +100,6 @@ const Wrapper = styled.div`
   .btn {
     display: flex;
     justify-content: center;
-    margin-top: 30px;
   }
 
   .view-button {

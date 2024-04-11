@@ -1,59 +1,41 @@
 import styled from "styled-components";
 import { IoIosCall } from 'react-icons/io'
 import { useState } from "react";
-// import { parse } from 'node-html-parser';  //This nm package is not install to use this first install from npm 
 import { BiRupee } from 'react-icons/bi'
 import CallingRequest from "@/lib/request/callingrequest/CallingRequest";
 import Image from "next/image";
 import TabsComponent from "../tabsComponent/TabsComponent";
+import VendorSticyNav from "../vendorSticyNav/VendorSticyNav";
 
 export default function VendorBasicInfo({ vendor, openLeadsModel }) {
-    // console.log(vendor)
 
     const [showSummary, setShowSumary] = useState(true);
-
-    // const vendor_summary = parse(vendor.summary);
-    //newchange
-
-
-
-
     async function handleAnchorClick(e, slug) {
         e.stopPropagation();
         await CallingRequest(slug);
-
     }
 
-    return (<Wrapper className="section info-section">
+    return (<Wrapper className="section-venue-basic_info info-section">
 
         <div className="container-l">
-
-            <div className="info-container">
-
+        <div className="info-container">
                 <div className="card info-card">
-
-                    <h2 className="v-name">{vendor.brand_name}</h2>
-                    <div className="v-desc" dangerouslySetInnerHTML={{ __html: showSummary ? vendor.summary : vendor.summary.slice(0, 500) }}></div>
-
-
-                    {/* To set the read more just uncomment this make initialize showSummary with false */}
-                    {/* <span className="read-more-btn" onClick={() => { setShowSumary(!showSummary) }}>  {showSummary ? "Read less" : "Read more"}</span> */}
-
-
-
-
+                    <h1 className="v-name">{vendor.brand_name}</h1>
                 </div>
+                </div>
+                <div className="info-container sticy-nav">
+                <VendorSticyNav></VendorSticyNav>
+                </div>
+            <div className="info-container">
+                <TabsComponent images={vendor.images} />
                 <div className="package-card card">
-
                     <h2 className="price"><BiRupee className="rupee-icon" />{vendor.package_price}</h2>
                     <span className="price-label">Package price</span>
-
                     <div className="action-btns">
                         <button className="venue-card-btn" onClick={(e) => openLeadsModel()} >Get Quatation</button>
                         <a href={`tel:0${vendor.phone}`} onClick={(e) => handleAnchorClick(e, vendor?.slug)} className="call-btn" aria-label="call icon ">
                             <IoIosCall className="call-icon" />
                         </a>
-
                     </div>
 
                     <div className="bannar-img">
@@ -64,13 +46,12 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                             sizes="(10vw)"
                         />
                     </div>
-
-
                 </div>
-                <TabsComponent images={vendor.images} />
-
-
-
+            </div>
+            <div className="info-container">
+            <div className="card info-card">
+                    <div className="v-desc" dangerouslySetInnerHTML={{ __html: showSummary ? vendor.summary : vendor.summary.slice(0, 500) }}></div>
+                </div>
             </div>
         </div>
     </Wrapper>)
@@ -80,7 +61,14 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
 const Wrapper = styled.section`
 
 background-color: var(--bg-color);
-
+position: relative;
+padding: 2rem 0;
+.sticy-nav{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: white;
+}
 .info-container{
     padding: 0rem 1rem;
     display: grid;
@@ -89,10 +77,8 @@ background-color: var(--bg-color);
     gap: 2rem;
 
     .card{
-        /* border: 2px solid var(--primary-color); */
         padding: 1rem;
     }
-
 
     .info-card{
         display: flex;
@@ -104,6 +90,7 @@ background-color: var(--bg-color);
             font-size: 2.5rem;
             color: var(--primary-color);
             font-weight: 700;
+            margin-bottom: 15px;
         }
         .address{
             font-family: "Poppins";
@@ -115,7 +102,12 @@ background-color: var(--bg-color);
             font-family: "Poppins" !important;
             font-size: 1.8rem !important;
             color: var(--para) !important;
-            font-weight: 400 !important;
+        }
+        .v-desc{
+            ul li{
+                list-style-type: disc;
+                margin-left: 3rem;
+            }
         }
         .read-more-btn{
             color: var(--info-color);
@@ -129,9 +121,7 @@ background-color: var(--bg-color);
 
 .package-card{
     padding-top: 2rem !important;
-    /* border: 2px solid var(--primary-color); */
     max-width: 50rem;
-    /* margin: auto; */
     background-color: white;
     display: flex;
     flex-direction: column;

@@ -47,7 +47,7 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                 </div>
             </div>
             <div className="info-container" id="vendor_basic_desc">
-            <div className="card info-card">
+            <div className="card  info-card info-cardd">
                     <h2 className="v-name">About {vendor.brand_name}</h2>
                     <div className="v-desc" dangerouslySetInnerHTML={{ __html: showSummary ? vendor.summary : vendor.summary.slice(0, 500) }}></div>
                 </div>
@@ -62,7 +62,7 @@ const Wrapper = styled.section`
 background-color: var(--bg-color);
 position: relative;
 padding: 2rem 0;
-.info-card{
+.info-cardd{
     margin-top:50px;
 }
 .info-container{

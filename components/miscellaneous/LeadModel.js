@@ -245,17 +245,17 @@ export default function LeadModel() {
               {errors.phoneNumber && (
                 <span className="error-text">{errors.phoneNumber}</span>
               )}
-              <ReCAPTCHA
+              {/* <ReCAPTCHA
                 sitekey="6LfVFGcpAAAAAO606P0XnI79hWitIwuF4HPhB_nR"
                 onChange={onRecaptchaChange}
-              />
+              /> */}
             </>
           )}
-          {recaptcha === null ? (
+          {/* {recaptcha === null ? (
             <span className="error-text">Please Fill ReCAPTCHA</span>
           ) : (
             <></>
-          )}
+          )} */}
           {isSent ? (
             <button className="discount-btn" onClick={hideCard}>
               CLOSE
@@ -263,11 +263,17 @@ export default function LeadModel() {
           ) : (
             <button
               className="discount-btn"
-              disabled={recaptcha === null}
               onClick={submitHandler}
             >
               {isLoading ? <Spinner1 /> : "SUBMIT"}
             </button>
+          //   <button
+          //   className="discount-btn"
+          //   disabled={recaptcha === null}
+          //   onClick={submitHandler}
+          // >
+          //   {isLoading ? <Spinner1 /> : "SUBMIT"}
+          // </button>
           )}
         </div>
       </div>

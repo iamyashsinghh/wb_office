@@ -5,12 +5,10 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 import getLocalities from "@/lib/request/getlocalities/getLocalities";
-// import axios from 'axios';
 
 const MyContext = createContext();
 
 export const MyContextProvider = ({ children }) => {
-  // console.log(process.env.NEXT_PUBLIC_SERVER_DOMAIN)
   const router = useRouter();
   const firstRender = useRef(true);
 
@@ -25,13 +23,12 @@ export const MyContextProvider = ({ children }) => {
   const [loggedUser, setLoggedUser] = useState(null);
   const [leadFormData, setLeadFormData] = useState(null);
   const [cities, setCities] = useState([]);
-  const [localities, setLocalities] = useState([]); //Localities will be fetched based on the selected city.
+  const [localities, setLocalities] = useState([]);
   const [vendorCategories, setVendorsCategories] = useState([]);
   const [venueCategories, setVenuesCategories] = useState([]);
   const [cityRoute, setCityRoute] = useState("");
 
 
-  //serch state routes 
   const [searchSuggestions, setSearchSuggestions] = useState("");
 
   //This useEffect will run when we set the setRouteCity(city_slug), this will rediect to the /city url
@@ -46,26 +43,22 @@ export const MyContextProvider = ({ children }) => {
     }
   }, [cityRoute]);
 
-  //Get All the cities,venue,vendors list. Calling context api here
   useEffect(() => {
     async function getLists() {
       try {
         const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/state_management`;
-        // console.log(url)
-
         //All in one API For context data
         // let context_data = await fetch("http://192.168.29.128/wedding_benquets/website/api/state_management");
-
         let context_data = await fetch(url);
         context_data = await context_data.json();
         console.log(context_data);
+
 
         //Setting the data on the context.
         setCities(context_data.data.cities);
         setVendorsCategories(context_data.data.vendor_categories);
         setVenuesCategories(context_data.data.venue_categories);
       } catch (error) {
-        // console.log(error)
       }
     }
 

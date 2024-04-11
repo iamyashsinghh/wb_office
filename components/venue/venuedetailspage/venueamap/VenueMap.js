@@ -166,9 +166,11 @@ export default function VenueMap({ location_map }) {
                             
 
                     </div>
-                    {recaptcha===null ?( <span className="error-text">Please Fill ReCAPTCHA</span>):(<></> )}
-                    <ReCAPTCHA sitekey="6LfVFGcpAAAAAO606P0XnI79hWitIwuF4HPhB_nR" onChange={onRecaptchaChange} />
-                             <button className="schedule-btn" disabled={recaptcha===null} type="submit" onClick={() => { formik.handleSubmit() }}> {isLoading ? <Spinner1/> : "Schedule Visit"} </button>
+                    {/* {recaptcha===null ?( <span className="error-text">Please Fill ReCAPTCHA</span>):(<></> )} */}
+                    {/* <ReCAPTCHA sitekey="6LfVFGcpAAAAAO606P0XnI79hWitIwuF4HPhB_nR" onChange={onRecaptchaChange} /> */}
+                             {/* <button className="schedule-btn" disabled={recaptcha===null} type="submit" onClick={() => { formik.handleSubmit() }}> {isLoading ? <Spinner1/> : "Schedule Visit"} </button> */}
+                             <button className="schedule-btn" type="submit" onClick={() => { formik.handleSubmit() }}> {isLoading ? <Spinner1/> : "Schedule Visit"} </button>
+
                 </div>
             </div>
         </div>

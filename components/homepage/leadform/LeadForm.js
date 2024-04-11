@@ -174,11 +174,11 @@ export default function LeadForm() {
                   <AiFillCaretDown className="down-arrow" size={15} />
                 </div>
                 <div>
-                  <CustomReCAPTCHA
+                  {/* <CustomReCAPTCHA
                     sitekey="6LfVFGcpAAAAAO606P0XnI79hWitIwuF4HPhB_nR"
                     style={{ width: "200px" }}
                     onChange={onRecaptchaChange}
-                  />
+                  /> */}
 
                   {/* <div className="">
     <h2>I Am</h2>
@@ -189,17 +189,20 @@ export default function LeadForm() {
 
     </div>
 </div> */}
-                  {recaptcha === null ? (
+                  {/* {recaptcha === null ? (
                     <span className="error-text">Please Fill ReCAPTCHA</span>
                   ) : (
                     <></>
-                  )}
+                  )} */}
                 </div>
 
-                <ButtonDark
+                {/* <ButtonDark
                   disabled={recaptcha === null}
                   onClick={formik.handleSubmit}
-                >
+                > */}
+                  <ButtonDark
+                  onClick={formik.handleSubmit}
+                  >
                   {isLoading ? <Spinner1 /> : "Submit"}
                 </ButtonDark>
               </div>

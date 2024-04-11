@@ -160,12 +160,14 @@ const RatingForm = ({venue_id, onCloseOffCanvas }) => {
 
           
         </ReviewForm>
-        <ReCAPTCHA sitekey="6LfVFGcpAAAAAO606P0XnI79hWitIwuF4HPhB_nR" onChange={onRecaptchaChange} />
-        {recaptcha===null ?( <span className="error-text">Please Fill ReCAPTCHA</span>):(<></> )}
+        {/* <ReCAPTCHA sitekey="6LfVFGcpAAAAAO606P0XnI79hWitIwuF4HPhB_nR" onChange={onRecaptchaChange} /> */}
+        {/* {recaptcha===null ?( <span className="error-text">Please Fill ReCAPTCHA</span>):(<></> )} */}
         <br></br>
         <br></br>
 
-        <StyledButton type="submit"  disabled={recaptcha===null}>Submit</StyledButton>
+        <StyledButton type="submit" >Submit</StyledButton>
+        {/* <StyledButton type="submit"  disabled={recaptcha===null}>Submit</StyledButton> */}
+
       </StyledForm>
     </Formik>
   );

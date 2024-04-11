@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Heading from "@/components/miscellaneous/Heading";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
+// Import Swiper styles 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";

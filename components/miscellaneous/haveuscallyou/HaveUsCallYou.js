@@ -97,7 +97,7 @@ export default function HaveUsCallYou() {
                   onChange={(e) => handerInputNumber(e)}
                 />
               </div>
-              <div className="captcha-container">
+              {/* <div className="captcha-container">
                 <CustomReCAPTCHA
                   sitekey="6LfVFGcpAAAAAO606P0XnI79hWitIwuF4HPhB_nR"
                   onChange={onRecaptchaChange}
@@ -107,13 +107,17 @@ export default function HaveUsCallYou() {
                 ) : (
                   <></>
                 )}
-              </div>
+              </div> */}
             </div>
 
             <div className="btn-container">
-              <button
+              {/* <button
                 className="btn"
                 disabled={recaptcha === null}
+                onClick={handleSubmit}
+              > */}
+              <button
+                className="btn"
                 onClick={handleSubmit}
               >
                 {isLoading ? "Submiting..." : "Submit"}

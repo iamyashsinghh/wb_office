@@ -252,18 +252,21 @@ export default function AvailableCheck() {
               {errors.phoneNumber && (
                 <span className="error-text">{errors.phoneNumber}</span>
               )}
-              <ReCAPTCHA sitekey="6LfVFGcpAAAAAO606P0XnI79hWitIwuF4HPhB_nR" onChange={onRecaptchaChange} />
+              {/* <ReCAPTCHA sitekey="6LfVFGcpAAAAAO606P0XnI79hWitIwuF4HPhB_nR" onChange={onRecaptchaChange} /> */}
             </>
           )}
-          {recaptcha===null ?( <span className="error-text">Please Fill ReCAPTCHA</span>):(<></> )}
+          {/* {recaptcha===null ?( <span className="error-text">Please Fill ReCAPTCHA</span>):(<></> )} */}
           {isSent ? (
             <button className="discount-btn" onClick={hideCard}>
               CLOSE
             </button>
           ) : (
-            <button className="discount-btn" disabled={recaptcha===null} onClick={submitHandler}>
+            <button className="discount-btn" onClick={submitHandler}>
               {isLoading ? <Spinner1 /> : "SUBMIT"}
             </button>
+          //   <button className="discount-btn" disabled={recaptcha===null} onClick={submitHandler}>
+          //   {isLoading ? <Spinner1 /> : "SUBMIT"}
+          // </button>
           )}
         </div>
       </div>
@@ -303,7 +306,6 @@ const Wrapper = styled.div`
       css`
         transform: scale(1);
       `}
-
     max-width: 45rem;
     min-width: 45rem;
     position: relative;

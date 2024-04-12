@@ -21,7 +21,7 @@ const RatingForm = ({venue_id, onCloseOffCanvas }) => {
   const saveRatingAjax = async (values) => {
       let data = { ...values, rating ,product_id, product_for, status,recaptcha }
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/storereview`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/storereview`, {
           
             method: "POST",
             headers: {

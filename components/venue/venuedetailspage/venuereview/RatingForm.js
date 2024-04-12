@@ -21,7 +21,7 @@ const RatingForm = ({venue_id, onCloseOffCanvas }) => {
   const saveRatingAjax = async (values) => {
       let data = { ...values, rating ,product_id, product_for, status,recaptcha }
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_LEAD_SERVER_DOMAIN}/review-data`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/storereview`, {
           
             method: "POST",
             headers: {
@@ -29,7 +29,6 @@ const RatingForm = ({venue_id, onCloseOffCanvas }) => {
             },
             body: JSON.stringify(data),
         });
-        console.log('weddingbanquets.in');
         if (response.ok) {
             onCloseOffCanvas();
             Swal.fire({

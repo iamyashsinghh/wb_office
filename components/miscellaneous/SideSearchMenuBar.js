@@ -1,3 +1,4 @@
+import React, { useRef } from 'react';
 import styled from "styled-components";
 import { useSwipeable } from "react-swipeable";
 import { useGlobalContext } from "@/context/MyContext";
@@ -12,6 +13,18 @@ export default function SideSearchMenuBar() {
     const handlers = useSwipeable({
         onSwipedRight: (eventData) => { setIsSearchMenuOpen(false) },
     });
+    const timeoutRef = useRef(null);
+
+    const handleBlur = () => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+        
+        timeoutRef.current = setTimeout(() => {
+            setIsSearchMenuOpen(false);
+            timeoutRef.current = null;
+        }, 300);
+    };
     let venueObject = [];
     let vendorObject = [];
     let venueNames = venueCategories.map((category) => category.name);
@@ -37,10 +50,9 @@ export default function SideSearchMenuBar() {
         obj[vendorBrandNames[i]] = allVendorsSlug[i];
         vendorObject.push(obj);
     }
-
     return (
         <Wrapper {...handlers} isActive={isSearchMenuOpen}>
-            <Div isActive={isSearchMenuOpen} onBlur={() => setIsSearchMenuOpen(false)} tabIndex="1" >
+            <Div isActive={isSearchMenuOpen} onBlur={handleBlur} tabIndex="1">
                 <div className="menu-img">
                         <h2 className="searchBarMenuTitle">Plan Your Dream Wedding!</h2>
                         <p className="searchBarMenuDesc">Search for venues, Makeup Artists, Photographers and more!</p>

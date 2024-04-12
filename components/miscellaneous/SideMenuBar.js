@@ -13,8 +13,6 @@ import { MdCancel } from 'react-icons/md'
 
 
 export default function SideMenuBar() {
-
-
     const { isMenuOpen, setIsMenuOpen, cities, selectedCity, setSelectedCity, loggedUser, setCityRoute } = useGlobalContext();
 
     const handlers = useSwipeable({

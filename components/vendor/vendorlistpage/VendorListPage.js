@@ -6,7 +6,7 @@ import TitleCaption from "./titlecaption/TitleCaption";
 import Pagedescription from "@/components/miscellaneous/pagedescription/PageDescription";
 
 export default function VendorListPage(props) {
-  const { category, city, locality, result } = props.data;
+  const { category, city, locality, result, venue_list,vendor_list } = props.data;
 
   return (
     <>
@@ -17,6 +17,8 @@ export default function VendorListPage(props) {
         category={category}
         locality={locality}
         city={city}
+        venue_list={venue_list}
+        vendor_list={vendor_list}
         count={result.count}
         caption={result.meta?.caption}
       />

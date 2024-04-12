@@ -39,7 +39,7 @@ export default function AvailableCheck() {
 
   async function conversionHandler(type) {
     try {
-      const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/click_conversion_handle`;
+      const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN_LIVE}/api/click_conversion_handle`;
       let response = await fetch(url, {
         method: "POST",
         headers: {

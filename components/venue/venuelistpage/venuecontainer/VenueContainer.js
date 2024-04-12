@@ -185,8 +185,8 @@ background-color: var(--bg-color);
         align-items: center;
         background-color: white;
         padding:1.5rem 2rem;
-        // box-shadow:var(--shadow);
-        /* border-bottom: 1px solid gray;  */
+         box-shadow:var(--shadow);
+         
         display: none;
 
         .page-title{

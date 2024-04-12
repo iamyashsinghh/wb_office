@@ -8,7 +8,9 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   z-index: 1;
-
+  @media (max-width: 1000px) {
+    display: none;
+  }
   #react-autowhatever-1{
     position: absolute;
     top: 95%;

@@ -8,7 +8,7 @@ export default function Contactus(){
         <MdSupportAgent className="icon"/>
         <h2>Contact a Wedding Expert in Free</h2>
         <p>We had love to assist you! 7 days a week</p>
-        <p>Call<Link href={`tel:01800 889 0082`} className="phone">1800 889 0082</Link></p>
+        <p>Call<Link href={`tel:07969071909`} className="phone">7969071909</Link></p>
 
     
     </Wrapper>)

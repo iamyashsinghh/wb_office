@@ -33,7 +33,7 @@ export default function LeadModel() {
 
   async function conversionHandler(type) {
     try {
-      const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/click_conversion_handle`;
+      const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN_LIVE}/api/click_conversion_handle`;
       let response = await fetch(url, {
         method: "POST",
         headers: {
@@ -299,7 +299,7 @@ const Wrapper = styled.div`
   top: 0px;
   left: 0px;
   right: 0px;
-  z-index: 100;
+  z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -37,7 +37,7 @@ const Wrapper = styled.div`
         background-color: var(--gray);
         border-radius: 50%;
         width: 25px;
-        height: 25px;
+        height: 2px;
 
         .icon {
             font-size: 2rem;

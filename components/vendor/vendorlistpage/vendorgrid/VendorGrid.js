@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import useLeadModel from "@/lib/hook/useLeadModel";
 import { Spinner2 } from "@/styles/components/spinner";
 
-export default function VendorGrid({ vendors, category, city, locality }) {
+export default function VendorGrid({ vendors, category, city, locality, data }) {
   const { data: vendors_list, count } = vendors;
 
   //To open leadModel
@@ -19,7 +19,6 @@ export default function VendorGrid({ vendors, category, city, locality }) {
     setVendorLists(vendors_list);
   }, [vendors_list]);
 
-  //This will update the hasmore state.
   useEffect(() => {
     setHasMore(vendorLists.length >= count ? false : true);
   }, [vendorLists]);
@@ -33,7 +32,6 @@ export default function VendorGrid({ vendors, category, city, locality }) {
       }
       page.current = page.current + 1;
       const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}/${page.current}`;
-      // lists = await fetch(`http://192.168.29.128/wedding_benquets/website/api/venues_or_vendors_listing/banquet-halls/${city}/${locality}/${page.current}`);
       let lists = await fetch(url);
       lists = await lists.json();
       lists = lists.data;

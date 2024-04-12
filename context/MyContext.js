@@ -13,12 +13,12 @@ export const MyContextProvider = ({ children }) => {
   const firstRender = useRef(true);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchMenuOpen, setIsSearchMenuOpen] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [isLeadsModelOpen, setIsLeadsModelOpen] = useState(false);
   const [isAvailableCheckOpen, setIsAvailableCheckOpen] = useState(false);
   const [isAvailableCheckShow, setIsAvailableCheckShow] = useState(false);
   const [isAvailableCheckID, setIsAvailableCheckID] = useState(null);
-
   const [selectedCity, setSelectedCity] = useState("delhi");
   const [loggedUser, setLoggedUser] = useState(null);
   const [leadFormData, setLeadFormData] = useState(null);
@@ -27,6 +27,8 @@ export const MyContextProvider = ({ children }) => {
   const [vendorCategories, setVendorsCategories] = useState([]);
   const [venueCategories, setVenuesCategories] = useState([]);
   const [cityRoute, setCityRoute] = useState("");
+  const [vendor_list, setVendor_list] = useState([]);
+  const [venue_list, setVenue_list] = useState([]);
 
 
   const [searchSuggestions, setSearchSuggestions] = useState("");
@@ -51,8 +53,18 @@ export const MyContextProvider = ({ children }) => {
         // let context_data = await fetch("http://192.168.29.128/wedding_benquets/website/api/state_management");
         let context_data = await fetch(url);
         context_data = await context_data.json();
-        console.log(context_data);
+        // console.log(context_data);
 
+       const searchurl2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
+       let vendorList = await fetch(searchurl2);
+       vendorList = await vendorList.json();
+
+       const searchurl3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
+       let venueList = await fetch(searchurl3);
+       venueList = await venueList.json();
+
+       setVendor_list(vendorList);
+       setVenue_list(venueList);
 
         //Setting the data on the context.
         setCities(context_data.data.cities);
@@ -96,6 +108,8 @@ export const MyContextProvider = ({ children }) => {
       value={{
         isMenuOpen,
         setIsMenuOpen,
+        isSearchMenuOpen,
+        setIsSearchMenuOpen,
         selectedCity,
         isAvailableCheckID,
         setIsAvailableCheckID,
@@ -106,6 +120,8 @@ export const MyContextProvider = ({ children }) => {
         localities,
         vendorCategories,
         venueCategories,
+        vendor_list,
+        venue_list,
         isLeadsModelOpen,
         setIsLeadsModelOpen,
         isAvailableCheckOpen,
@@ -116,7 +132,7 @@ export const MyContextProvider = ({ children }) => {
         setShowFilter,
         setCityRoute,
         loggedUser,
-        setLoggedUser,
+        setLoggedUser,        
       }}
     >
       {children}

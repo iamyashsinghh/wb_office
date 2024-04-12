@@ -12,7 +12,7 @@ export default function VendorGrid({ vendorCategories }) {
       <div className="vendor-grid-container">
         <div className="vendor-category-card">
           <ExtraCard img={`/vendor-vector/1.png`} data="" />
-          {vendorCategories?.slice(0, 6).map((vendor, i) => {
+          {vendorCategories?.slice(0, 5).map((vendor, i) => {
             return (
               <VendorCard
                 key={i}
@@ -59,6 +59,9 @@ const Wrapper = styled.div`
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(3, 1fr);
+    @media (max-width: 400px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
   .view-all-btn {
     /* text-align: center; */

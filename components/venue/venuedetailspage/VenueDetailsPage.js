@@ -19,14 +19,6 @@ export default function VenueDetailsPage({ response }) {
     const {setLeadFormData,setIsLeadsModelOpen, setIsAvailableCheckOpen} = useGlobalContext();
     const router = useRouter();
 
-    // useEffect(()=>{
-    //     setTimeout(() => {
-    //         openLeadsModel();
-    //     }, 5000);
-
-    //     return;
-    // },[])
-
     const { data } = response;
     const { similar_packages, venue } = data;
     let venue_place_id = venue?.location_place_id;
@@ -40,11 +32,8 @@ export default function VenueDetailsPage({ response }) {
             request_handle_by: by
         }
         setLeadFormData(leadData);
-        
         setIsLeadsModelOpen(true);
-
         if(e){
-
             e.stopPropagation();
         }
     }
@@ -57,11 +46,8 @@ export default function VenueDetailsPage({ response }) {
             request_handle_by: by
         }
         setLeadFormData(leadData);
-        
         setIsAvailableCheckOpen(true);
-
         if(e){
-
             e.stopPropagation();
         }
     }

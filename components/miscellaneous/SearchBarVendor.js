@@ -5,37 +5,62 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 
 const Container = styled.div`
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 8;
-  .react-autowhatever-1{
-    left:0;
-    @media(max-width:345px){
-      left: -1px;
-    }
+  z-index: 1;
+  margin-right: 15px;
+  @media (max-width: 1000px) {
+    display: none;
   }
 
+  #react-autowhatever-1{
+    position: absolute;
+    top: 95%;
+    width: calc(100% + 1px);
+    left: 0;
+    border: 1px solid none;
+    background-color: #fff;
+    z-index: 9999;
+    @media (min-width: 768px) {
+      left: 0px !important;
+    }
+    @media (min-width: 601px) {
+      left: -16px;
+    }
+    @media (max-width: 601px) {
+      width: 100%;
+      left: -15px;
+    }
+  }
   .search-icon {
-    position:absolute;
-    display:flex;
-    align-items:center;
+    position: absolute;
     color: #fff;
-    font-size: 25px;
-    top:29%;
-    right:2%;
+    font-size: 20px;
+    top: 43%;
+    right: 2%;
     cursor:pointer;
-
+    @media (max-width: 1142px) {
+      top: 43%;
+      right: 2%;
+    }
+    @media (max-width: 1000px) {
+      top: 1.32%;
+    }
+    @media (max-width: 681px) {
+      top: 0.77%;
+      right: 4%;
+    }
+    @media (max-width: 341px) {
+      top: 0.75%;
+      right: 5%;
+    }
   }
   .autosuggest-input {
     position: relative;
     border: none;
     background: white;
-    width: 700px;
+    border: 1px solid #bf9539;
+    width: 400px;
     height: 6rem;
     padding: 2.5rem;
     margin: auto;
@@ -49,42 +74,20 @@ const Container = styled.div`
       showSuggestions ? "0" : "25px"};
     font-family: "Work Sans", sans-serif;
   }
-  @media (max-width: 1000px) {
-    top: 70%;
-    transform: translate(-61%, -50%);
-    width: 40%;
+  @media (max-width: 500px) {
+      width: 85vw;
+  }
+  @media (max-width: 768px) {
     .autosuggest-input {
-      width: 40rem;
-      right: -5%;
+      width: 91vw;
+    }
+  }
+  @media (max-width: 1000px) {
+    .autosuggest-input {
+      width: 97vw;
       font-size: 12px;
       padding: 1rem 0rem 1rem 2.5rem ;
     }
-    }
-    .search-icon {
-      color: #fff;
-      font-size: 15px;
-      cursor:pointer;
-      right:-55%;
-      top:35%;
-      cursor:pointer;
-      @media (min-width: 410px) {
-        right: -35%;
-      }
-      @media (min-width: 490px) {
-        right: -25%;
-      }
-      @media (min-width: 590px) {
-        right: -15%;
-      }
-      @media (min-width: 690px) {
-        right: -5%;
-      }
-      @media (min-width: 790px) {
-        right: 0%;
-      }
-      @media (min-width: 890px) {
-        right: 5%;
-      }
     }
   }
 `;
@@ -101,6 +104,10 @@ const SuggestionsContainer = styled.div`
   position: relative;
   border-bottom-right-radius: 25px;
   border-bottom-left-radius: 25px;
+  border-right:1px solid #bf9539;
+  border-left: 1px solid #bf9539;
+  border-bottom: ${({ showSuggestions }) =>
+      showSuggestions ? "1px solid #bf9539" : "none"};
   overflow-y: auto;
   @media (max-width: 768px) {
     margin-left: 15.5px;
@@ -121,13 +128,14 @@ const Suggestion = styled.div`
   }
 `;
 
-const SearchBar3 = ({
+const SearchBarVendor = ({
   suggestions,
   selectedCity,
   venueObject,
   vendorObject,
   allVenues,
   allVenuesSlug,
+  category,
 }) => {
   const [value, setValue] = useState("");
   const [suggestionsList, setSuggestionsList] = useState([]);
@@ -161,6 +169,7 @@ const SearchBar3 = ({
     setIsInputFocused(false);
     setTimeout(() => {
       if (!isInputFocused) {
+        // Check if input is not focused before clearing suggestions
         onSuggestionsClearRequested();
       }
     }, 100);
@@ -187,6 +196,7 @@ const SearchBar3 = ({
     if (suggestion == "Mehndi Artists") {
       suggestion = "Best Mehndi Artists";
     }
+    // console.log(venueObject);
     let matchedVenue = null;
     let matchedVendor = null;
     let venueMatchedSlug = null;
@@ -230,7 +240,6 @@ const SearchBar3 = ({
         clearTimeout(timeout);
         func(...args);
       };
-
       clearTimeout(timeout);
       timeout = setTimeout(later, wait);
     };
@@ -315,7 +324,7 @@ const SearchBar3 = ({
   };
 
   const inputProps = {
-    placeholder: "Search for Banquet Halls, Photographer, etc..",
+    placeholder: `Search for ${category.replaceAll("-", " ")}, etc..`,
     value,
     onChange,
     onFocus: onFocusHandler,
@@ -356,12 +365,6 @@ const SearchBar3 = ({
             position: "relative",
           },
           suggestionsContainer: {
-            position: "absolute",
-            top: "95%",
-            width: "100%",
-            border: "1px solid none",
-            backgroundColor: "#fff",
-            zIndex: 9999,
           },
           suggestionHighlighted: {
             backgroundColor: "#bf9539",
@@ -374,4 +377,4 @@ const SearchBar3 = ({
     </Container>
   );
 };
-export default SearchBar3;
+export default SearchBarVendor;

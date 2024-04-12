@@ -5,37 +5,47 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 
 const Container = styled.div`
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 8;
-  .react-autowhatever-1{
-    left:0;
-    @media(max-width:345px){
-      left: -1px;
+  justify-content: center;
+  z-index: 1;
+  #react-autowhatever-1{
+    position: absolute;
+    top: 95%;
+    width: calc(100% + 1px);
+    left: 0;
+    border: 1px solid none;
+    background-color: #fff;
+    z-index: 9999;
+    @media (min-width: 768px) {
+      left: 0px !important;
+    }
+    @media (min-width: 601px) {
+      left: -16px;
+    }
+    @media (max-width: 601px) {
+      width: 100%;
+      left: -15px;
     }
   }
-
   .search-icon {
-    position:absolute;
-    display:flex;
-    align-items:center;
+    position: absolute;
     color: #fff;
-    font-size: 25px;
-    top:29%;
-    right:2%;
+    font-size: 20px;
+    top: 98px;
+    right: 50px;
     cursor:pointer;
-
+    @media (max-width: 520px) {
+      top: 96px;
+    right: 40px;
+    }
   }
   .autosuggest-input {
     position: relative;
     border: none;
     background: white;
-    width: 700px;
+    border: 1px solid #bf9539;
+    width: 350px;
     height: 6rem;
     padding: 2.5rem;
     margin: auto;
@@ -49,42 +59,13 @@ const Container = styled.div`
       showSuggestions ? "0" : "25px"};
     font-family: "Work Sans", sans-serif;
   }
+  
   @media (max-width: 1000px) {
-    top: 70%;
-    transform: translate(-61%, -50%);
-    width: 40%;
     .autosuggest-input {
-      width: 40rem;
-      right: -5%;
+      width: 90vw;
       font-size: 12px;
       padding: 1rem 0rem 1rem 2.5rem ;
     }
-    }
-    .search-icon {
-      color: #fff;
-      font-size: 15px;
-      cursor:pointer;
-      right:-55%;
-      top:35%;
-      cursor:pointer;
-      @media (min-width: 410px) {
-        right: -35%;
-      }
-      @media (min-width: 490px) {
-        right: -25%;
-      }
-      @media (min-width: 590px) {
-        right: -15%;
-      }
-      @media (min-width: 690px) {
-        right: -5%;
-      }
-      @media (min-width: 790px) {
-        right: 0%;
-      }
-      @media (min-width: 890px) {
-        right: 5%;
-      }
     }
   }
 `;
@@ -101,6 +82,10 @@ const SuggestionsContainer = styled.div`
   position: relative;
   border-bottom-right-radius: 25px;
   border-bottom-left-radius: 25px;
+  border-right:1px solid #bf9539;
+  border-left: 1px solid #bf9539;
+  border-bottom: ${({ showSuggestions }) =>
+      showSuggestions ? "1px solid #bf9539" : "none"};
   overflow-y: auto;
   @media (max-width: 768px) {
     margin-left: 15.5px;
@@ -121,7 +106,7 @@ const Suggestion = styled.div`
   }
 `;
 
-const SearchBar3 = ({
+const SearchBarForSideBar = ({
   suggestions,
   selectedCity,
   venueObject,
@@ -161,6 +146,7 @@ const SearchBar3 = ({
     setIsInputFocused(false);
     setTimeout(() => {
       if (!isInputFocused) {
+        // Check if input is not focused before clearing suggestions
         onSuggestionsClearRequested();
       }
     }, 100);
@@ -187,6 +173,7 @@ const SearchBar3 = ({
     if (suggestion == "Mehndi Artists") {
       suggestion = "Best Mehndi Artists";
     }
+    // console.log(venueObject);
     let matchedVenue = null;
     let matchedVendor = null;
     let venueMatchedSlug = null;
@@ -238,6 +225,7 @@ const SearchBar3 = ({
 
   const getSuggestions = (inputValue) => {
     const inputValueTrimmed = inputValue.trim();
+    // Check if the inputValue is empty, return suggestions for "a"
     if (inputValueTrimmed === "") {
       return suggestions.filter((suggestion) =>
         suggestion.toLowerCase().startsWith("a")
@@ -250,7 +238,9 @@ const SearchBar3 = ({
   };
 
   const onSuggestionsFetchRequested = ({ value }) => {
+    //slicing 5 suggestion
     setSuggestionsList(getSuggestions(value || "a").slice(0, 100));
+    // console.log(suggestionsList, "set");
     setShowSuggestions(true);
   };
   const debouncedFetchSuggestions = debounce(onSuggestionsFetchRequested, 800);
@@ -266,7 +256,7 @@ const SearchBar3 = ({
         ref={ref}
         showSuggestions={showSuggestions}
       >
-        <div style={{ maxHeight: "200px", overflowY: "auto" }}>
+        <div style={{ maxHeight: "400px", overflowY: "auto" }}>
           {showSuggestions && noSuggestions && (
             <div
               style={{
@@ -315,7 +305,7 @@ const SearchBar3 = ({
   };
 
   const inputProps = {
-    placeholder: "Search for Banquet Halls, Photographer, etc..",
+    placeholder: "Search for Banquet Halls, etc..",
     value,
     onChange,
     onFocus: onFocusHandler,
@@ -356,12 +346,6 @@ const SearchBar3 = ({
             position: "relative",
           },
           suggestionsContainer: {
-            position: "absolute",
-            top: "95%",
-            width: "100%",
-            border: "1px solid none",
-            backgroundColor: "#fff",
-            zIndex: 9999,
           },
           suggestionHighlighted: {
             backgroundColor: "#bf9539",
@@ -374,4 +358,4 @@ const SearchBar3 = ({
     </Container>
   );
 };
-export default SearchBar3;
+export default SearchBarForSideBar;

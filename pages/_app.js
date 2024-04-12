@@ -99,7 +99,7 @@ export default function App({ Component, pageProps }) {
       style={{
         position: 'fixed',
         right: '25px', 
-        bottom: '25px',
+        bottom: '70px',
         zIndex: '99999999',
       }}
     >

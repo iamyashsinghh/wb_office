@@ -22,8 +22,8 @@ export default function Contact() {
                         />
                     </div>
                     <h2 className="contact-text">Contact us at the number mentioned below.</h2>
-                    <a href={`tel:${18008890082}`}  className="cantact-no">
-                    <IoIosCall size={20} />   1800 889 0082
+                    <a href={`tel:07969071909`}  className="cantact-no">
+                    <IoIosCall size={20} />   7969071909
                     </a>
                     <h2 className="contact-text">If you are a vendor then connect with us now</h2>
                     <Link href={'/business'} className="link"><ButtonOutline>Register now</ButtonOutline></Link>
@@ -31,7 +31,7 @@ export default function Contact() {
 
                
             </div>
-
+            <div id="wedding-vendors-by-category"></div>
         </Section>
 
 

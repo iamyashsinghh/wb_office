@@ -1,6 +1,8 @@
 import Pagedescription from "@/components/miscellaneous/pagedescription/PageDescription";
 import styled from "styled-components";
+import { useGlobalContext } from "@/context/MyContext";
 import VendorSearchBar from "../vendorSearchBar/VendorSearchBar";
+import SearchBarVendor from "@/components/miscellaneous/SearchBarVendor";
 
 export default function TitleCaption({
   caption,
@@ -8,10 +10,38 @@ export default function TitleCaption({
   city,
   locality,
   count,
+  vendor_list,
+  venue_list,
 }) {
+     const { selectedCity, vendorCategories, venueCategories, cities } = useGlobalContext();
+    let venueObject = [];
+    let vendorObject = [];
+    let venueNames = venueCategories.map((category) => category.name);
+    let cityNames = cities.map((city) => city.name);
+    let vendorNames = vendorCategories.map((category) => category.name);
+    let vendorBrandNames = vendor_list.map((category) => category.brand_name);
+    let allVenues = venue_list.map((category) => category.name);
+    let allVenuesSlug = venue_list.map((category) => category.slug);
+    let allVendorsSlug = vendor_list.map((category) => category.slug);
+    const suggestions = [
+        ...venueNames,
+        ...vendorNames,
+        ...vendorBrandNames,
+        ...allVenues,
+    ];
+    for (let i = 0; i < allVenues.length; i++) {
+        let obj = {};
+        obj[allVenues[i]] = allVenuesSlug[i];
+        venueObject.push(obj);
+    }
+    for (let i = 0; i < vendorBrandNames.length; i++) {
+        let obj = {};
+        obj[vendorBrandNames[i]] = allVendorsSlug[i];
+        vendorObject.push(obj);
+    }
   return (
     <Wrapper className="section title-caption-section">
-      <div className="header">
+      <div className="headerr">
         <div className="header-container">
           <div className="vendor-page-title">
             <h2 className="main-title">
@@ -26,9 +56,17 @@ export default function TitleCaption({
             {/* <Pagedescription caption={caption}/> */}
           </div>
         </div>
-        <div className="search-bar">
-          <VendorSearchBar category={category} />
-        </div>
+          {/* <VendorSearchBar category={category} /> */}
+          <SearchBarVendor
+                      suggestions={suggestions}
+                      selectedCity={selectedCity}
+                      vendorBrandNames={vendorBrandNames}
+                      allVenues={allVenues}
+                      allVenuesSlug={allVenuesSlug}
+                      venueObject={venueObject}
+                      vendorObject={vendorObject}
+                      category={category}
+                    />
       </div>
     </Wrapper>
   );
@@ -40,23 +78,20 @@ const Wrapper = styled.section`
       display: none;
     }
   }
+  .headerr{
+    display:flex;
+    justify-content: space-between;
+  }
   .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     max-width: 150rem;
-    margin: auto;
-    ${"" /* position: absolute; */}
-    ${"" /* left: 0; */}
     .vendor-page-title {
       margin: 0 20px;
-      ${"" /* text-align:center; */}
-      ${"" /* display: flex; */}
-      ${"" /* flex-direction: column; */}
       .main-title {
         font-family: "Montserrat";
         font-size: 2.8rem;
-        ${"" /* text-align: center; */}
         text-transform: capitalize;
       }
 

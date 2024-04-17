@@ -147,7 +147,6 @@ export async function getServerSideProps({ params, req, res }) {
       };
     } else if (url.length === 1) {
       //It means its a details page url
-
       return {
         redirect: {
           permanent: true,

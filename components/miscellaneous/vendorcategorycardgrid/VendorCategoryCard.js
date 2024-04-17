@@ -2,42 +2,44 @@
 import {BsArrowRight} from 'react-icons/bs'
 import styled from "styled-components";
 import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 
-export default function VendorCategoryCard({bgColor,title,desc,url}) {
-
-
+export default function VendorCategoryCard({bgColor,title,desc,url,imgUrl}) {
+    const router = useRouter();
+    function vendorClickCat(url){
+        router.push(url)
+    }
     return (
-        <Wrapper color={bgColor}>
+        <Wrapper color={bgColor} onClick={() => vendorClickCat(url)}>
             <div className="content">
                 <h2 className="title">{title}</h2>
                 <p>{desc && desc}</p>
             </div>
             <div className="btn-container">
                 <Link href={url} className="btn">Explore  <BsArrowRight className='icon'/></Link>
-               
             </div>
-            {/* <div className="img-container">
+            <div className="img-container">
                 <Image
-                    src={'/bannar.png'}
+                    src={imgUrl}
                     fill
                     alt="img"
                     sizes="(100vw)"
                 />
-
-            </div> */}
+            </div>
         </Wrapper>
     )
 }
 
 const Wrapper = styled.div`
-/* border: 1px solid red; */
+cursor : pointer;
 background-color: ${(props)=>props?.color};
 display: flex;
 height: 120px;
 justify-content: space-between;
 .content{
     /* border: 1px solid black;     */
-    /* width: 60%; */
+    width: 230px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -96,9 +98,9 @@ justify-content: space-between;
 
 }
 .img-container{
-    border: 1px solid black;
+    // border: 1px solid black;
     position: relative;
-    width: 40%;
+    width: 32%;
     height: 100%;
     overflow: hidden;
     /* border-radius:9% 10% 10% 9% / 48% 0% 0% 53%  ; */
@@ -108,11 +110,13 @@ justify-content: space-between;
 }
 
 
-@media (max-width:500px) {
+@media (max-width:600px) {
     height: 100px;
-    
     .img-container{
-        width: 50%;
+        width: 50% !important;
+    }
+    .content{
+        width: 150px;
     }
 }
 

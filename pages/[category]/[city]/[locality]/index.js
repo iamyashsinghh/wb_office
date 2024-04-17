@@ -130,7 +130,6 @@ export async function getServerSideProps({ query, req, res }) {
   try {
     let { category, city, locality } = query;
 
-    //For filter
     const { guest, per_plate, per_budget, multi_localities , serch_value } = query;
 
     const filterQuery = {

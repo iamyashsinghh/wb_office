@@ -11,6 +11,8 @@ import CityVenueHall from "@/components/miscellaneous/footer/CityVenueHall";
 import VendorCategoryCardGrid from "@/components/miscellaneous/vendorcategorycardgrid/VendorCategoryCardGrid";
 import Head from "next/head";
 import { query } from "@/utils/db";
+import Gallary from "@/components/homepage/gallary/Gallary";
+import Testimonial from "@/components/homepage/testimonial/Testimonial";
 // import VendorGrid from "@/components/miscellaneous/vendorcategoryslider/VendorGrid";
 // import FooterVendors from "@/components/miscellaneous/footer/FooterVendors";
 // import dynamic from "next/dynamic";

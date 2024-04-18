@@ -77,18 +77,26 @@ export default function SignUpPage() {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
-
                 },
                 body: data
             })
 
+            const crmUrl =  `${process.env.NEXT_PUBLIC_LEAD_SERVER_DOMAINN}/api/business_lead`
+            let crmResponse = await fetch(crmUrl, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: data
+            })
+
+            
             response = await response.json();
             if (response.success === true) {
                 formik.resetForm();
                 alert('You have successfully registered! Our team will contact you soon')
             }
             else {
-                
                 alert(response.message)
             }
             setIsLoading(false)

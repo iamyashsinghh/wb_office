@@ -71,7 +71,7 @@ function Venue(props) {
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
           />
         </Head>
-
+        
         <VenueListPage data={{ ...props, localities }} />
 
         {props.result.meta?.faq && (
@@ -181,15 +181,10 @@ export async function getServerSideProps({ query, req, res }) {
         console.log("-----------------------------------------------------");
         throw error;
       }
-
-      // const data = await response.json();
-      // console.log("locality data " + data)
-      // return data;
     };
 
     const result = await fetchData(url);
     const localities = await fetchLocality(getlocalitiesURL);
-
     // // Use Promise.all to fetch data from both APIs concurrently
     // const [result, localities] = await Promise.all([
     //     fetchData(url),
@@ -220,6 +215,7 @@ export async function getServerSideProps({ query, req, res }) {
         venue_list: venue_list || null,
       },
     };
+
   } catch (error) {
     console.log("Error from listing page line number 183");
     console.log(error);

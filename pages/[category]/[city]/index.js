@@ -4,28 +4,84 @@ import Head from "next/head";
 
 export default function Page({ response }) {
     if (response.tag === 'venue') {
+        const jsonLdData = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "item": { "@id": "https://weddingbanquets.in", "name": "Wedding Banquets" }
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                  "@id": `https://weddingbanquets.in/${response.city.slug}`,
+                  "name": response.city.name
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "item": { "name":response.data.venue.name }
+              }
+            ]
+          };
         return (
             <>
                 <Head>
                     <title>{response.data.venue.meta_title}</title>
                     <meta name="description" content={response.data.venue.meta_description} />
-                    <meta name="keywords" content={response.data.venue.meta_keywords}/>   
-                    <meta property="og:title" content={response.data.venue.meta_title}/>
-                    <meta property="og:description" content={response.data.venue.meta_description}/>
+                    <meta name="keywords" content={response.data.venue.meta_keywords} />
+                    <meta property="og:title" content={response.data.venue.meta_title} />
+                    <meta property="og:description" content={response.data.venue.meta_description} />
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+                    />
                 </Head>
                 <VenueDetailsPage response={response} />
             </>
         )
     }
     else {
+        const jsonLdData = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "item": { "@id": "https://weddingbanquets.in", "name": "Wedding Banquets" }
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                  "@id": `https://weddingbanquets.in/${response.city.slug}`,
+                  "name": response.city.name
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "item": { "name":response.data.vendor.brand_name }
+              }
+            ]
+          };
         return (
             <>
                 <Head>
                     <title>{response.data.vendor.meta_title}</title>
                     <meta name="description" content={response.data.vendor.meta_description} />
-                    <meta name="keywords" content={response.data.vendor.meta_keywords}/>   
-                    <meta property="og:title" content={response.data.vendor.meta_title}/>
-                    <meta property="og:description" content={response.data.vendor.meta_description}/>
+                    <meta name="keywords" content={response.data.vendor.meta_keywords} />
+                    <meta property="og:title" content={response.data.vendor.meta_title} />
+                    <meta property="og:description" content={response.data.vendor.meta_description} />
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
+                    />
                 </Head>
                 <VendorDetailsPage response={response} />
             </>
@@ -46,11 +102,11 @@ export async function getServerSideProps({ query, req, res }) {
                 notFound: true,
             })
         }
-        if(response.city.slug !== city){
+        if (response.city.slug !== city) {
             return {
                 redirect: {
-                  permanent: true,
-                  destination: `/${response.city.slug}/${slug}`,
+                    permanent: true,
+                    destination: `/${response.city.slug}/${slug}`,
                 },
             };
         }

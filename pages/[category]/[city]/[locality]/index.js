@@ -86,9 +86,14 @@ function Venue(props) {
             content={props.result.meta?.meta_description}
           />
           <meta name="keywords" content={props.result.meta?.meta_keywords} />
-          
-          <meta name="og:image" content={`${process.env.MEDIA_PREFIX}/${props.result.data[0].images.split(',')[0]}`} />
-
+          <meta
+            name="og:image"
+            content={
+              props.result && props.result.data && props.result.data.length > 0 && props.result.data[0].images
+                ? `${process.env.MEDIA_PREFIX || '/default/prefix'}/${props.result.data[0].images.split(',')[0]}`
+                : 'https://weddingbanquets.in/twitter-img.png'
+            }
+          />
           <meta property="og:title" content={props.result.meta?.meta_title} />
           <meta
             property="og:description"
@@ -140,7 +145,15 @@ function Venue(props) {
             content={props.result.meta?.meta_description}
           />
           <meta name="keywords" content={props.result.meta?.meta_keywords} />
-          <meta name="og:image" content={`${process.env.MEDIA_PREFIX}/${props.result.data[0].images.split(',')[0]}`} />
+          <meta
+            name="og:image"
+            content={
+              props.result && props.result.data && props.result.data.length > 0 && props.result.data[0].images
+                ? `${process.env.MEDIA_PREFIX || '/default/prefix'}/${props.result.data[0].images.split(',')[0]}`
+                : 'https://weddingbanquets.in/twitter-img.png'
+            }
+          />
+
           <meta property="og:title" content={props.result.meta?.meta_title} />
           <meta
             property="og:description"
@@ -150,7 +163,7 @@ function Venue(props) {
             property="og:url"
             content={`https://weddingbanquets.in/${router.asPath}`}
           />
-           <script
+          <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData2) }}
           />
@@ -166,7 +179,7 @@ function Venue(props) {
 export async function getServerSideProps({ query, req, res }) {
   try {
     let { category, city, locality } = query;
-    const { guest, per_plate, per_budget, multi_localities , serch_value } = query;
+    const { guest, per_plate, per_budget, multi_localities, serch_value } = query;
     const filterQuery = {
       guest: guest || "",
       per_plate: per_plate || "",
@@ -217,13 +230,13 @@ export async function getServerSideProps({ query, req, res }) {
 
     const result = await fetchData(url);
     const localities = await fetchLocality(getlocalitiesURL);
-  
-      const url2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
-      let vendor_list = await fetch(url2);
-      vendor_list = await vendor_list.json();
-      const url3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
-      let venue_list = await fetch(url3);
-      venue_list = await venue_list.json();
+
+    const url2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
+    let vendor_list = await fetch(url2);
+    vendor_list = await vendor_list.json();
+    const url3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
+    let venue_list = await fetch(url3);
+    venue_list = await venue_list.json();
     return {
       props: {
         result: result || null,

@@ -6,6 +6,7 @@ import CallingRequest from "@/lib/request/callingrequest/CallingRequest";
 import Image from "next/image";
 import TabsComponent from "../tabsComponent/TabsComponent";
 import Tabs from "../tabs/Tabs";
+import Head from "next/head";
 
 export default function VendorBasicInfo({ vendor, openLeadsModel }) {
 
@@ -15,7 +16,11 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
         await CallingRequest(slug);
     }
 
-    return (<Wrapper className="section-venue-basic_info info-section">
+    return (<>
+  <Head>
+    
+  </Head>
+    <Wrapper className="section-venue-basic_info info-section">
 
         <div className="container-l">
         <div className="info-container">
@@ -53,7 +58,8 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                 </div>
             </div>
         </div>
-    </Wrapper>)
+    </Wrapper>
+    </>)
 }
 
 

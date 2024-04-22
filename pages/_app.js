@@ -44,9 +44,9 @@ export default function App({ Component, pageProps }) {
         <meta property="og:site_name" content="Weddingbanquets" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
+
         {/* twiiter card */}
           <meta name="twitter:card" content="summary_large_image" />
-          
           <meta name="twitter:title" content="Weddingbanquets" />
           <meta name="twitter:url" content="https://weddingbanquets.in" />
           <meta name="twitter:description" content="Your one-stop shop for all of your wedding needs. Browse 1000+ party halls &amp; wedding banquets. Get budget-friendly photographers, mehndi artists, makeup artists, &amp; more..." />

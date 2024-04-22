@@ -76,6 +76,7 @@ export default function Home({
   return (
     <div>
       <Head>
+      <meta name="og:image" content="https://weddingbanquets.in/twitter-img.png"/>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}

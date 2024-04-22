@@ -86,6 +86,9 @@ function Venue(props) {
             content={props.result.meta?.meta_description}
           />
           <meta name="keywords" content={props.result.meta?.meta_keywords} />
+          
+          <meta name="og:image" content={`${process.env.MEDIA_PREFIX}/${props.result.data[0].images.split(',')[0]}`} />
+
           <meta property="og:title" content={props.result.meta?.meta_title} />
           <meta
             property="og:description"
@@ -137,7 +140,7 @@ function Venue(props) {
             content={props.result.meta?.meta_description}
           />
           <meta name="keywords" content={props.result.meta?.meta_keywords} />
-
+          <meta name="og:image" content={`${process.env.MEDIA_PREFIX}/${props.result.data[0].images.split(',')[0]}`} />
           <meta property="og:title" content={props.result.meta?.meta_title} />
           <meta
             property="og:description"

@@ -2,40 +2,61 @@ import styled from "styled-components";
 import { BsChevronDown } from 'react-icons/bs'
 import { useState } from 'react';
 import Heading from "@/components/miscellaneous/Heading";
+import Head from "next/head";
 
 
-function Faqs({ faqs,name }) {
-
+function Faqs({ faqs, name }) {
     const faqs_contant = JSON.parse(faqs);
     const [activeIndex, setActiveIndex] = useState(null);
     const onItemClick = (index) => {
         setActiveIndex(activeIndex === index ? null : index);
     };
 
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs_contant.map(faq => ({
+            "@type": "Question",
+            "name": faq.question,
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+            }
+        }))
+    };
+
     return (
+        <>
+            <Head>
+            <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          />
+               
+            </Head>
+            <Section className="section faqs-section"  >
+                <div className="container faqs-container">
+                    <Heading text={`FAQs about ${name}`} />
+                    {
+                        faqs_contant?.map((item, index) => {
+                            return (
+                                <Wrapper key={index}>
+                                    <div className='faqs-header' onClick={() => { onItemClick(index) }}>
+                                        <span className='faqs-ques'>{item.question}</span>
+                                        <BsChevronDown className={`icon ${activeIndex === index ? 'rotate' : ''}`} size={20} />
+                                    </div>
+                                    <ul className={`list-unstyled ${activeIndex === index ? 'active' : ''} `}>
 
-        <Section className="section faqs-section"  >
+                                        <li>{item.answer}</li>
+                                    </ul>
+                                </Wrapper>
+                            )
+                        })
+                    }
+                </div>
+            </Section>
+        </>
 
-            <div className="container faqs-container">
-                <Heading text={`FAQs about ${name}`}/>
-                {
-                    faqs_contant?.map((item, index) => {
-                        return (
-                            <Wrapper key={index}>
-                                <div className='faqs-header' onClick={() => { onItemClick(index) }}>
-                                    <span className='faqs-ques'>{item.question}</span>
-                                    <BsChevronDown className={`icon ${activeIndex === index ? 'rotate' : ''}`} size={20} />
-                                </div>
-                                <ul className={`list-unstyled ${activeIndex === index ? 'active' : ''} `}>
-
-                                    <li>{item.answer}</li>
-                                </ul>
-                            </Wrapper>
-                        )
-                    })
-                }
-            </div>
-        </Section>
 
     )
 }

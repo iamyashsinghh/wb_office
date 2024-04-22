@@ -1,5 +1,4 @@
 //This is a Listing page which will list the venue and vendor based on the url slug
-
 import CityVenueHall from "@/components/miscellaneous/footer/CityVenueHall";
 import FooterVendors from "@/components/miscellaneous/footer/FooterVendors";
 import VendorListPage from "@/components/vendor/vendorlistpage/VendorListPage";
@@ -17,15 +16,11 @@ function Venue(props) {
   const { setSelectedCity, localities } = useGlobalContext();
 
   const router = useRouter();
-
-  // If a user is comming by the url then we change the city as per the url, Here I am not update chageRoute because here i don't need to update that , otherwire userwill rediect to the homepage.
-  //This will run every time when user come on listing page. It will setSelectcity if city name is diff. if url contain the same city name then useEffect will run but it will not update the city.Updating the city with the same values does not cause re-render.
   useEffect(() => {
     if (props.city) {
       setSelectedCity(props.city);
     }
   }, [props.city]);
-
   const jsonLdData = {
     "@type": "Review",
     "itemReviewed": {
@@ -45,7 +40,6 @@ function Venue(props) {
       "worstRating": 1.0
     }
   };
-
   if (props.result.tag === "venues") {
     return (
       <>
@@ -65,22 +59,18 @@ function Venue(props) {
             property="og:url"
             content={`https://weddingbanquets.in/${router.asPath}`}
           />
-
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
           />
         </Head>
-        
         <VenueListPage data={{ ...props, localities }} />
-
         {props.result.meta?.faq && (
           <Faqs
             faqs={props.result.meta?.faq}
             name={`${props.category} in ${props.city}`}
           />
         )}
-
         <FooterKeyword
           city={props?.city}
           locality={props?.locality}
@@ -129,9 +119,7 @@ function Venue(props) {
 export async function getServerSideProps({ query, req, res }) {
   try {
     let { category, city, locality } = query;
-
     const { guest, per_plate, per_budget, multi_localities , serch_value } = query;
-
     const filterQuery = {
       guest: guest || "",
       per_plate: per_plate || "",
@@ -139,16 +127,13 @@ export async function getServerSideProps({ query, req, res }) {
       multi_localities: multi_localities || "",
       serch_value: serch_value || "",
     };
-
     const url = `${process.env.SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}?guest=${filterQuery.guest}&per_plate=${filterQuery.per_plate}&per_budget=${filterQuery.per_budget}&multi_localities=${filterQuery.multi_localities}&serch_value=${filterQuery.serch_value}`;
     const getlocalitiesURL = `${process.env.SERVER_DOMAIN}/api/locations/${city}`;
-
     const fetchData = async (url) => {
       const response = await fetch(url);
 
       try {
         const data = await response.json();
-
         console.log("-----------------------------------------------------");
         console.log("page data  " + data);
         console.log("-----------------------------------------------------");
@@ -185,24 +170,15 @@ export async function getServerSideProps({ query, req, res }) {
 
     const result = await fetchData(url);
     const localities = await fetchLocality(getlocalitiesURL);
-    // // Use Promise.all to fetch data from both APIs concurrently
-    // const [result, localities] = await Promise.all([
-    //     fetchData(url),
-    //     fetchData(getlocalitiesURL),
-    // ]);
-
       const url1 = `${process.env.SERVER_DOMAIN}/api/home_page/`;
       let homePageData = await fetch(url1);
       homePageData = await homePageData.json();
-
       const url2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
       let vendor_list = await fetch(url2);
       vendor_list = await vendor_list.json();
-
       const url3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
       let venue_list = await fetch(url3);
       venue_list = await venue_list.json();
-
     return {
       props: {
         result: result || null,
@@ -215,7 +191,6 @@ export async function getServerSideProps({ query, req, res }) {
         venue_list: venue_list || null,
       },
     };
-
   } catch (error) {
     console.log("Error from listing page line number 183");
     console.log(error);

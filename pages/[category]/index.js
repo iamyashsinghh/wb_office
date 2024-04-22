@@ -128,6 +128,7 @@ export async function getServerSideProps({ params, req, res }) {
   } else {
     //This is magix box which redirect the old url to the new url with its coressponding page.
 
+    
     let url = slug?.split("-in-");
 
     //It means its a listing page url
@@ -146,7 +147,6 @@ export async function getServerSideProps({ params, req, res }) {
         },
       };
     } else if (url.length === 1) {
-      //It means its a details page url
       return {
         redirect: {
           permanent: true,

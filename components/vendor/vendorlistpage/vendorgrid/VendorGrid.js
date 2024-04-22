@@ -3,11 +3,14 @@ import VendorCard from "./VendorCard";
 import { useState, useRef, useEffect } from "react";
 import useLeadModel from "@/lib/hook/useLeadModel";
 import { Spinner2 } from "@/styles/components/spinner";
+import {useGlobalContext} from "@/context/MyContext";
+import Head from "next/head";
 
 export default function VendorGrid({ vendors, category, city, locality, data }) {
   const { data: vendors_list, count } = vendors;
-
+  
   //To open leadModel
+  const { selectedCity } =useGlobalContext();
   const { openLeadModel } = useLeadModel();
 
   let page = useRef(1);
@@ -27,7 +30,6 @@ export default function VendorGrid({ vendors, category, city, locality, data }) 
     try {
       setLoading(true);
       if (vendorLists.length >= count) {
-        // console.log("Hy")
         setHasMore(false);
       }
       page.current = page.current + 1;
@@ -43,7 +45,25 @@ export default function VendorGrid({ vendors, category, city, locality, data }) 
     }
   }
 
+  let listingPageListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": vendorLists.map((item, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": item?.brand_name,
+        "url": `https://weddingbanquets.in/${selectedCity}/${item?.slug}`
+    }))
+};
+
   return (
+    <>
+    <Head>
+    <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(listingPageListSchema) }}
+    />
+    </Head>
     <Wrapper className="section vendor-grid-section">
       <div className="container">
         <div className="card-container">
@@ -76,6 +96,7 @@ export default function VendorGrid({ vendors, category, city, locality, data }) 
         )}
       </div>
     </Wrapper>
+    </>
   );
 }
 

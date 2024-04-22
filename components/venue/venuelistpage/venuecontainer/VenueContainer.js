@@ -10,6 +10,7 @@ import Filter from "../filter/Filter";
 import useLeadModel from "@/lib/hook/useLeadModel";
 import useCallConversion from "@/lib/hook/useCallConversion";
 import SearchBarVenue from "@/components/miscellaneous/SearchBarVenue";
+import Head from "next/head";
 
 
 function VenueContainer({ city, lists, locality, category, count, localities, venueCategories, vendorCategories, data, filterQuery }) {
@@ -18,7 +19,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
     const { openLeadModel } = useLeadModel();         //To open lead model
     const { callConversion } = useCallConversion();         //For call conversion
     const [loading, setLoading] = useState(false);
-    const {venue_list, vendor_list} = data;
+    const { venue_list, vendor_list } = data;
     let venueObject = [];
     let vendorObject = [];
     let venueNames = venueCategories.map((category) => category.name);
@@ -67,6 +68,9 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
     }, [venuelists])
 
 
+   
+
+
     //For infinity scroll to fetch more venues.
     const fetchMoreVenue = async () => {
 
@@ -97,7 +101,26 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
         }
 
     }
+
+    let listingPageListSchema = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": venuelists.map((item, index) => ({
+            "@type": "ListItem",
+            "position": index + 1,
+            "name": item?.name,
+            "url": `https://weddingbanquets.in/${selectedCity}/${item?.slug}`
+        }))
+    };
+
     return (
+        <>
+        <Head>
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(listingPageListSchema) }}
+          />
+        </Head>
         <Section className="section section-venue-container">
             {/* <Heading text={'Wedding Banque t in Mumbai'} desc={"As you start with the wedding preparations and dive deeper to create the perfect fairytale wedding, one crucial element is the wedding venue. It can be exhausting, especially in Delhi, as the city is brimming with options."} /> */}
 
@@ -123,16 +146,16 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                 <main className="venues-list box">
                     {/* <Heading text={`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality} (${count})`} /> */}
                     <div className="d-flex">
-                    <h1 className="venue-conatiner-h1 main-title">{`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality}`} <span className="count">{`(${count || 0})`}</span></h1>
-                    <SearchBarVenue
-                      suggestions={suggestions}
-                      selectedCity={selectedCity}
-                      vendorBrandNames={vendorBrandNames}
-                      allVenues={allVenues}
-                      allVenuesSlug={allVenuesSlug}
-                      venueObject={venueObject}
-                      vendorObject={vendorObject}
-                    />
+                        <h1 className="venue-conatiner-h1 main-title">{`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality}`} <span className="count">{`(${count || 0})`}</span></h1>
+                        <SearchBarVenue
+                            suggestions={suggestions}
+                            selectedCity={selectedCity}
+                            vendorBrandNames={vendorBrandNames}
+                            allVenues={allVenues}
+                            allVenuesSlug={allVenuesSlug}
+                            venueObject={venueObject}
+                            vendorObject={vendorObject}
+                        />
                     </div>
                     {
                         venuelists?.map((item, index) => (
@@ -140,7 +163,6 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                                 {/* <VenueCard key={index} venue={item} city={city} /> */}
                                 <VenueCard2 key={index} venue={item} city={city} openLeadModel={openLeadModel} callConversion={callConversion} />
                             </>
-
                         ))
                     }
 
@@ -158,6 +180,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
             </div>
 
         </Section>
+        </>
     )
 }
 

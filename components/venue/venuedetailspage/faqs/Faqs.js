@@ -12,10 +12,12 @@ function Faqs({ faqs, name }) {
         setActiveIndex(activeIndex === index ? null : index);
     };
 
+    const faqs_content = faqs_contant ? faqs_contant : [];
+
     const faqSchema = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": faqs_contant.map(faq => ({
+        "mainEntity": faqs_content.map(faq => ({
             "@type": "Question",
             "name": faq.question,
             "acceptedAnswer": {
@@ -28,11 +30,11 @@ function Faqs({ faqs, name }) {
     return (
         <>
             <Head>
-            <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-          />
-               
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                />
+
             </Head>
             <Section className="section faqs-section"  >
                 <div className="container faqs-container">

@@ -67,8 +67,6 @@ function FooterRelatedSearch({city,locality}) {
                                 )
                             })
                         }
-
-
                     </div>
                 </div>
             </div>

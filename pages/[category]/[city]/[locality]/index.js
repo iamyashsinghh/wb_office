@@ -227,10 +227,8 @@ export async function getServerSideProps({ query, req, res }) {
         throw error;
       }
     };
-
     const result = await fetchData(url);
     const localities = await fetchLocality(getlocalitiesURL);
-
     const url2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
     let vendor_list = await fetch(url2);
     vendor_list = await vendor_list.json();

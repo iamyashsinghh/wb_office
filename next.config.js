@@ -12,7 +12,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'cms.wbcrm.in',
+        hostname: 'cms.wiseweddings.in',
       },
       {
         protocol: 'https',
@@ -39,7 +39,7 @@ const nextConfig = {
         hostname: 'cdn.pixabay.com',
       },
     ],
-    domains: [ 'localhost', 'cms.wbcrm.in','lh3.googleusercontent.com',"weddingbanquets.in","blog.weddingbanquets.in"],
+    domains: [ 'localhost', 'cms.wiseweddings.in','lh3.googleusercontent.com',"weddingbanquets.in","blog.weddingbanquets.in"],
   },
   
 }

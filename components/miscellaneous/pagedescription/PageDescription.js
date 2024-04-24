@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 
 export default function Pagedescription({ caption }) {
-  // console.log(caption.slice(0,500))
 
   const [showCaption, setShowCaption] = useState(false);
   return (

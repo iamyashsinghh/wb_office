@@ -106,17 +106,15 @@ export default function Page({ response }) {
 }
 
 export async function getServerSideProps({ query, req, res }) {
-
   try {
     const { category: city, city: slug } = query;
-
-    const url = `${process.env.SERVER_DOMAIN}/api/venue_or_vendor_details/${slug}`
+    const url = `${process.env.SERVER_DOMAIN}/api/venue_or_vendor_details/${slug}`;
     let response = await fetch(url);
     response = await response.json();
-    if (!response.success) {
-      return ({
-        notFound: true,
-      })
+
+    if (!response || !response.success || !response.city || !response.data) {
+      // console.error('Invalid API response', response);
+      return { notFound: true };
     }
     if (response.city.slug !== city) {
       return {
@@ -126,15 +124,10 @@ export async function getServerSideProps({ query, req, res }) {
         },
       };
     }
-    return ({
-      props: {
-        response: response || null
-      }
-    })
+
+    return { props: { response } };
   } catch (error) {
-    console.log("some error occur featching the data" + error)
-    return ({
-      notFound: true,
-    })
+    // console.error("Error fetching data:", error);
+    return { notFound: true };
   }
 }

@@ -54,7 +54,7 @@ function VendorCard({ vendor, openLeadModel }) {
             <p className="v-add">{vendor.vendor_address}</p>
           </div>
         </div>
-        <div>
+        <div>  
           <a
             onClick={(e) => handleShareClick(e)}
             className="call-btn"

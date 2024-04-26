@@ -17,7 +17,7 @@ function Hero({ vendor_list, venue_list, venueCategogies, cities }) {
   let allVenues = venue_list.map((category) => category.name);
   let allVenuesSlug = venue_list.map((category) => category.slug);
   let allVendorsSlug = vendor_list.map((category) => category.slug);
-  const [backgroundImage, setBackgroundImage] = useState("/banner/banner.png");
+  const [backgroundImage, setBackgroundImage] = useState("/banner/banner.avif");
   const suggestions = [
     ...venueNames,
     ...vendorNames,
@@ -50,7 +50,7 @@ function Hero({ vendor_list, venue_list, venueCategogies, cities }) {
     checkImageExists(cityImagePath).then((imageExists) => {
       const backgroundImage = imageExists
         ? cityImagePath
-        : "/banner/banner.png";
+        : "/banner/banner.avif";
       setBackgroundImage(backgroundImage);
     });
   }, [selectedCity, setBackgroundImage]);
@@ -60,7 +60,7 @@ function Hero({ vendor_list, venue_list, venueCategogies, cities }) {
       <div className="hero-container">
         <Image
           src={backgroundImage}
-          alt="An example image"
+          alt="Wedding Banquets"
           fill={true}
           priority={true} //Remove Lazy Loading
           quality={100}

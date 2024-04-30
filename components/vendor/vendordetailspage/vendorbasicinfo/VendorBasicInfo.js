@@ -32,7 +32,7 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
             <div className="info-container">
                 <TabsComponent images={vendor.images} />
                 <div className="package-card card">
-                    <h2 className="price"><BiRupee className="rupee-icon" />{vendor.package_price}</h2>
+                    <h2 className="price"><BiRupee className="rupee-icon" /><div className='cut-price'>{vendor.package_price}</div></h2>
                     <span className="price-label">Package price</span>
                     <div className="action-btns">
                         <button className="venue-card-btn" onClick={(e) => openLeadsModel()} >Get Quatation</button>
@@ -70,6 +70,9 @@ position: relative;
 padding: 2rem 0;
 .info-cardd{
     margin-top:50px;
+}
+.cut-price{
+    text-decoration: line-through;
 }
 .info-container{
     padding: 0rem 1rem;

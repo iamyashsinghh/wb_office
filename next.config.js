@@ -16,6 +16,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'cms.wbcrm.in',
+      },
+      {
+        protocol: 'https',
         hostname: 'i.ibb.co',
       },
       {
@@ -39,7 +43,7 @@ const nextConfig = {
         hostname: 'cdn.pixabay.com',
       },
     ],
-    domains: [ 'localhost', 'cms.wiseweddings.in','lh3.googleusercontent.com',"weddingbanquets.in","blog.weddingbanquets.in"],
+    domains: [ 'localhost', 'cms.wiseweddings.in', 'cms.wbcrm.in', 'lh3.googleusercontent.com',"weddingbanquets.in","blog.weddingbanquets.in"],
   },
   
 }

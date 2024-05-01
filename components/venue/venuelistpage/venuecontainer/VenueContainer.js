@@ -161,7 +161,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                         venuelists?.map((item, index) => (
                             <>
                                 {/* <VenueCard key={index} venue={item} city={city} /> */}
-                                <VenueCard2 key={index} venue={item} city={city} openLeadModel={openLeadModel} callConversion={callConversion} />
+                                <VenueCard2 key={index} locality={locality} category={category} venue={item} city={city} openLeadModel={openLeadModel} callConversion={callConversion} />
                             </>
                         ))
                     }

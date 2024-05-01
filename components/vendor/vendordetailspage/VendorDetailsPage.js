@@ -44,7 +44,7 @@ export default function VendorDetailsPage({ response }) {
     <>
       <Header />
       <BreadCrumb meta_title={vendor.meta_title} />
-      <ImageSlider images={vendor.images} wb_assured={vendor?.wb_assured} />
+      <ImageSlider images={vendor.images} altname ={vendor.brand_name} wb_assured={vendor?.wb_assured} />
       <VendorBasicInfo vendor={vendor} openLeadsModel={openLeadsModel} />
       <HaveUsCallYou />
       <Policies />

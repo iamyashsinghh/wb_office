@@ -30,7 +30,7 @@ import Counter from "yet-another-react-lightbox/plugins/counter";
 import Assured from "@/components/miscellaneous/Assured";
 
 
-export default function ImageSlider({ images,wb_assured }) {
+export default function ImageSlider({ images,wb_assured, altname }) {
 
     const [open, setOpen] = useState(false);
 
@@ -78,7 +78,7 @@ export default function ImageSlider({ images,wb_assured }) {
                                         src={`${process.env.NEXT_PUBLIC_MEDIA_PREFIX}/${url}`}
                                         fill
                                         sizes="(100vw)"
-                                        alt="venue-img"
+                                        alt={altname}
                                     />
                                 </SwiperSlide>
                             )

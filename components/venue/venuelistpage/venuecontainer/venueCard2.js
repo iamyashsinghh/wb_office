@@ -25,7 +25,7 @@ import Assured from "@/components/miscellaneous/Assured";
 import { useGlobalContext } from "@/context/MyContext";
 import Head from "next/head";
 
-function VenueCard2({ venue, city, openLeadModel, callConversion }) {
+function VenueCard2({ venue, city, openLeadModel,locality,category, callConversion }) {
   const images = venue.images?.split(",");
   const { selectedCity } = useGlobalContext();
 
@@ -106,7 +106,7 @@ function VenueCard2({ venue, city, openLeadModel, callConversion }) {
                   src={`${process.env.NEXT_PUBLIC_MEDIA_PREFIX}/${image}`}
                   fill
                   sizes="(100vw)"
-                  alt="venue-img"
+                  alt={locality === 'all' ? '' : `${category.replaceAll("-", " ")} in ${locality.replaceAll("-", " ")}`}
                 />
               </SwiperSlide>
             );
@@ -137,8 +137,8 @@ function VenueCard2({ venue, city, openLeadModel, callConversion }) {
                   src={`${process.env.NEXT_PUBLIC_MEDIA_PREFIX}/${image}`}
                   fill
                   sizes="(100vw)"
-                  alt="venue-img"
-                />
+                  alt={locality === 'all' ? '' : `${category} in ${locality}`}
+                  />
               </SwiperSlide>
             );
           })}

@@ -68,7 +68,7 @@ export default function VendorGrid({ vendors, category, city, locality }) {
 
                     {
                         vendorLists?.map((vendor) => {
-                            return (<VendorCard key={vendor.key} vendor={vendor} openLeadModel={openLeadModel} />)
+                            return (<VendorCard key={vendor.key} category={category} locality={locality} city={city} vendor={vendor} openLeadModel={openLeadModel} />)
                         })
                     }
                 </div>

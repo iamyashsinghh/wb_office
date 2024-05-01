@@ -56,7 +56,7 @@ export default function VenueDetailsPage({ response }) {
         <>
             <Header />
             <BreadCrumb meta_title={venue.meta_title} />
-            <ImageSlider images={venue.images} wb_assured={venue?.wb_assured}/>
+            <ImageSlider images={venue.images} altname={venue.name} wb_assured={venue?.wb_assured}/>
             <VenueBasicInfo venue={venue} openLeadsModel={openLeadsModel} openAvailableCheck={openAvailableCheck} id={venue.id}/>
             <VenueFeatures />
             <FoodPackage nonveg_foods={venue?.nonveg_foods} veg_foods={venue?.veg_foods} />

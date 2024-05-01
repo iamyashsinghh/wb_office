@@ -9,12 +9,13 @@ import CallingRequest from "@/lib/request/callingrequest/CallingRequest";
 import Assured from "@/components/miscellaneous/Assured";
 import { MdOutlineWhatsapp } from "react-icons/md";
 
-function VendorCard({ vendor, openLeadModel }) {
+function VendorCard({ vendor, openLeadModel,city, category, locality }) {
   // console.log("from vendor card")
   const image_url = vendor.images?.split(",")[0];
   // console.log(`${process.env.NEXT_PUBLIC_MEDIA_PREFIX}/${image_url}`)
 
   const router = useRouter();
+
 
   async function handleAnchorClick(e, slug) {
     e.stopPropagation();
@@ -36,7 +37,9 @@ function VendorCard({ vendor, openLeadModel }) {
         <Image
           src={`${process.env.NEXT_PUBLIC_MEDIA_PREFIX}/${image_url}`}
           fill={true}
-          alt="vendor-img"
+          alt={`${category} in ${
+            locality === "all" ? city : locality
+          }`}
           sizes="(100vw)"
         />
         {vendor?.wb_assured == 1 && <Assured />}

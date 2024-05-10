@@ -6,7 +6,7 @@ export default function Heading({ text ,desc}) {
     return (
         <Wrapper className="container">
 
-            <h2 className="heading-text">{text}</h2>
+            <h3 className="heading-text">{text}</h3>
             <p className="desc">{desc || ""}</p>
 
         </Wrapper>

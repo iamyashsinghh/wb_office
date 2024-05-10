@@ -37,7 +37,7 @@ export default function DiscountCard() {
                         sizes="(100vw)"
                         height={80}
                     />
-                    <h2 className="discount-heading">get upto 40% off</h2>
+                    <h3 className="discount-heading">get upto 40% off</h3>
                     <p className="discount-text">Share your mobile number to see WeddingBanquet.in prices</p>
                     <div className="discount-form">
                         <div className="country-code">

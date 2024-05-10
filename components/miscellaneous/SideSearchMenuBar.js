@@ -54,7 +54,7 @@ export default function SideSearchMenuBar() {
         <Wrapper {...handlers} isActive={isSearchMenuOpen}>
             <Div isActive={isSearchMenuOpen} onBlur={handleBlur} tabIndex="1">
                 <div className="menu-img">
-                        <h2 className="searchBarMenuTitle">Plan Your Dream Wedding!</h2>
+                        <h3 className="searchBarMenuTitle">Plan Your Dream Wedding!</h3>
                         <p className="searchBarMenuDesc">Search for venues, Makeup Artists, Photographers and more!</p>
                         <MdCancel className="cancel-icon" onClick={() => setIsSearchMenuOpen(false)} />
                     <SearchBarForSideBar

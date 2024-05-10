@@ -167,7 +167,7 @@ export default function LeadModel() {
           ) : (
             <h3 className="title"> Send Enquiry</h3>
           )}
-          <h2 className="discount-heading">{!isSent && "get upto 40% off"}</h2>
+          <h3 className="discount-heading">{!isSent && "get upto 40% off"}</h3>
           <p className="discount-text">
             {isSent
               ? "Our team will reach you soon with best price.."

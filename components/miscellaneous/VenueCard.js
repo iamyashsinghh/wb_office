@@ -59,7 +59,7 @@ function VenueCard({ venue,openLeadModel,callConversion,selectedCity }) {
                     {/* <span className="tag"><AiFillCheckCircle className="tick-icon" />  WB Assured</span> */}
                 </div>
                 <div className="name-city">
-                    <h2 className="venue-name">{`${venue.name}`}</h2>
+                    <h3 className="venue-name">{`${venue.name}`}</h3>
                     <p className="venue-city">{venue.venue_address}</p>
 
                 </div>

@@ -75,30 +75,28 @@ export default function App({ Component, pageProps }) {
 
         {/* Google tag (gtag.js) */}
         {/* old g tag  */}
-        {/* <Script
+        <Script
           id="my-script2"
-          src="https://www.googletagmanager.com/gtag/js?id=G-F1S085RR3J"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-11325854315"
           strategy="afterInteractive"
         />
-
-
         <Script strategy="afterInteractive" id="my-script3">
           {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-F1S085RR3J');
+          gtag('config', 'AW-11325854315');
         `}
-        </Script> */}
+        </Script>
 
-        <Script id="my-script2" async src="https://www.googletagmanager.com/gtag/js?id=AW-11325854315">
+        {/* <Script id="my-script2" async src="https://www.googletagmanager.com/gtag/js?id=AW-11325854315">
         </Script>
         <Script>
           {`window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'AW-11325854315')`}
-        </Script>
+        </Script> */}
         {/* End Google tag (gtag.js) */}
         <a
           href="https://api.whatsapp.com/send?phone=918882198989&text=Hi"

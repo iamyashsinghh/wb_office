@@ -13,7 +13,7 @@ export default function VendorCategoryCard({bgColor,title,desc,url,imgUrl}) {
     return (
         <Wrapper color={bgColor} onClick={() => vendorClickCat(url)}>
             <div className="content">
-                <h2 className="title">{title}</h2>
+                <h3 className="title">{title}</h3>
                 <p>{desc && desc}</p>
             </div>
             <div className="btn-container">

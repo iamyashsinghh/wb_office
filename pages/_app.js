@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
   return (
     <MyContextProvider>
       <GlobalStyles />
-      
+
       <Head>
         <title>Banquet Halls, Wedding Venues, Wedding Planning in India- Wedding Banquets</title>
         <meta
@@ -37,19 +37,19 @@ export default function App({ Component, pageProps }) {
           type="image/png"
           href="https://weddingbanquets.in/fav-icon/favicon14.png"
         />
-        <link rel="preload" href="/banner/delhi.avif" as="image"/>
-        
+        <link rel="preload" href="/banner/delhi.avif" as="image" />
+
         {/* Open graph meta tag */}
         <meta property="og:site_name" content="Weddingbanquets" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
 
         {/* twiiter card */}
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Weddingbanquets" />
-          <meta name="twitter:url" content="https://weddingbanquets.in" />
-          <meta name="twitter:description" content="Your one-stop shop for all of your wedding needs. Browse 1000+ party halls &amp; wedding banquets. Get budget-friendly photographers, mehndi artists, makeup artists, &amp; more..." />
-          <meta name="twitter:image" content="https://weddingbanquets.in/twitter-img.png"/>
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Weddingbanquets" />
+        <meta name="twitter:url" content="https://weddingbanquets.in" />
+        <meta name="twitter:description" content="Your one-stop shop for all of your wedding needs. Browse 1000+ party halls &amp; wedding banquets. Get budget-friendly photographers, mehndi artists, makeup artists, &amp; more..." />
+        <meta name="twitter:image" content="https://weddingbanquets.in/twitter-img.png" />
       </Head>
       <Layout>
         {/* Google Tag Manager (noscript) */}
@@ -74,11 +74,13 @@ export default function App({ Component, pageProps }) {
         {/* End Google Tag Manager */}
 
         {/* Google tag (gtag.js) */}
-        <Script
+        {/* old g tag  */}
+        {/* <Script
           id="my-script2"
           src="https://www.googletagmanager.com/gtag/js?id=G-F1S085RR3J"
           strategy="afterInteractive"
         />
+
 
         <Script strategy="afterInteractive" id="my-script3">
           {`
@@ -87,22 +89,31 @@ export default function App({ Component, pageProps }) {
           gtag('js', new Date());
           gtag('config', 'G-F1S085RR3J');
         `}
+        </Script> */}
+
+        <Script id="my-script2" async src="https://www.googletagmanager.com/gtag/js?id=AW-11325854315">
+        </Script>
+        <Script>
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-11325854315')`}
         </Script>
         {/* End Google tag (gtag.js) */}
         <a
-      href="https://api.whatsapp.com/send?phone=918882198989&text=Hi"
-      className="whatsapp-button"
-      target="_blank"
-      rel="noopener noreferrer"
-      style={{
-        position: 'fixed',
-        right: '25px', 
-        bottom: '70px',
-        zIndex: '99999999',
-      }}
-    >
-  <Image alt='weddingbanquets whatsapp' src="https://i.ibb.co/VgSspjY/whatsapp-button.png" width={55} height={55}></Image>
-  </a>
+          href="https://api.whatsapp.com/send?phone=918882198989&text=Hi"
+          className="whatsapp-button"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            position: 'fixed',
+            right: '25px',
+            bottom: '70px',
+            zIndex: '99999999',
+          }}
+        >
+          <Image alt='weddingbanquets whatsapp' src="https://i.ibb.co/VgSspjY/whatsapp-button.png" width={55} height={55}></Image>
+        </a>
         <Component {...pageProps} />
       </Layout>
     </MyContextProvider>

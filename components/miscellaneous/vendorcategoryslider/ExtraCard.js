@@ -22,7 +22,7 @@ function ExtraCard() {
       </div>
 
       <div className="vendor-details">
-        <h2>Banquet Hall</h2>
+        <h3>Banquet Hall</h3>
         <p>{`(502)`}</p>
       </div>
     </Card>
@@ -79,7 +79,7 @@ const Card = styled(Link)`
     overflow: hidden;
     text-overflow: ellipsis;
 
-    h2 {
+    h3 {
       text-align: center;
       font-size: 1.7rem;
       color: var(--primary-color);

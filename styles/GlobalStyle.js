@@ -64,9 +64,8 @@ h4 {
   font-family: "Poppins", sans-serif;
 }
 
-h2{
+h2, h3{
   font-weight:500;
-
 }
 
 

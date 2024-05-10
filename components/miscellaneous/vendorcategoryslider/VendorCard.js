@@ -24,7 +24,7 @@ function VendorCard({ img, data }) {
                 </div>
 
                 <div className="vendor-details">
-                    <h2>{data?.name}</h2>
+                    <h3>{data?.name}</h3>
                     <p>{`(${data?.vendors_count})`}</p>
                 </div>
             </Card>
@@ -84,7 +84,7 @@ transition: all .3s linear;
     text-overflow: ellipsis; 
 
 
-    h2{
+    h3{
         text-align: center;
         font-size:1.7rem; 
         color:var(--primary-color);

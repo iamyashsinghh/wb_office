@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }) {
         />
         <meta
           name="keywords"
-          content="Affordable Banquet Halls Banquet Halls Top Banquet Halls Best Banquet Halls with price Banquet Halls with review Luxury Banquet Halls Best Banquet Halls List of Banquet Halls Cheapest Banquet Halls Banquet Halls near by Banquet Halls near Marriage Halls Party Halls Birthday Party Halls Function Halls Wedding Venues"
+          content="Affordable Banquet Halls, Banquet Halls, Top Banquet Halls, Best Banquet Halls with price, Banquet Halls with review, Luxury Banquet Halls, Best Banquet Halls, List of Banquet Halls, Cheapest Banquet Halls, Banquet Halls near by, Banquet Halls near, Marriage Halls, Party Halls, Birthday Party Halls, Function Halls, Wedding Venues"
         />
         <meta name="author" content="y@sh" />
         {/* For google search console */}
@@ -37,8 +37,7 @@ export default function App({ Component, pageProps }) {
           type="image/png"
           href="https://weddingbanquets.in/fav-icon/favicon14.png"
         />
-        <link rel="preload" href="/banner/banner.avif" as="image"/>
-
+        <link rel="preload" href="/banner/delhi.avif" as="image"/>
         
         {/* Open graph meta tag */}
         <meta property="og:site_name" content="Weddingbanquets" />
@@ -90,7 +89,6 @@ export default function App({ Component, pageProps }) {
         `}
         </Script>
         {/* End Google tag (gtag.js) */}
-
         <a
       href="https://api.whatsapp.com/send?phone=918882198989&text=Hi"
       className="whatsapp-button"

@@ -17,7 +17,7 @@ function Hero({ vendor_list, venue_list, venueCategogies, cities }) {
   let allVenues = venue_list.map((category) => category.name);
   let allVenuesSlug = venue_list.map((category) => category.slug);
   let allVendorsSlug = vendor_list.map((category) => category.slug);
-  const [backgroundImage, setBackgroundImage] = useState("/banner/banner.avif");
+  const [backgroundImage, setBackgroundImage] = useState("/banner/delhi.avif");
   const suggestions = [
     ...venueNames,
     ...vendorNames,
@@ -35,7 +35,7 @@ function Hero({ vendor_list, venue_list, venueCategogies, cities }) {
     vendorObject.push(obj);
   }
   useEffect(() => {
-    const cityImagePath = `/banner/${selectedCity.toLowerCase()}.png`;
+    const cityImagePath = `/banner/${selectedCity.toLowerCase()}.avif`;
 
     async function checkImageExists(url) {
       try {
@@ -46,11 +46,10 @@ function Hero({ vendor_list, venue_list, venueCategogies, cities }) {
       }
     }
 
-    // Call the asynchronous function and set the state based on the result
     checkImageExists(cityImagePath).then((imageExists) => {
       const backgroundImage = imageExists
         ? cityImagePath
-        : "/banner/banner.avif";
+        : "/banner/delhi.avif";
       setBackgroundImage(backgroundImage);
     });
   }, [selectedCity, setBackgroundImage]);
@@ -62,14 +61,14 @@ function Hero({ vendor_list, venue_list, venueCategogies, cities }) {
           src={backgroundImage}
           alt="Wedding Banquets"
           fill={true}
-          priority={true} //Remove Lazy Loading
+          priority={true} 
           quality={100}
           sizes="(100vw)"
         />
         <div className="hero-title-container">
           {/* <h1 className="title">10,000 + Venues & Vendors Get Everything You Need Here!</h1> */}
-          <h1 className="title">Weddings are for Life</h1>
-          <h1 className="title"> Make it Larger than Life!</h1>
+          <h1 className="title">Weddings are for Life
+          <br /> Make it Larger than Life!</h1>
           <p className="description">
             Explore over 10,000+ Venues and Vendors with reviews, pricing and
             more.

@@ -1,17 +1,15 @@
-// MyContext.js
-
 import React, { createContext, useContext, useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useRef } from "react";
 import getLocalities from "@/lib/request/getlocalities/getLocalities";
-
+import { userAgentFromString } from "next/server";
 const MyContext = createContext();
 
 export const MyContextProvider = ({ children }) => {
   const router = useRouter();
-  const firstRender = useRef(true);
 
+  const firstRender = useRef(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchMenuOpen, setIsSearchMenuOpen] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
@@ -29,13 +27,29 @@ export const MyContextProvider = ({ children }) => {
   const [cityRoute, setCityRoute] = useState("");
   const [vendor_list, setVendor_list] = useState([]);
   const [venue_list, setVenue_list] = useState([]);
-
-
+  const [userIP, setUserIP] = useState('');
+  const [userAgent, setUserAgent] = useState('');
   const [searchSuggestions, setSearchSuggestions] = useState("");
+  
+  const getUserIP = async () => {
+    try {
+      const response = await fetch("https://api.ipify.org?format=json");
+      const data = await response.json();
+      return data.ip;
+    } catch (error) {
+      return null;
+    }
+  };
+  useEffect(() => {
+    async function fetchIP() {
+      const getuserip = await getUserIP();
+      setUserIP(getuserip);
+    }
+    const requestt = userAgentFromString();
+    setUserAgent(requestt);
+    fetchIP();
+  }, []);
 
-  //This useEffect will run when we set the setRouteCity(city_slug), this will rediect to the /city url
-  //I am setting city route when change with dropdwon on navbar and homepage dropdown, Because i want to that when a user change the city it will redirect to the /city page.
-  //If a user is selecting the city and we are only setting the selectedCity state then the url will not be redirect. To rediect the url we have to update the CityRoute with new city slug.
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
@@ -49,39 +63,29 @@ export const MyContextProvider = ({ children }) => {
     async function getLists() {
       try {
         const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/state_management`;
-        //All in one API For context data
-        // let context_data = await fetch("http://192.168.29.128/wedding_benquets/website/api/state_management");
         let context_data = await fetch(url);
         context_data = await context_data.json();
-        // console.log(context_data);
 
-       const searchurl2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
-       let vendorList = await fetch(searchurl2);
-       vendorList = await vendorList.json();
+        const searchurl2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
+        let vendorList = await fetch(searchurl2);
+        vendorList = await vendorList.json();
 
-       const searchurl3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
-       let venueList = await fetch(searchurl3);
-       venueList = await venueList.json();
-
-       setVendor_list(vendorList);
-       setVenue_list(venueList);
-
-        //Setting the data on the context.
+        const searchurl3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
+        let venueList = await fetch(searchurl3);
+        venueList = await venueList.json();
+        setVendor_list(vendorList);
+        setVenue_list(venueList);
         setCities(context_data.data.cities);
         setVendorsCategories(context_data.data.vendor_categories);
         setVenuesCategories(context_data.data.venue_categories);
       } catch (error) {
       }
     }
-
-    //This function will call and this will fetch all the list of cities,vendors,and venue and store in state.
     getLists();
   }, []);
 
-  //This useEffect will fetch the locality if the selectedcity change
   useEffect(() => {
     async function fetchLocalities() {
-      
       const response = await getLocalities(selectedCity);
       if (response.success) {
         setLocalities(response.data);
@@ -89,8 +93,6 @@ export const MyContextProvider = ({ children }) => {
     }
     fetchLocalities();
   }, [selectedCity]);
-
-  //get user details from the localStorage and set to the context api. If user is logged in
   useEffect(() => {
     try {
       let user = localStorage.getItem("@UserApp");
@@ -98,7 +100,6 @@ export const MyContextProvider = ({ children }) => {
         setLoggedUser(JSON.parse(user));
       }
     } catch (error) {
-      // console.log(error);
       setLoggedUser(null);
     }
   }, []);
@@ -114,6 +115,10 @@ export const MyContextProvider = ({ children }) => {
         isAvailableCheckID,
         setIsAvailableCheckID,
         setSelectedCity,
+        userIP,
+        setUserIP,
+        userAgent,
+        setUserAgent,
         cities,
         isAvailableCheckShow,
         setIsAvailableCheckShow,
@@ -132,7 +137,7 @@ export const MyContextProvider = ({ children }) => {
         setShowFilter,
         setCityRoute,
         loggedUser,
-        setLoggedUser,        
+        setLoggedUser,
       }}
     >
       {children}
@@ -140,7 +145,6 @@ export const MyContextProvider = ({ children }) => {
   );
 };
 export default MyContext;
-
 export function useGlobalContext() {
   return useContext(MyContext);
 }

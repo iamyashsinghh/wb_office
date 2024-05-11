@@ -5,11 +5,10 @@ import SearchBar3 from "@/components/miscellaneous/SearchBar3";
 import { useGlobalContext } from "@/context/MyContext";
 import { useEffect, useState } from "react";
 
-function Hero({ vendor_list, venue_list, venueCategogies, cities }) {
+function Hero({ venueCategogies, cities }) {
   let venueObject = [];
   let vendorObject = [];
-  // console.log(cities);
-  const { vendorCategories, selectedCity } = useGlobalContext();
+  const { venue_list, vendor_list, vendorCategories, selectedCity } = useGlobalContext();
   let venueNames = venueCategogies.map((category) => category.name);
   let cityNames = cities.map((city) => city.name);
   let vendorNames = vendorCategories.map((category) => category.name);

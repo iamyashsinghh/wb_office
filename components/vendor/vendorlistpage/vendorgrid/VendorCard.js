@@ -108,7 +108,7 @@ export default memo(VendorCard);
 
 const Wrapper = styled.div`
   width: 100%;
-  z-index: 1;
+  z-index: -1 !important;
   background-color: white;
   overflow: hidden;
   ${"" /* max-width: 45rem; */}
@@ -225,7 +225,6 @@ const Wrapper = styled.div`
     .price-title,
     .price {
       color: white;
-      /* color: black; */
       font-family: "Poppins";
       padding: 0.5rem;
       font-size: 1.8rem;

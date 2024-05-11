@@ -15,11 +15,10 @@ import Head from "next/head";
 
 function VenueContainer({ city, lists, locality, category, count, localities, venueCategories, vendorCategories, data, filterQuery }) {
 
-    const { setShowFilter, selectedCity, cities } = useGlobalContext();
-    const { openLeadModel } = useLeadModel();         //To open lead model
-    const { callConversion } = useCallConversion();         //For call conversion
+    const { setShowFilter, selectedCity, cities, venue_list, vendor_list } = useGlobalContext();
+    const { openLeadModel } = useLeadModel();
+    const { callConversion } = useCallConversion();
     const [loading, setLoading] = useState(false);
-    const { venue_list, vendor_list } = data;
     let venueObject = [];
     let vendorObject = [];
     let venueNames = venueCategories.map((category) => category.name);

@@ -1,4 +1,3 @@
-//This is a Listing page which will list the venue and vendor based on the url slug
 import CityVenueHall from "@/components/miscellaneous/footer/CityVenueHall";
 import FooterVendors from "@/components/miscellaneous/footer/FooterVendors";
 import VendorListPage from "@/components/vendor/vendorlistpage/VendorListPage";
@@ -194,16 +193,16 @@ export async function getServerSideProps({ query, req, res }) {
 
       try {
         const data = await response.json();
-        console.log("-----------------------------------------------------");
-        console.log("page data  " + data);
-        console.log("-----------------------------------------------------");
+        // console.log("-----------------------------------------------------");
+        // console.log("page data  " + data);
+        // console.log("-----------------------------------------------------");
 
         return data;
       } catch (error) {
-        console.log("-----------------------------------------------------");
-        console.log(" Invalid response while fetching the data .");
-        console.log(response);
-        console.log("-----------------------------------------------------");
+        // console.log("-----------------------------------------------------");
+        // console.log(" Invalid response while fetching the data .");
+        // console.log(response);
+        // console.log("-----------------------------------------------------");
         throw error;
       }
     };
@@ -214,27 +213,21 @@ export async function getServerSideProps({ query, req, res }) {
       try {
         const data = await response.json();
 
-        console.log("-----------------------------------------------------");
-        console.log("locality data " + data);
-        console.log("-----------------------------------------------------");
+        // console.log("-----------------------------------------------------");
+        // console.log("locality data " + data);
+        // console.log("-----------------------------------------------------");
 
         return data;
       } catch (error) {
-        console.log("-----------------------------------------------------");
-        console.log("Invalid response while fetching the locality.");
-        console.log(response);
-        console.log("-----------------------------------------------------");
+        // console.log("-----------------------------------------------------");
+        // console.log("Invalid response while fetching the locality.");
+        // console.log(response);
+        // console.log("-----------------------------------------------------");
         throw error;
       }
     };
     const result = await fetchData(url);
     const localities = await fetchLocality(getlocalitiesURL);
-    const url2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
-    let vendor_list = await fetch(url2);
-    vendor_list = await vendor_list.json();
-    const url3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
-    let venue_list = await fetch(url3);
-    venue_list = await venue_list.json();
     return {
       props: {
         result: result || null,
@@ -243,8 +236,6 @@ export async function getServerSideProps({ query, req, res }) {
         category: category || null,
         localities: localities || null,
         filterQuery,
-        vendor_list: vendor_list || null,
-        venue_list: venue_list || null,
       },
     };
   } catch (error) {

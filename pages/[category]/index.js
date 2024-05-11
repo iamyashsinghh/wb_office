@@ -57,35 +57,11 @@ export default function Home({
 export async function getServerSideProps({ params, req, res }) {
   const { category: slug } = params;
 
-  //Checking if the url is city or not, iscity is the method which takes city slug and return boolean value accordingly.
   if (await iscity(slug)) {
-    // console.log("City is " + slug)
-    // console.log( await iscity(slug))
     try {
-      //Fetch Blog Post
-      // let homePageData = await fetch("http://192.168.29.128/wedding_benquets/website/api/home_page/");
-
       const url = `${process.env.SERVER_DOMAIN}/api/home_page/`;
-
-      // const headers = { 'Authorization': process.env.SECRATE_TOKEN };
-      // console.log(url)
-
       let homePageData = await fetch(url);
-
       homePageData = await homePageData.json();
-      // console.log(homePageData)
-
-      const url2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
-      let vendor_list = await fetch(url2);
-      vendor_list = await vendor_list.json();
-
-      const url3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
-      let venue_list = await fetch(url3);
-      venue_list = await venue_list.json();
-
-      const url4 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/state_management`;
-      let context_data = await fetch(url4);
-      context_data = await context_data.json();
 
       let blogposts;
       try {
@@ -107,8 +83,6 @@ export async function getServerSideProps({ params, req, res }) {
         props: {
           venueCategogies: homePageData.data.venue_categories || null,
           vendorCategories: homePageData.data.vendor_categories || null,
-          vendor_list: vendor_list || null,
-          venue_list: venue_list || null,
           cities: homePageData.data.cities || null,
           popularVenues: homePageData.data.popular_venues || null,
           blogposts: blogposts || null,

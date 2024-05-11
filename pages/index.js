@@ -11,8 +11,8 @@ import CityVenueHall from "@/components/miscellaneous/footer/CityVenueHall";
 import VendorCategoryCardGrid from "@/components/miscellaneous/vendorcategorycardgrid/VendorCategoryCardGrid";
 import Head from "next/head";
 import { query } from "@/utils/db";
-import Gallary from "@/components/homepage/gallary/Gallary";
-import Testimonial from "@/components/homepage/testimonial/Testimonial";
+// import Gallary from "@/components/homepage/gallary/Gallary";
+// import Testimonial from "@/components/homepage/testimonial/Testimonial";
 // import VendorGrid from "@/components/miscellaneous/vendorcategoryslider/VendorGrid";
 // import FooterVendors from "@/components/miscellaneous/footer/FooterVendors";
 // import dynamic from "next/dynamic";
@@ -27,8 +27,6 @@ export default function Home({
   popularVenues,
   blogposts,
   vendorCategories,
-  vendor_list,
-  venue_list
 }) {
   const jsonLdData = {
     "@context": "https://schema.org",
@@ -87,8 +85,6 @@ export default function Home({
       <Hero
         venueCategogies={venueCategogies}
         vendorCategories={vendorCategories}
-        vendor_list={vendor_list}
-        venue_list={venue_list}
         cities={cities}
       />
       <VendorSlider vendorCategories={vendorCategories} />
@@ -123,18 +119,6 @@ export async function getStaticProps() {
     homePageData = await homePageData.json();
     // console.log(homePageData)
 
-    const url2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
-    let vendor_list = await fetch(url2);
-    vendor_list = await vendor_list.json();
-
-    const url3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
-    let venue_list = await fetch(url3);
-    venue_list = await venue_list.json();
-
-    const url4 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/state_management`;
-    let context_data = await fetch(url4);
-    context_data = await context_data.json();
-
     let blogposts;
     try {
       const sql = `select wp_posts.ID, wp_posts.post_title, wp_posts.post_name as
@@ -155,8 +139,6 @@ export async function getStaticProps() {
       props: {
         venueCategogies: homePageData.data.venue_categories || null,
         vendorCategories: homePageData.data.vendor_categories || null,
-        vendor_list: vendor_list || null,
-        venue_list: venue_list || null,
         cities: homePageData.data.cities || null,
         popularVenues: homePageData.data.popular_venues || null,
         blogposts: blogposts || null,

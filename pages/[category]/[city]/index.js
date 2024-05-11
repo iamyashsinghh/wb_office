@@ -113,7 +113,6 @@ export async function getServerSideProps({ query, req, res }) {
     response = await response.json();
 
     if (!response || !response.success || !response.city || !response.data) {
-      // console.error('Invalid API response', response);
       return { notFound: true };
     }
     if (response.city.slug !== city) {
@@ -127,7 +126,6 @@ export async function getServerSideProps({ query, req, res }) {
 
     return { props: { response } };
   } catch (error) {
-    // console.error("Error fetching data:", error);
     return { notFound: true };
   }
 }

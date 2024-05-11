@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import Offer from "@/components/miscellaneous/Offer";
 import Header from "@/components/layout.js/Header";
 import VendorGrid from "./vendorgrid/VendorGrid";
 import TitleCaption from "./titlecaption/TitleCaption";
 import Pagedescription from "@/components/miscellaneous/pagedescription/PageDescription";
+import { useGlobalContext } from "@/context/MyContext";
 
 export default function VendorListPage(props) {
-  const { category, city, locality, result, venue_list,vendor_list } = props.data;
+  const { category, city, locality, result } = props.data;
+  const { venue_list,vendor_list } = useGlobalContext();
 
   return (
     <>

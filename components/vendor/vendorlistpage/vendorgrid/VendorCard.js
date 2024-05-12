@@ -108,7 +108,7 @@ export default memo(VendorCard);
 
 const Wrapper = styled.div`
   width: 100%;
-  z-index: -1 !important;
+  z-index: 1 !important;
   background-color: white;
   overflow: hidden;
   ${"" /* max-width: 45rem; */}

@@ -16,7 +16,6 @@ function VendorCard({ vendor, openLeadModel,city, category, locality }) {
 
   const router = useRouter();
 
-
   async function handleAnchorClick(e, slug) {
     e.stopPropagation();
     await CallingRequest(slug);

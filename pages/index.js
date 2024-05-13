@@ -74,6 +74,8 @@ export default function Home({
   return (
     <div>
       <Head>
+      <link rel="canonical" href="https://weddingbanquets.in/" />
+      
       <meta name="og:image" content="https://weddingbanquets.in/twitter-img.png"/>
         <script
           type="application/ld+json"

@@ -104,6 +104,21 @@ export const MyContextProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    if (queryParams.has('utm_source')) {
+      const expirationTime = 60 * 60 * 1000;
+      const expiryTimestamp = Date.now() + expirationTime;
+      localStorage.setItem('utm_source_expiry', expiryTimestamp);
+    }
+    const expiryTimestamp = localStorage.getItem('utm_source_expiry');
+  if (expiryTimestamp && parseInt(expiryTimestamp) > Date.now()) {
+    localStorage.setItem('utm_source_active', '1');
+  } else {
+    localStorage.setItem('utm_source_active', '0');
+  }
+  }, []);
+
   return (
     <MyContext.Provider
       value={{

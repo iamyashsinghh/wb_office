@@ -111,7 +111,7 @@ export default function LeadModel() {
         return;
       }
       setIsLoading(true);
-
+      const utm_source_active = localStorage.getItem('utm_source_active');
       const url = `${process.env.NEXT_PUBLIC_LEAD_SERVER_DOMAIN}/venue-lead`;
       let response = await fetch(url, {
         method: "POST",
@@ -124,6 +124,7 @@ export default function LeadModel() {
           name: name,
           token: csrfToken,
           recaptcha: recaptcha,
+          is_ad : utm_source_active,
         }),
       });
       response = await response.json();

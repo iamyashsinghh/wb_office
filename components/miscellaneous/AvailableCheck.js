@@ -64,7 +64,7 @@ export default function AvailableCheck() {
       );
       const data = await response.json();
       setCsrfToken(data.csrfToken);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const onRecaptchaChange = (value) => {
@@ -110,13 +110,7 @@ export default function AvailableCheck() {
         return;
       }
       setIsLoading(true);
-      // console.log(JSON.stringify({
-      //   mobile: phoneNumber,
-      //   preference: leadFormData.venue_slug,
-      //   name: name,
-      //   token: csrfToken,
-      //   recaptcha: recaptcha,
-      // }));
+      const utm_source_active = localStorage.getItem('utm_source_active');
       const url = `${process.env.NEXT_PUBLIC_LEAD_SERVER_DOMAIN}/venue-lead`;
       let response = await fetch(url, {
         method: "POST",
@@ -129,9 +123,10 @@ export default function AvailableCheck() {
           name: name,
           token: csrfToken,
           recaptcha: recaptcha,
+          is_ad : utm_source_active,
         }),
       });
-      
+
       response = await response.json();
 
       if (response.status === true) {
@@ -264,9 +259,9 @@ export default function AvailableCheck() {
             <button className="discount-btn" onClick={submitHandler}>
               {isLoading ? <Spinner1 /> : "SUBMIT"}
             </button>
-          //   <button className="discount-btn" disabled={recaptcha===null} onClick={submitHandler}>
-          //   {isLoading ? <Spinner1 /> : "SUBMIT"}
-          // </button>
+            //   <button className="discount-btn" disabled={recaptcha===null} onClick={submitHandler}>
+            //   {isLoading ? <Spinner1 /> : "SUBMIT"}
+            // </button>
           )}
         </div>
       </div>
@@ -302,8 +297,8 @@ const Wrapper = styled.div`
     transform: scale(0.5);
 
     ${({ show }) =>
-      show &&
-      css`
+    show &&
+    css`
         transform: scale(1);
       `}
     max-width: 45rem;

@@ -95,9 +95,7 @@ export async function getServerSideProps({ params, req, res }) {
       };
     }
   } else {
-    //This is magix box which redirect the old url to the new url with its coressponding page.
-
-    
+    //This is magix box which redirect the old url to the new url with its coressponding page.    
     let url = slug?.split("-in-");
 
     //It means its a listing page url

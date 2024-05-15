@@ -16,6 +16,7 @@ export default function AvailableCheck() {
     setIsAvailableCheckOpen,
     setIsAvailableCheckShow,
     setIsAvailableCheckID,
+    userIP
   } = useGlobalContext();
   const [recaptcha, setrecaptcha] = useState(null);
   const [isSent, setIsSent] = useState(false);
@@ -124,6 +125,7 @@ export default function AvailableCheck() {
           token: csrfToken,
           recaptcha: recaptcha,
           is_ad : utm_source_active,
+          user_ip: userIP,
         }),
       });
 

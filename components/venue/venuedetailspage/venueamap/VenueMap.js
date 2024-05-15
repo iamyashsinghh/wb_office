@@ -7,11 +7,12 @@ import { useState, useEffect } from "react";
 import leadGen from "@/lib/request/leadgen/leadGen";
 import { Spinner1 } from "@/styles/components/spinner";
 import { useFormik } from 'formik';
-import EncryprKey from "@/components/miscellaneous/EncryprKey";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useGlobalContext } from "@/context/MyContext";
 
 export default function VenueMap({ location_map }) {
     const [recaptcha, setrecaptcha] = useState(null);
+    const { userIP } = useGlobalContext();
 
     const today = new Date().toISOString().split('T')[0];
     const [csrfToken, setCsrfToken] = useState("");
@@ -73,10 +74,10 @@ export default function VenueMap({ location_map }) {
         fetchCsrfToken()
       }, []);
     async function handleSubmit (values) {
-        // console.log(values)
         try {
-            setIsLoading(true)
-            const response = await leadGen({ mobile: values.phone, token: csrfToken, recaptcha: recaptcha })
+            setIsLoading(true);
+            fetchCsrfToken();
+            const response = await leadGen({ mobile: values.phone, token: csrfToken, recaptcha: recaptcha, user_ip: userIP })
             if (response.status) {
                 formik.resetForm();
                 setrecaptcha(null);

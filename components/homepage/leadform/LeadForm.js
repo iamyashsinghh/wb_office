@@ -16,7 +16,7 @@ export default function LeadForm() {
 
   const today = new Date().toISOString().split("T")[0];
   const [isLoading, setIsLoading] = useState(false);
-  const { localities } = useGlobalContext();
+  const { localities, userIP } = useGlobalContext();
   const [csrfToken, setCsrfToken] = useState("");
 
   useEffect(() => {
@@ -56,8 +56,10 @@ export default function LeadForm() {
     onSubmit: async (values) => {
       try {
         setIsLoading(true);
+        fetchCsrfToken();
         values.token = csrfToken;
         values.recaptcha = recaptcha;
+        values.user_ip = userIP;
         const response = await leadGen(values);
         if (response.status === true) {
           alert(response.msg);

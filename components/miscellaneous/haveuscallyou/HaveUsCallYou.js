@@ -3,12 +3,12 @@ import Image from "next/image";
 import { AiFillCaretDown } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import leadGen from "@/lib/request/leadgen/leadGen";
-import EncryprKey from "../EncryprKey";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useGlobalContext } from "@/context/MyContext";
 
 export default function HaveUsCallYou() {
   const [recaptcha, setrecaptcha] = useState(null);
-
+  const { userIP } = useGlobalContext();
   const [number, setNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [csrfToken, setCsrfToken] = useState("");
@@ -41,11 +41,12 @@ export default function HaveUsCallYou() {
         return;
       }
       setIsLoading(true);
-
+      fetchCsrfToken();
       const response = await leadGen({
         mobile: number,
         token: csrfToken,
         recaptcha: recaptcha,
+        user_ip: userIP,
       });
       if (response.status) {
         alert(response.msg);

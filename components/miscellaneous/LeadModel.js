@@ -124,7 +124,7 @@ export default function LeadModel() {
           token: csrfToken,
           recaptcha: recaptcha,
           is_ad : utm_source_active,
-          user_ip:userIP,
+          user_ip: userIP,
         }),
       });
       response = await response.json();

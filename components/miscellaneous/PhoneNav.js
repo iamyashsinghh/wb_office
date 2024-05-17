@@ -64,7 +64,7 @@ function PhoneNav() {
         if (hasTriggeredBefore === 'true') {
             return;
         }
-
+        
         const handleScroll = () => {
             const scrollPercentage =
                 (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;

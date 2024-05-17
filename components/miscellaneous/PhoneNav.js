@@ -64,7 +64,7 @@ function PhoneNav() {
         if (hasTriggeredBefore === 'true') {
             return;
         }
-        
+
         const handleScroll = () => {
             const scrollPercentage =
                 (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
@@ -100,7 +100,7 @@ function PhoneNav() {
                 console.log('Timeout trigger detected');
                 triggerOpenLeadsModel();
             }
-        }, 15000);
+        }, 10000);
     
         window.addEventListener('scroll', handleScroll);
         return () => {

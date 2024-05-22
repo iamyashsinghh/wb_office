@@ -20,26 +20,7 @@ function Venue(props) {
       setSelectedCity(props.city);
     }
   }, [props.city]);
-  const jsonLdData = {
-    "@type": "Review",
-    "itemReviewed": {
-      "@type": "Organization",
-      "name": "Wedding Banquets",
-      "url": "https://weddingbanquets.in/"
-    },
-    "author": {
-      "@type": "Person",
-      "name": "User"
-    },
-    "reviewRating": {
-      "@type": "AggregateRating",
-      "ratingValue": 4.4,
-      "reviewCount": 3956,
-      "bestRating": 5.0,
-      "worstRating": 1.0
-    }
-  };
-
+  
   const jsonLdData2 = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -105,10 +86,6 @@ function Venue(props) {
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData2) }}
-          />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
           />
         </Head>
         <VenueListPage data={{ ...props, localities }} />

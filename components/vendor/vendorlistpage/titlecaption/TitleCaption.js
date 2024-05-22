@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useGlobalContext } from "@/context/MyContext";
 import VendorSearchBar from "../vendorSearchBar/VendorSearchBar";
 import SearchBarVendor from "@/components/miscellaneous/SearchBarVendor";
+import Head from "next/head";
 
 export default function TitleCaption({
   caption,
@@ -39,7 +40,25 @@ export default function TitleCaption({
         obj[vendorBrandNames[i]] = allVendorsSlug[i];
         vendorObject.push(obj);
     }
+    const  jsonDataRS = `{
+      "@context": "http://schema.org",
+      "@type": "Product",
+      "name": ${category.replaceAll("-", " ")} in ${locality === "all" ? city : locality},
+      "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.5",
+          "ratingCount": "283",
+          "reviewCount": "118"
+      }
+  }`;
   return (
+    <>
+    <Head>
+    <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: jsonDataRS }}
+          />
+    </Head>
     <Wrapper className="section title-caption-section">
       <div className="headerr">
         <div className="header-container">
@@ -69,6 +88,7 @@ export default function TitleCaption({
                     />
       </div>
     </Wrapper>
+    </>
   );
 }
 

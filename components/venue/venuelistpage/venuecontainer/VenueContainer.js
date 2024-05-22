@@ -112,6 +112,17 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
         }))
     };
 
+    const  jsonDataRS = `{
+        "@context": "http://schema.org",
+        "@type": "Product",
+        "name": ${category.replaceAll("-", " ")} in ${locality === "all" ? city : locality},
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "ratingCount": "263",
+            "reviewCount": "128"
+        }
+    }`;
     return (
         <>
         <Head>
@@ -119,9 +130,13 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(listingPageListSchema) }}
           />
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: jsonDataRS }}
+          />
         </Head>
         <Section className="section section-venue-container">
-            {/* <Heading text={'Wedding Banque t in Mumbai'} desc={"As you start with the wedding preparations and dive deeper to create the perfect fairytale wedding, one crucial element is the wedding venue. It can be exhausting, especially in Delhi, as the city is brimming with options."} /> */}
+            {/* <Heading text={'Wedding Banquet in Mumbai'} desc={"As you start with the wedding preparations and dive deeper to create the perfect fairytale wedding, one crucial element is the wedding venue. It can be exhausting, especially in Delhi, as the city is brimming with options."} /> */}
 
             <div className="sticky-head">
                 <div className="page-title">

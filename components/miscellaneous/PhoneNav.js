@@ -60,22 +60,22 @@ function PhoneNav() {
 
     useEffect(() => {
         const hasTriggeredBefore = localStorage.getItem('hasTriggered');
-    
+
         if (hasTriggeredBefore === 'true') {
             return;
         }
-        
+
         const handleScroll = () => {
             const scrollPercentage =
                 (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             const halfPageLoaded = window.scrollY > (document.documentElement.scrollHeight / 2);
-    
+
             if ((!hasTriggered && scrollPercentage >= 50) || (!hasTriggered && halfPageLoaded)) {
                 console.log('Scroll trigger detected');
                 triggerOpenLeadsModel();
             }
         };
-    
+
         const triggerOpenLeadsModel = () => {
             const leadData = {
                 url: router.asPath,
@@ -89,28 +89,32 @@ function PhoneNav() {
             localStorage.setItem('hasTriggered', true);
             localStorage.setItem('lastTriggerTime', new Date().getTime());
         };
-    
+
         const getVenueSlug = () => {
-            const pathSegments = router.asPath.split('/').filter((segment) => segment.length > 0);
-            return pathSegments.length === 2 ? pathSegments[1] : router.asPath;
+            const url = new URL(window.location.origin + router.asPath);
+            url.search = '';
+            const cleanedPath = url.pathname + url.hash;
+            const pathSegments = cleanedPath.split('/').filter((segment) => segment.length > 0);
+            return pathSegments.length === 2 ? pathSegments[1] : cleanedPath;
         };
-    
+
+
         const timeoutId = setTimeout(() => {
             if (!hasTriggered) {
                 console.log('Timeout trigger detected');
                 triggerOpenLeadsModel();
             }
         }, 10000);
-    
+
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
             clearTimeout(timeoutId);
         };
     }, [hasTriggered]);
-    
-    
-       
+
+
+
 
     return (
         <>

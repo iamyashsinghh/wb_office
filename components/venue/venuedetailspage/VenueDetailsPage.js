@@ -19,7 +19,7 @@ export default function VenueDetailsPage({ response }) {
     const {setLeadFormData,setIsLeadsModelOpen, setIsAvailableCheckOpen} = useGlobalContext();
     const router = useRouter();
 
-    const { data } = response;
+    const { data, reviews } = response;
     const { similar_packages, venue } = data;
     let venue_place_id = venue?.location_place_id;
 
@@ -62,7 +62,7 @@ export default function VenueDetailsPage({ response }) {
             <FoodPackage nonveg_foods={venue?.nonveg_foods} veg_foods={venue?.veg_foods} />
             {/* <HaveUsCallYou /> */}
             <VenuePolicy venue={venue} />
-            <VenueReview venue_place_id={venue_place_id} venue={venue}/>
+            <VenueReview venue_place_id={venue_place_id} venue={venue} reviews={reviews}/>
             <VenueMap location_map={venue.location_map} />
             <StickyButton openLeadsModel={openLeadsModel} phone={venue.phone} slug={venue.slug} id={venue.id}/>
             <SimilarVenue similar_packages={similar_packages} />

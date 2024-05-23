@@ -1,19 +1,16 @@
 import styled from "styled-components";
 import { AiFillStar } from 'react-icons/ai'
 
+export default function RatingCardDynamic({rating, ratingcount}) {
 
-export default function RatingCard() {
-
-    // const randomRating =  Math.floor(Math.random() * (9 - 1) + 1);
-    // const randomReviews =  Math.floor(Math.random() * (244 - 110) + 110)
-
+    const finalRating = rating ?? 4.5;
+    const finalRatingCount = ratingcount === 0 ? 158 : ratingcount ?? 158;
     return (
         <Wrapper>
 
             <AiFillStar className="star" />
-            <span className="rating">{`4.5`}</span>
-            <span className="reviews">{`(${158})`}</span>
-
+            <span className="rating">{finalRating}</span>
+            <span className="reviews">{`(${finalRatingCount})`}</span>
         </Wrapper>
     )
 }

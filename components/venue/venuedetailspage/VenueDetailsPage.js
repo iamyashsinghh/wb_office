@@ -13,17 +13,17 @@ import VenuePolicy from "@/components/venue/venuedetailspage/venuepolicy/VenuePo
 import VenueReview from "@/components/venue/venuedetailspage/venuereview/VenueReview";
 import { useGlobalContext } from "@/context/MyContext";
 import { useRouter } from "next/router";
- 
+
 export default function VenueDetailsPage({ response }) {
 
-    const {setLeadFormData,setIsLeadsModelOpen, setIsAvailableCheckOpen} = useGlobalContext();
+    const { setLeadFormData, setIsLeadsModelOpen, setIsAvailableCheckOpen } = useGlobalContext();
     const router = useRouter();
 
     const { data, reviews } = response;
     const { similar_packages, venue } = data;
     let venue_place_id = venue?.location_place_id;
 
-    const openLeadsModel = (e, v_slug=venue?.slug, v_id=venue?.id,by="form") => {
+    const openLeadsModel = (e, v_slug = venue?.slug, v_id = venue?.id, by = "form") => {
         const leadData = {
             url: router.asPath,
             venue_id: v_id,
@@ -33,11 +33,11 @@ export default function VenueDetailsPage({ response }) {
         }
         setLeadFormData(leadData);
         setIsLeadsModelOpen(true);
-        if(e){
+        if (e) {
             e.stopPropagation();
         }
     }
-    const openAvailableCheck = (e, v_slug=venue?.slug, v_id=venue?.id,by="form") => {
+    const openAvailableCheck = (e, v_slug = venue?.slug, v_id = venue?.id, by = "form") => {
         const leadData = {
             url: router.asPath,
             venue_id: v_id,
@@ -47,7 +47,7 @@ export default function VenueDetailsPage({ response }) {
         }
         setLeadFormData(leadData);
         setIsAvailableCheckOpen(true);
-        if(e){
+        if (e) {
             e.stopPropagation();
         }
     }
@@ -56,17 +56,17 @@ export default function VenueDetailsPage({ response }) {
         <>
             <Header />
             <BreadCrumb meta_title={venue.meta_title} />
-            <ImageSlider images={venue.images} altname={venue.name} wb_assured={venue?.wb_assured}/>
-            <VenueBasicInfo venue={venue} openLeadsModel={openLeadsModel} openAvailableCheck={openAvailableCheck} id={venue.id}/>
+            <ImageSlider images={venue.images} rating={venue.place_rating ?? 4.5} ratingcount={reviews.length === 0 ? 158 : reviews.length} altname={venue.name} wb_assured={venue?.wb_assured} />
+            <VenueBasicInfo venue={venue} openLeadsModel={openLeadsModel} openAvailableCheck={openAvailableCheck} id={venue.id} />
             <VenueFeatures />
             <FoodPackage nonveg_foods={venue?.nonveg_foods} veg_foods={venue?.veg_foods} />
             {/* <HaveUsCallYou /> */}
             <VenuePolicy venue={venue} />
-            <VenueReview venue_place_id={venue_place_id} venue={venue} reviews={reviews}/>
+            <VenueReview venue_place_id={venue_place_id} venue={venue} reviews={reviews} />
             <VenueMap location_map={venue.location_map} />
-            <StickyButton openLeadsModel={openLeadsModel} phone={venue.phone} slug={venue.slug} id={venue.id}/>
+            <StickyButton openLeadsModel={openLeadsModel} phone={venue.phone} slug={venue.slug} id={venue.id} />
             <SimilarVenue similar_packages={similar_packages} />
-            <Faqs faqs={venue?.faq} name={venue?.name}/>
+            <Faqs faqs={venue?.faq} name={venue?.name} />
         </>
     )
 }

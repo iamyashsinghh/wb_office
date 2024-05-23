@@ -24,6 +24,7 @@ import CallingRequest from "@/lib/request/callingrequest/CallingRequest";
 import Assured from "@/components/miscellaneous/Assured";
 import { useGlobalContext } from "@/context/MyContext";
 import Head from "next/head";
+import RatingCardDynamic from "@/components/miscellaneous/RatingCardDynamic";
 
 function VenueCard2({ venue, city, openLeadModel,locality,category, callConversion }) {
   const images = venue.images?.split(",");
@@ -113,7 +114,7 @@ function VenueCard2({ venue, city, openLeadModel,locality,category, callConversi
           })}
 
           <div className="rate">
-            <RatingCard />
+            <RatingCardDynamic rating={venue?.place_rating } ratingcount={venue?.reviews_count} />
           </div>
 
           {venue?.wb_assured && <Assured />}

@@ -7,6 +7,7 @@ import RatingCard from "./RatingCard";
 import CallingRequest from "@/lib/request/callingrequest/CallingRequest";
 import Assured from "./Assured";
 import { memo } from "react";
+import RatingCardDynamic from "./RatingCardDynamic";
 
 
 function VenueCard({ venue,openLeadModel,callConversion,selectedCity }) {
@@ -50,7 +51,7 @@ function VenueCard({ venue,openLeadModel,callConversion,selectedCity }) {
                     }
                
                     <div className="rate">
-                        <RatingCard />
+                    <RatingCardDynamic rating={venue?.place_rating } ratingcount={venue?.reviews_count} />
                     </div>
                     {/* <div className="liked"> */}
                     {/* <AiOutlineHeart className="liked-icon" /> */}

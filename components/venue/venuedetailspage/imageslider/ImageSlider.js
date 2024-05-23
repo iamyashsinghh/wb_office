@@ -28,9 +28,10 @@ import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Fullscreen from "yet-another-react-lightbox/plugins/fullscreen";
 import Counter from "yet-another-react-lightbox/plugins/counter";
 import Assured from "@/components/miscellaneous/Assured";
+import RatingCardDynamic from "@/components/miscellaneous/RatingCardDynamic";
 
 
-export default function ImageSlider({ images,wb_assured, altname }) {
+export default function ImageSlider({ images, wb_assured, altname, rating, ratingcount }) {
 
     const [open, setOpen] = useState(false);
 
@@ -88,7 +89,7 @@ export default function ImageSlider({ images,wb_assured, altname }) {
                     {/* <IoIosShareAlt className="share-icon" title="Share venue"/> */}
 
                     <div className="rate">
-                        <RatingCard />
+                        <RatingCardDynamic rating={rating} ratingcount={ratingcount}  />
                     </div>
 
 

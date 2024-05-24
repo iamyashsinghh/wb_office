@@ -50,7 +50,7 @@ function PopularVenue({ popularVenues }) {
         <Section className="section popular-venue-section">
             <div className="container">
                 <Heading text={`Popular Venues in ${selectedCity}`} />
-                <div className="tab-btn">
+                {/* <div className="tab-btn">
                     {
                         venueCategories?.map((cat, i) => {
                             return (<>
@@ -59,7 +59,7 @@ function PopularVenue({ popularVenues }) {
                         })
                     }
 
-                </div>
+                </div> */}
 
                 <VenueSlider venues={popularVenuess} />
             </div>

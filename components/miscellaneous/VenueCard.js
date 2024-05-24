@@ -36,7 +36,7 @@ function VenueCard({ venue,openLeadModel,callConversion,selectedCity }) {
     return (
 
         <Wrapper>
-            <div className="card-items" onClick={(e) => { router.push(`/${selectedCity}/${venue.slug}`) }}>
+            <div className="card-items">
 
                 <div className="banner">
                     <Image
@@ -44,14 +44,14 @@ function VenueCard({ venue,openLeadModel,callConversion,selectedCity }) {
                         alt="An example image"
                         fill={true}
                         sizes="(100vw)"
+                        onClick={(e) => { router.push(`/${selectedCity}/${venue.slug}`) }}
                     />
-                  
                     {
                         venue?.wb_assured && (<Assured/>)
                     }
                
                     <div className="rate">
-                    <RatingCardDynamic rating={venue?.place_rating } ratingcount={venue?.reviews_count} />
+                    <RatingCardDynamic rating={venue?.place_rating } ratingcount={venue?.reviews_count} slug={venue.slug} />
                     </div>
                     {/* <div className="liked"> */}
                     {/* <AiOutlineHeart className="liked-icon" /> */}
@@ -59,7 +59,8 @@ function VenueCard({ venue,openLeadModel,callConversion,selectedCity }) {
                     {/* </div> */}
                     {/* <span className="tag"><AiFillCheckCircle className="tick-icon" />  WB Assured</span> */}
                 </div>
-                <div className="name-city">
+                <div onClick={(e) => { router.push(`/${selectedCity}/${venue.slug}`) }}>
+                    <div className="name-city">
                     <h3 className="venue-name">{`${venue.name}`}</h3>
                     <p className="venue-city">{venue.venue_address}</p>
 
@@ -116,8 +117,6 @@ function VenueCard({ venue,openLeadModel,callConversion,selectedCity }) {
                     <button className="venue-card-btn" onClick={(e) => { openLeadModel(e, venue.slug, venue.id); e.stopPropagation(); }}>Get Quotation</button>
 
                     <span className="call-btn">
-
-
                         {/* This is how earlier I am handling the conversion request, by opening the lead model */}
                         {/* <a href={`tel:${venue.phone}`} onClick={(e) => {handleAnchorClick(e, venue.slug);openLeadModel(e,venue.slug,venue.id,"call")}} aria-label="call icon ">
                             <IoIosCall className="call-icon" size={30} />
@@ -126,7 +125,7 @@ function VenueCard({ venue,openLeadModel,callConversion,selectedCity }) {
                             <IoIosCall className="call-icon" size={30} />
                         </a>
                     </span>
-                </div>
+                </div></div>
             </div>
         </Wrapper>
 

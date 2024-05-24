@@ -19,14 +19,13 @@ import "swiper/css/thumbs";
 // import required modules
 import { FreeMode, Thumbs, Pagination, Autoplay } from "swiper";
 import Image from "next/image";
-import RatingCard from "@/components/miscellaneous/RatingCard";
 import CallingRequest from "@/lib/request/callingrequest/CallingRequest";
 import Assured from "@/components/miscellaneous/Assured";
 import { useGlobalContext } from "@/context/MyContext";
 import Head from "next/head";
 import RatingCardDynamic from "@/components/miscellaneous/RatingCardDynamic";
 
-function VenueCard2({ venue, city, openLeadModel,locality,category, callConversion }) {
+function VenueCard2({ venue, city, openLeadModel, locality, category, callConversion }) {
   const images = venue.images?.split(",");
   const { selectedCity } = useGlobalContext();
 
@@ -114,7 +113,7 @@ function VenueCard2({ venue, city, openLeadModel,locality,category, callConversi
           })}
 
           <div className="rate">
-            <RatingCardDynamic rating={venue?.place_rating } ratingcount={venue?.reviews_count} />
+            <RatingCardDynamic rating={venue?.place_rating} ratingcount={venue?.reviews_count} slug={venue?.slug} />
           </div>
 
           {venue?.wb_assured && <Assured />}
@@ -139,7 +138,7 @@ function VenueCard2({ venue, city, openLeadModel,locality,category, callConversi
                   fill
                   sizes="(100vw)"
                   alt={locality === 'all' ? '' : `${category} in ${locality}`}
-                  />
+                />
               </SwiperSlide>
             );
           })}
@@ -158,22 +157,13 @@ function VenueCard2({ venue, city, openLeadModel,locality,category, callConversi
             <address>{venue?.venue_address}</address>
           </div>
           <div className="phone">
-            {/* <a href={`tel:0${venue.phone}`} onClick={(e)=>{handleAnchorClick(e,venue.slug);openLeadModel(e,venue.slug,venue.id,"call")}} aria-label="call icon ">
-                            <IoIosCall className="phone-icon" />
-                        </a> */}
-            <a
-              href={`tel:0${venue.phone}`}
-              onClick={(e) => {
-                handleAnchorClick(e, venue.slug);
-                callConversion(e, venue.slug, venue.id);
-              }}
-              aria-label="call icon "
-            >
-              <IoIosCall className="phone-icon" />
-            </a>
+            <div className="" onClick={(e) => shareViaWhatsApp(e)} >
+              <div className="whatsapp-btn">
+                <IoLogoWhatsapp className="whatsapp-icon" />
+              </div>
+            </div>
           </div>
         </div>
-
         <div className="venue-aditional-info">
           <div className="guests detail-circle">
             <IoIosPeople className="icon" />
@@ -215,15 +205,19 @@ function VenueCard2({ venue, city, openLeadModel,locality,category, callConversi
           >
             GET QUOTATION
           </button>
-          <button
-            className="venue-card-btn share-btn"
-            onClick={(e) => shareViaWhatsApp(e)}
+          <a className=" call-us-btn share-btn"
+            href={`tel:0${venue.phone}`}
+            onClick={(e) => {
+              handleAnchorClick(e, venue.slug);
+              callConversion(e, venue.slug, venue.id);
+            }}
+            aria-label="call icon "
           >
-            <div className="whatsapp-btn">
-              <IoLogoWhatsapp className="share-icon" />
-              <span>Share On Whatsapp</span>
-            </div>
-          </button>
+              <div className="">
+                <IoIosCall className="phone-icon" />
+                <span>Call Us Now</span>
+              </div>
+          </a>
         </div>
       </div>
     </Wrapper>
@@ -232,6 +226,47 @@ function VenueCard2({ venue, city, openLeadModel,locality,category, callConversi
 export default memo(VenueCard2);
 
 const Wrapper = styled.div`
+.whatsapp-icon{
+  font-size: 2.5rem;
+  color: #fff;
+}
+.phone-icon {
+  cursor: pointer;
+  color: white;
+  margin-bottom: -4px;
+  font-size: 2.1rem;
+  margin-right: 5px;
+}
+.phone{
+  border: 1px solid var(--phone);
+  background-color: var(
+    --phone
+  ); 
+  color: white;
+  padding: 0.7rem 1.8rem;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s linear;
+  outline: none;
+}
+.call-us-btn {
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(23, 196, 52, 0.7);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(23, 196, 52, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(23, 196, 52, 0);
+  }
+}
   border: 8px solid #f2f2f2;
   /* border: 6px solid green; */
   display: grid;
@@ -325,23 +360,6 @@ const Wrapper = styled.div`
           text-overflow: ellipsis;
         }
       }
-
-      .phone {
-        background-color: var(--phone);
-        min-width: 40px;
-        min-height: 40px;
-        border-radius: 1rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .phone-icon {
-          cursor: pointer;
-          color: white;
-          font-size: 3rem;
-        }
-      }
     }
 
     .venue-aditional-info {
@@ -410,11 +428,10 @@ const Wrapper = styled.div`
   }
 
   .action-btns {
-    /* padding: 2rem 1rem; */
     margin-top: 1rem;
-    /* padding-right: 3rem; */
     display: flex;
     align-items: center;
+    justify-content: space-around;
     gap: 4px;
     width: 100%;
     .venue-card-btn {
@@ -422,9 +439,7 @@ const Wrapper = styled.div`
       white-space: nowrap;
       background: none;
       width: 50%;
-      /* box-sizing: border-box; */
       border: 1px solid #f33232;
-      /* color: #F33232; */
       padding: 1rem 2.5rem;
       text-transform: uppercase;
       border-radius: 0.5rem;
@@ -435,24 +450,23 @@ const Wrapper = styled.div`
       color: white;
     }
     .share-btn {
-      border: 1px solid var(--phone); /* Border similar to phone button */
+      border: 1px solid var(--phone);
       background-color: var(
         --phone
-      ); /* Background color similar to phone button */
-      color: white; /* Text color */
+      ); 
+      color: white;
       padding: 0.7rem 1.8rem;
       text-transform: uppercase;
       border-radius: 0.5rem;
-      ${"" /* font-size: 2rem; */}
       cursor: pointer;
       transition: all 0.3s linear;
       outline: none;
       display: flex;
+      font-size: 1.8rem;
       align-items: center;
       justify-content: center;
       height: 100%;
-      width: 50%;
-      ${"" /* width: 10%; */}
+      width: 45%;
 
       &:hover {
         background-color: #128c7e; /* Darker shade of WhatsApp color */
@@ -519,4 +533,6 @@ const Wrapper = styled.div`
   @media (max-width: 450px) {
     max-width: 100%;
   }
+  
 `;
+

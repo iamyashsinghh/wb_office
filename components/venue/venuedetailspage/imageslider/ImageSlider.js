@@ -89,7 +89,7 @@ export default function ImageSlider({ images, wb_assured, altname, rating, ratin
                     {/* <IoIosShareAlt className="share-icon" title="Share venue"/> */}
 
                     <div className="rate">
-                        <RatingCardDynamic rating={rating} ratingcount={ratingcount}  />
+                        <RatingCardDynamic rating={rating} ratingcount={ratingcount} slug={0} />
                     </div>
 
 

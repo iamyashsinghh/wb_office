@@ -50,7 +50,7 @@ function VenueReview({ venue, reviews }) {
 
 
   return (
-    <Section className="section">
+    <Section className="section" id="rating-section">
       <div className="container">
         <Heading text={`Latest Ratings & Reviews`} />
 {venueData.place_rating > 0 && 

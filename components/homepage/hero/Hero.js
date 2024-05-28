@@ -58,7 +58,7 @@ function Hero({ venueCategogies, cities }) {
       <div className="hero-container">
         <Image
           src={backgroundImage}
-          alt="Wedding Banquets"
+          alt="Wedding Banquets, Banquet halls, Wedding Venues"
           fill={true}
           priority={true} 
           quality={100}

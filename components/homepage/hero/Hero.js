@@ -70,7 +70,7 @@ function Hero({ venueCategogies, cities }) {
           <h1 className="title">Weddings are for Life
           <br /> Make it Larger than Life!</h1>
           <p className="description">
-            Explore over 10,000+ Venues and Vendors with reviews, pricing and
+            Explore over 50,000+ Venues and Vendors with reviews, pricing and
             more.
           </p>
         </div>

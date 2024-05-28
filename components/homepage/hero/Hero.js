@@ -16,7 +16,7 @@ function Hero({ venueCategogies, cities }) {
   let allVenues = venue_list.map((category) => category.name);
   let allVenuesSlug = venue_list.map((category) => category.slug);
   let allVendorsSlug = vendor_list.map((category) => category.slug);
-  const [backgroundImage, setBackgroundImage] = useState("/banner/delhi.avif");
+  const [backgroundImage, setBackgroundImage] = useState("/banner/delhi.webp");
   const suggestions = [
     ...venueNames,
     ...vendorNames,
@@ -34,7 +34,7 @@ function Hero({ venueCategogies, cities }) {
     vendorObject.push(obj);
   }
   useEffect(() => {
-    const cityImagePath = `/banner/${selectedCity.toLowerCase()}.avif`;
+    const cityImagePath = `/banner/${selectedCity.toLowerCase()}.webp`;
 
     async function checkImageExists(url) {
       try {
@@ -48,7 +48,7 @@ function Hero({ venueCategogies, cities }) {
     checkImageExists(cityImagePath).then((imageExists) => {
       const backgroundImage = imageExists
         ? cityImagePath
-        : "/banner/delhi.avif";
+        : "/banner/delhi.webp";
       setBackgroundImage(backgroundImage);
     });
   }, [selectedCity, setBackgroundImage]);
@@ -64,6 +64,7 @@ function Hero({ venueCategogies, cities }) {
           quality={100}
           sizes="(100vw)"
         />
+        <div className="overlay"></div>
         <div className="hero-title-container">
           {/* <h1 className="title">10,000 + Venues & Vendors Get Everything You Need Here!</h1> */}
           <h1 className="title">Weddings are for Life
@@ -105,10 +106,17 @@ const Section = styled.section`
     position: relative;
     width: 100%;
     height: 85vh;
-    /* height: 600px; */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+      // z-index: ;
+    }
 
     .hero-title-container {
-      /* border: 1px solid red; */
       position: absolute;
       top: 40%;
       right: 50%;

@@ -49,7 +49,7 @@ function PopularVenue({ popularVenues }) {
     return (
         <Section className="section popular-venue-section">
             <div className="container">
-                <Heading text={`Popular Venues in ${selectedCity}`} />
+                <Heading text={`Popular Wedding Venues in ${selectedCity}`} />
                 {/* <div className="tab-btn">
                     {
                         venueCategories?.map((cat, i) => {

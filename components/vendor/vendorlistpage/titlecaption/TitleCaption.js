@@ -78,10 +78,10 @@ export default function TitleCaption({
                 Showing <span className="count">{count} results</span> as per
                 your search criteria
               </div>
-              {/* <Pagedescription caption={caption}/> */}
+              {/* < Pagedescription caption={caption}/ > */}
             </div>
           </div>
-          {/* <VendorSearchBar category={category} /> */}
+          {/* < VendorSearchBar category={category} /> */}
           <SearchBarVendor
             suggestions={suggestions}
             selectedCity={selectedCity}

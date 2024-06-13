@@ -11,49 +11,42 @@ function PhoneNav() {
     const { setLeadFormData, setIsLeadsModelOpen, vendor_list, venue_list, vendorCategories, venueCategories, selectedCity } = useGlobalContext();
     const router = useRouter();
     const [hasTriggered, setHasTriggered] = useState(false);
+    const [triggerCount, setTriggerCount] = useState(0);
 
-    const openLeadsModel = (e) => {
-        e.stopPropagation();
+    const openLeadsModel = (e, type = 'click') => {
+        if (e) e.stopPropagation();
+
         const pathSegments = router.asPath.split('/').filter((segment) => segment.length > 0);
-        let venue_slug;
-        if (pathSegments.length === 2) {
-            venue_slug = pathSegments[1];
-        } else {
-            venue_slug = router.asPath;
-        }
+        let venue_slug = pathSegments.length === 2 ? pathSegments[1] : router.asPath;
+
         const leadData = {
             url: router.asPath,
             venue_slug: venue_slug,
-            type: 'click',
+            type: type,
             request_handle_by: 'form',
         };
+
         setLeadFormData(leadData);
         setIsLeadsModelOpen(true);
-        if (e) {
-            e.stopPropagation();
-        }
+        setHasTriggered(true);
+        setTriggerCount((prevCount) => prevCount + 1);
+
+        localStorage.setItem('hasTriggered', 'true');
+        localStorage.setItem('lastTriggerTime', new Date().getTime().toString());
     };
 
     const isActive = (menuType) => {
         const currentPath = router.asPath;
         if (menuType === 'home') {
-            if (currentPath === '/' || currentPath === `/${selectedCity}`) {
-                return 'active';
-            }
+            return currentPath === '/' || currentPath === `/${selectedCity}` ? 'active' : '';
         } else if (menuType === 'venue') {
-            return (
-                venue_list.some((venue) => currentPath.includes(venue.slug)) ||
-                    venueCategories.some((category) => currentPath.includes(category.slug))
-                    ? 'active'
-                    : ''
-            );
+            return venue_list.some((venue) => currentPath.includes(venue.slug)) ||
+                venueCategories.some((category) => currentPath.includes(category.slug)) ? 'active' : '';
         } else if (menuType === 'vendor') {
             const pathSegments = currentPath.split('/');
             const vendorPathSegment = pathSegments.length > 2 ? pathSegments[1] : null;
-            const isActiveVendor =
-                vendor_list.some((vendor) => currentPath.includes(vendor.slug)) ||
-                vendorCategories.some((category) => category.slug === vendorPathSegment);
-            return isActiveVendor ? 'active' : '';
+            return vendor_list.some((vendor) => currentPath.includes(vendor.slug)) ||
+                vendorCategories.some((category) => category.slug === vendorPathSegment) ? 'active' : '';
         }
         return '';
     };
@@ -61,60 +54,43 @@ function PhoneNav() {
     useEffect(() => {
         const hasTriggeredBefore = localStorage.getItem('hasTriggered');
 
-        if (hasTriggeredBefore === 'true') {
-            return;
-        }
+        // if (hasTriggeredBefore === 'true') {
+        //     return;
+        // }
 
         const handleScroll = () => {
-            const scrollPercentage =
-                (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             const halfPageLoaded = window.scrollY > (document.documentElement.scrollHeight / 2);
 
-            if ((!hasTriggered && scrollPercentage >= 50) || (!hasTriggered && halfPageLoaded)) {
+            if ((!hasTriggered && scrollPercentage >= 30) || (!hasTriggered && halfPageLoaded)) {
                 console.log('Scroll trigger detected');
-                triggerOpenLeadsModel();
+                openLeadsModel(null, 'scroll');
             }
         };
 
-        const triggerOpenLeadsModel = () => {
-            const leadData = {
-                url: router.asPath,
-                venue_slug: getVenueSlug(),
-                type: 'scroll',
-                request_handle_by: 'form',
-            };
-            setLeadFormData(leadData);
-            setIsLeadsModelOpen(true);
-            setHasTriggered(true);
-            localStorage.setItem('hasTriggered', true);
-            localStorage.setItem('lastTriggerTime', new Date().getTime());
-        };
-
-        const getVenueSlug = () => {
-            const url = new URL(window.location.origin + router.asPath);
-            url.search = '';
-            const cleanedPath = url.pathname + url.hash;
-            const pathSegments = cleanedPath.split('/').filter((segment) => segment.length > 0);
-            return pathSegments.length === 2 ? pathSegments[1] : cleanedPath;
-        };
-
+        const triggerInterval = setInterval(() => {
+            if (triggerCount < 4) {
+                console.log('Interval trigger detected');
+                openLeadsModel(null, 'interval');
+            } else {
+                clearInterval(triggerInterval);
+            }
+        }, 30000); 
 
         const timeoutId = setTimeout(() => {
             if (!hasTriggered) {
                 console.log('Timeout trigger detected');
-                triggerOpenLeadsModel();
+                openLeadsModel(null, 'timeout');
             }
-        }, 10000);
+        }, 5000);   
 
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
             clearTimeout(timeoutId);
+            clearInterval(triggerInterval);
         };
-    }, [hasTriggered]);
-
-
-
+    }, [hasTriggered, triggerCount]);
 
     return (
         <>
@@ -157,6 +133,7 @@ function PhoneNav() {
         </>
     );
 }
+
 const Wrapper = styled.div`
     position: fixed;
     bottom: 0;

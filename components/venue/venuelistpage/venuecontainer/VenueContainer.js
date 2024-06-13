@@ -113,7 +113,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
     };
 
     const  jsonDataRS = `{
-        "@context": "http://schema.org",
+        "@context": "https://schema.org",
         "@type": "Product",
         "name": "${category.replaceAll("-", " ")} in ${locality === "all" ? city : locality}",
         "aggregateRating": {

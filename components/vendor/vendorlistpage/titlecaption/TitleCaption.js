@@ -14,36 +14,39 @@ export default function TitleCaption({
   vendor_list,
   venue_list,
 }) {
-     const { selectedCity, vendorCategories, venueCategories, cities } = useGlobalContext();
-    let venueObject = [];
-    let vendorObject = [];
-    let venueNames = venueCategories.map((category) => category.name);
-    let cityNames = cities.map((city) => city.name);
-    let vendorNames = vendorCategories.map((category) => category.name);
-    let vendorBrandNames = vendor_list.map((category) => category.brand_name);
-    let allVenues = venue_list.map((category) => category.name);
-    let allVenuesSlug = venue_list.map((category) => category.slug);
-    let allVendorsSlug = vendor_list.map((category) => category.slug);
-    const suggestions = [
-        ...venueNames,
-        ...vendorNames,
-        ...vendorBrandNames,
-        ...allVenues,
-    ];
-    for (let i = 0; i < allVenues.length; i++) {
-        let obj = {};
-        obj[allVenues[i]] = allVenuesSlug[i];
-        venueObject.push(obj);
-    }
-    for (let i = 0; i < vendorBrandNames.length; i++) {
-        let obj = {};
-        obj[vendorBrandNames[i]] = allVendorsSlug[i];
-        vendorObject.push(obj);
-    }
-    const  jsonDataRS = `{
-      "@context": "http://schema.org",
+  const { selectedCity, vendorCategories, venueCategories, cities } =
+    useGlobalContext();
+  let venueObject = [];
+  let vendorObject = [];
+  let venueNames = venueCategories.map((category) => category.name);
+  let cityNames = cities.map((city) => city.name);
+  let vendorNames = vendorCategories.map((category) => category.name);
+  let vendorBrandNames = vendor_list.map((category) => category.brand_name);
+  let allVenues = venue_list.map((category) => category.name);
+  let allVenuesSlug = venue_list.map((category) => category.slug);
+  let allVendorsSlug = vendor_list.map((category) => category.slug);
+  const suggestions = [
+    ...venueNames,
+    ...vendorNames,
+    ...vendorBrandNames,
+    ...allVenues,
+  ];
+  for (let i = 0; i < allVenues.length; i++) {
+    let obj = {};
+    obj[allVenues[i]] = allVenuesSlug[i];
+    venueObject.push(obj);
+  }
+  for (let i = 0; i < vendorBrandNames.length; i++) {
+    let obj = {};
+    obj[vendorBrandNames[i]] = allVendorsSlug[i];
+    vendorObject.push(obj);
+  }
+  const jsonDataRS = `{
+      "@context": "https://schema.org",
       "@type": "Product",
-      "name": "${category.replaceAll("-", " ")} in ${locality === "all" ? city : locality}",
+      "name": "${category.replaceAll("-", " ")} in ${
+    locality === "all" ? city : locality
+  }",
       "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.5",
@@ -51,43 +54,46 @@ export default function TitleCaption({
           "reviewCount": "118"
       }
   }`;
+  // this is vendor page canonical url only for time becuse we dont have any content in vendor page related to locality 
+  const canonicalUrl = `https://weddingbanquets.in/${category}/${city}/all`;
   return (
     <>
-    <Head>
-    <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: jsonDataRS }}
-          />
-    </Head>
-    <Wrapper className="section title-caption-section">
-      <div className="headerr">
-        <div className="header-container">
-          <div className="vendor-page-title">
-            <h2 className="main-title">
-              {`${category.replaceAll("-", " ")}  in ${
-                locality === "all" ? city : locality
-              }`}
-            </h2>
-            <div className="description">
-              Showing <span className="count">{count} results</span> as per your
-              search criteria
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonDataRS }}
+        />
+        <link rel="canonical" href={canonicalUrl} />
+      </Head>
+      <Wrapper className="section title-caption-section">
+        <div className="headerr">
+          <div className="header-container">
+            <div className="vendor-page-title">
+              <h2 className="main-title">
+                {`${category.replaceAll("-", " ")}  in ${
+                  locality === "all" ? city : locality
+                }`}
+              </h2>
+              <div className="description">
+                Showing <span className="count">{count} results</span> as per
+                your search criteria
+              </div>
+              {/* <Pagedescription caption={caption}/> */}
             </div>
-            {/* <Pagedescription caption={caption}/> */}
           </div>
-        </div>
           {/* <VendorSearchBar category={category} /> */}
           <SearchBarVendor
-                      suggestions={suggestions}
-                      selectedCity={selectedCity}
-                      vendorBrandNames={vendorBrandNames}
-                      allVenues={allVenues}
-                      allVenuesSlug={allVenuesSlug}
-                      venueObject={venueObject}
-                      vendorObject={vendorObject}
-                      category={category}
-                    />
-      </div>
-    </Wrapper>
+            suggestions={suggestions}
+            selectedCity={selectedCity}
+            vendorBrandNames={vendorBrandNames}
+            allVenues={allVenues}
+            allVenuesSlug={allVenuesSlug}
+            venueObject={venueObject}
+            vendorObject={vendorObject}
+            category={category}
+          />
+        </div>
+      </Wrapper>
     </>
   );
 }
@@ -98,8 +104,8 @@ const Wrapper = styled.section`
       display: none;
     }
   }
-  .headerr{
-    display:flex;
+  .headerr {
+    display: flex;
     justify-content: space-between;
   }
   .header-container {

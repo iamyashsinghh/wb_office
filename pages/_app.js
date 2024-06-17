@@ -12,10 +12,10 @@ export default function App({ Component, pageProps }) {
       <GlobalStyles />
 
       <Head>
-        <title>Banquet Halls, Wedding Venues, Wedding Planning in India- Wedding Banquets</title>
+        <title>Best Banquet Halls And Wedding Venues, at 40% Discount</title>
         <meta
           name="description"
-          content="Wedding Banquet to Plan your wedding and make sure it is a memorable occasion. Look over 1000+ Indian Wedding venues for corporate events, weddings, birthday parties, and more."
+          content="Wedding Banquet To Plan Your Wedding And Make Sure It is a Memorable Occasion. Look Over 10000+ Indian Wedding Venues For Corporate Events, Weddings And Parties."
         />
         <meta
           name="keywords"

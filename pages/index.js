@@ -85,7 +85,6 @@ export default function Home({
         })(window, document, "clarity", "script", "mbuz9yg01f");`}
         </script>
       </Head>
-
       <Navbar />
       <Hero
         venueCategogies={venueCategogies}

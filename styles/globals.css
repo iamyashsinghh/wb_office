@@ -6,6 +6,12 @@
   width: 5px !important;
   border-radius: 20px;
 }
+body{
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
 /* Track background color */
 ::-webkit-scrollbar-track {

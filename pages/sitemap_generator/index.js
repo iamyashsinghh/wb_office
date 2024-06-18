@@ -7,8 +7,6 @@ import getLocalities from "@/lib/request/getlocalities/getLocalities";
 
 export default function SitemapGenPage() {
 
-
-
     const { cities, vendorCategories, venueCategories } = useGlobalContext();
     const [localites, setLocalities] = useState([])
     const [count, setCount] = useState(0)
@@ -89,50 +87,37 @@ export default function SitemapGenPage() {
 
         //Generate url for uenue
         if (selectedCat == "1") {
-            venueCategories.forEach(cat => {
-                localites.forEach((locality) => {
-                    const url = ` ${baseUrl}/${cat.slug}/${selectedCity}/${locality.slug} `;
-                    // console.log(`<url>\n<loc>${url}</loc>\n<lastmod>${getCurrentDateTime()}</lastmod>\n<priority>1.00</priority>\n</url>`);
+            venuesData.forEach((venues) => {
+                    const url = `${baseUrl}/${venues.city_slug}/${venues.slug}`;
                     const sitemap = `<url>\n<loc>${url}</loc>\n<lastmod>${getCurrentDateTime()}</lastmod>\n<priority>1.00</priority>\n</url>\n\n`;
                     rawsitemap += sitemap;
                 })
-
-            });
-            setCount(venueCategories.length * localites.length)
+            setCount(venuesData.length)
         }
+
         //Generate url for vendor
+
         if (selectedCat == "2") {
-            vendorCategories.forEach(cat => {
-
-                localites.forEach((locality) => {
-                    const url = `${baseUrl}/${cat.slug}/${selectedCity}/${locality.slug} `;
-                    // console.log(`<url>\n<loc>${url}</loc>\n<lastmod>${getCurrentDateTime()}</lastmod>\n<priority>1.00</priority>\n</url>\n\n`);
+            vendorssData.forEach((vendors) => {
+                    const url = `${baseUrl}/${vendors.city_slug}/${vendors.slug}`;
                     const sitemap = `<url>\n<loc>${url}</loc>\n<lastmod>${getCurrentDateTime()}</lastmod>\n<priority>1.00</priority>\n</url>\n\n`;
-
                     rawsitemap += sitemap;
                 })
-
-            });
-
-            setCount(vendorCategories.length * localites.length)
-
+            setCount(vendorssData.length)
         }
+
         //Generate url for both venue and vendor category
         if (selectedCat == "3") {
 
             vendorCategories.forEach(cat => {
-
                 localites.forEach((locality) => {
                     const url = `${baseUrl}/${cat.slug}/${selectedCity}/${locality.slug} `;
-                    // console.log(`<url>\n<loc>${url}</loc>\n<lastmod>${getCurrentDateTime()}</lastmod>\n<priority>1.00</priority>\n</url>\n\n`);
                     const sitemap = `<url>\n<loc>${url}</loc>\n<lastmod>${getCurrentDateTime()}</lastmod>\n<priority>1.00</priority>\n</url>\n\n`;
-
                     rawsitemap += sitemap;
                 })
             });
 
             vendorCategories.forEach(cat => {
-
                 localites.forEach((locality) => {
                     const url = `${baseUrl}/${cat.slug}/${selectedCity}/${locality.slug} `;
                     const sitemap = `<url>\n<loc>${url}</loc>\n<lastmod>${getCurrentDateTime()}</lastmod>\n<priority>1.00</priority>\n</url>\n\n`;
@@ -154,7 +139,9 @@ export default function SitemapGenPage() {
                 const cityLocalities = localitiesResponse.success ? localitiesResponse.data : [];
                 for (const cat of allCategories) {
                     console.log(cityLocalities);
-                    for (const locality of cityLocalities) {
+                    const extaLocality = { slug: 'all', name: 'all' };
+                    const allLocalities = [...cityLocalities , extaLocality]
+                    for (const locality of allLocalities) {
                         const url = `${baseUrl}/${cat.slug}/${city.slug}/${locality.slug}`;
                         const sitemapEntry = `<url>\n<loc>${url}</loc>\n<lastmod>${getCurrentDateTime()}</lastmod>\n<priority>1.00</priority>\n</url>\n\n`;
                         tempSitemap += sitemapEntry;
@@ -186,7 +173,6 @@ export default function SitemapGenPage() {
                                 cities?.map((city) => {
                                     return <option key={city.id} value={city.slug}> {city.name}</option>
                                 })
-
                             }
 
                         </select>
@@ -194,8 +180,8 @@ export default function SitemapGenPage() {
                     <div className="dropdown" >
                         <select name="category" id="category" onChange={(e) => setSelectedCat(e.target.value)}>
                             <option value=""> Select category</option>
-                            <option value="1"> For venue</option>
-                            <option value="2"> For Vendor</option>
+                            <option value="1"> For venue pages</option>
+                            <option value="2"> For Vendor pages</option>
                             <option value="3"> Venue and Vendor</option>
                             <option value="4"> All With Cities</option>
                         </select>
@@ -208,13 +194,9 @@ export default function SitemapGenPage() {
 
 
                 <div>
-
                     <h2>Total Sitemap Generated : {count}</h2>
-
                     <textarea value={sitemapData}></textarea>
                 </div>
-
-
 
             </div>
 

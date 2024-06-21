@@ -11,15 +11,6 @@ import CityVenueHall from "@/components/miscellaneous/footer/CityVenueHall";
 import VendorCategoryCardGrid from "@/components/miscellaneous/vendorcategorycardgrid/VendorCategoryCardGrid";
 import Head from "next/head";
 import { query } from "@/utils/db";
-// import Gallary from "@/components/homepage/gallary/Gallary";
-// import Testimonial from "@/components/homepage/testimonial/Testimonial";
-// import VendorGrid from "@/components/miscellaneous/vendorcategoryslider/VendorGrid";
-// import FooterVendors from "@/components/miscellaneous/footer/FooterVendors";
-// import dynamic from "next/dynamic";
-// import Script from "next/script";
-// import Gallary from "@/components/homepage/gallary/Gallary";
-// const HowItWorks = dynamic(import("../components/homepage/howitwork/HowItWorks"))
-// import Testimonial from "@/components/homepage/testimonial/Testimonial";
 
 export default function Home({
   venueCategogies,
@@ -133,9 +124,9 @@ export async function getStaticProps() {
       wp_posts.ID desc limit 3`;
 
       blogposts = await query(sql);
-      console.log("Blog data fetched");
+      // console.log("Blog data fetched");
     } catch (error) {
-      console.log("Blog data not fetched");
+      // console.log("Blog data not fetched");
       blogposts = [];
     }
 

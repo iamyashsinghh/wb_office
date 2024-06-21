@@ -105,7 +105,7 @@ export default function Page({ response }) {
   }
 }
 
-export async function getServerSideProps({ query, req, res }) {
+export async function getStaticProps({ query, req, res }) {
   try {
     const { category: city, city: slug } = query;
     const url = `${process.env.SERVER_DOMAIN}/api/venue_or_vendor_details/${slug}`;
@@ -124,7 +124,7 @@ export async function getServerSideProps({ query, req, res }) {
       };
     }
 
-    return { props: { response } };
+    return { props: { response }, revalidate: 3600, };
   } catch (error) {
     return { notFound: true };
   }

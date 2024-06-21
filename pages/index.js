@@ -87,14 +87,10 @@ export default function Home({
       <HowItWorks />
       <LeadForm />
       <Blog posts={blogposts} />
-      {/* <Gallary /> */}
-      {/* <Testimonial /> */}
       <WhyUs />
       <Contact />
       <VendorCategoryCardGrid />
-      {/* <FooterVendors/> */}
       <CityVenueHall cities={cities} />
-      {/* <LeadModel/> */}
     </div>
   );
 }

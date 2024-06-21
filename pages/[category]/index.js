@@ -54,7 +54,7 @@ export default function Home({
   );
 }
 
-export async function getStaticProps({ params, req, res }) {
+export async function getServerSideProps({ params, req, res }) {
   const { category: slug } = params;
 
   if (await iscity(slug)) {
@@ -87,7 +87,6 @@ export async function getStaticProps({ params, req, res }) {
           popularVenues: homePageData.data.popular_venues || null,
           blogposts: blogposts || null,
         },
-        revalidate : 3600,
       };
     } catch (error) {
       console.log(error);

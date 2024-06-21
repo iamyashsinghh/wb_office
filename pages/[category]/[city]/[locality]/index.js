@@ -152,7 +152,7 @@ function Venue(props) {
   }
 }
 
-export async function getStaticProps({ query, req, res }) {
+export async function getServerSideProps({ query, req, res }) {
   try {
     let { category, city, locality } = query;
     const { guest, per_plate, per_budget, multi_localities, serch_value } = query;
@@ -214,7 +214,6 @@ export async function getStaticProps({ query, req, res }) {
         localities: localities || null,
         filterQuery,
       },
-      revalidate: 3600,
     };
   } catch (error) {
     console.log("Error from listing page line number 183");

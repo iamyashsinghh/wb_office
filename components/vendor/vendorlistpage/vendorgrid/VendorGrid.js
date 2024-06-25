@@ -94,7 +94,6 @@ export default function VendorGrid({ vendors, category, city, locality }) {
                     <center style={{ fontSize: "1.5rem" }}>You have seen it all</center>
                 )}
                 <div ref={lastVendorElementRef}></div>
-                
             </div>
         </Wrapper>
     );
@@ -102,7 +101,6 @@ export default function VendorGrid({ vendors, category, city, locality }) {
 
 const Wrapper = styled.section`
     padding-top: 0 !important;
-
     .container {
         .load-more-btn-container {
             text-align: center;

@@ -19,7 +19,7 @@ import { useGlobalContext } from "@/context/MyContext";
 import Head from "next/head";
 import RatingCardDynamic from "@/components/miscellaneous/RatingCardDynamic";
 
-function VenueCard2({venue, city, openLeadModel, locality, category, callConversion }) {
+function VenueCard2({venue, city, openLeadModel, locality, category, callConversion, index }) {
 
   const images = venue.images?.split(",");
   const { selectedCity } = useGlobalContext();
@@ -172,7 +172,7 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
 
         <div className="venue-category">
           {categories?.map((item, index) => (
-            <div className="category">
+            <div className="category" key={index}>
               <p>{item}</p>
             </div>
           ))} 

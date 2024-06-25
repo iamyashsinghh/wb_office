@@ -1,8 +1,6 @@
-
-
 import styled from "styled-components";
-import { useState, useRef, useEffect } from "react";
-import { BiSlider } from 'react-icons/bi'
+import { useState, useRef, useEffect, useCallback } from "react";
+import { BiSlider } from 'react-icons/bi';
 import { Spinner2 } from "@/styles/components/spinner";
 import VenueCard2 from "./venueCard2";
 import { useGlobalContext } from "@/context/MyContext";
@@ -12,28 +10,32 @@ import useCallConversion from "@/lib/hook/useCallConversion";
 import SearchBarVenue from "@/components/miscellaneous/SearchBarVenue";
 import Head from "next/head";
 
-
 function VenueContainer({ city, lists, locality, category, count, localities, venueCategories, vendorCategories, data, filterQuery }) {
-
     const { setShowFilter, selectedCity, cities, venue_list, vendor_list } = useGlobalContext();
     const { openLeadModel } = useLeadModel();
     const { callConversion } = useCallConversion();
     const [loading, setLoading] = useState(false);
-    let venueObject = [];
-    let vendorObject = [];
-    let venueNames = venueCategories.map((category) => category.name);
-    let cityNames = cities.map((city) => city.name);
-    let vendorNames = vendorCategories.map((category) => category.name);
-    let vendorBrandNames = vendor_list.map((category) => category.brand_name);
-    let allVenues = venue_list.map((category) => category.name);
-    let allVenuesSlug = venue_list.map((category) => category.slug);
-    let allVendorsSlug = vendor_list.map((category) => category.slug);
+    const [venuelists, setVenueList] = useState(lists || []);
+    const [hasMore, setHasMore] = useState(true);
+    const observer = useRef();
+
+    const venueNames = venueCategories.map(category => category.name);
+    const cityNames = cities.map(city => city.name);
+    const vendorNames = vendorCategories.map(category => category.name);
+    const vendorBrandNames = vendor_list.map(category => category.brand_name);
+    const allVenues = venue_list.map(category => category.name);
+    const allVenuesSlug = venue_list.map(category => category.slug);
+    const allVendorsSlug = vendor_list.map(category => category.slug);
+
     const suggestions = [
         ...venueNames,
         ...vendorNames,
         ...vendorBrandNames,
         ...allVenues,
     ];
+
+    let venueObject = [];
+    let vendorObject = [];
     for (let i = 0; i < allVenues.length; i++) {
         let obj = {};
         obj[allVenues[i]] = allVenuesSlug[i];
@@ -45,61 +47,46 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
         vendorObject.push(obj);
     }
 
-    let page = useRef(1)
+    let page = useRef(1);
 
-    const [venuelists, setVenueList] = useState(lists || []);
-
-    //IF the venueList reached with the count then there is no venue available if venueList is less the count the then venues are available
-    const [hasMore, setHasMore] = useState(true);
-
-
-    //For solving the same problem as above useEffect do, now if a user will change sulg from the filter it will show the new list otherwise it will show the prvious venues. Yes we are taking the new venue from the server but still it will not update the new one and show the old one, To solve the problem we use this useEffect.
-    //NOTE: lists is not a state it is a normal variable which container the list of venues which comes from the server.
     useEffect(() => {
-        setVenueList(lists)
-    }, [lists])
+        setVenueList(lists);
+    }, [lists]);
 
-
-    //This will update the hasmore state.
     useEffect(() => {
-        setHasMore(venuelists.length >= count ? false : true)
+        setHasMore(venuelists.length < count);
+    }, [venuelists]);
 
-    }, [venuelists])
-
-
-   
-
-
-    //For infinity scroll to fetch more venues.
     const fetchMoreVenue = async () => {
-
         try {
-            setLoading(true)
-
-
+            setLoading(true);
             if (venuelists.length >= count) {
-                // console.log("Hy")
-                setHasMore(false)
+                setHasMore(false);
+                return;
             }
-
-            page.current = page.current + 1;
-
-            const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}/${page.current}?guest=${filterQuery.guest}&per_budget=${filterQuery.per_budget}&per_plate=${filterQuery.per_plate}&multi_localities=${filterQuery.multi_localities}`
-
-
-            let newLists = await fetch(url)
+            page.current += 1;
+            const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}/${page.current}?guest=${filterQuery.guest}&per_budget=${filterQuery.per_budget}&per_plate=${filterQuery.per_plate}&multi_localities=${filterQuery.multi_localities}`;
+            let newLists = await fetch(url);
             newLists = await newLists.json();
             newLists = newLists.data;
-            setVenueList([...venuelists, ...newLists]);
-
+            setVenueList(prev => [...prev, ...newLists]);
         } catch (error) {
-            console.log(error)
-            // 
+            console.log(error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
+    };
 
-    }
+    const lastVenueElementRef = useCallback(node => {
+        if (loading) return;
+        if (observer.current) observer.current.disconnect();
+        observer.current = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting && hasMore) {
+                fetchMoreVenue();
+            }
+        });
+        if (node) observer.current.observe(node);
+    }, [loading, hasMore]);
 
     let listingPageListSchema = {
         "@context": "https://schema.org",
@@ -112,7 +99,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
         }))
     };
 
-    const  jsonDataRS = `{
+    const jsonDataRS = `{
         "@context": "https://schema.org",
         "@type": "Product",
         "name": "${category.replaceAll("-", " ")} in ${locality === "all" ? city : locality}",
@@ -123,83 +110,68 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
             "reviewCount": "128"
         }
     }`;
+
     return (
         <>
-        <Head>
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(listingPageListSchema) }}
-          />
-        <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: jsonDataRS }}
-          />
-        </Head>
-        <Section className="section section-venue-container">
-            {/* <Heading text={'Wedding Banquet in Mumbai'} desc={"As you start with the wedding preparations and dive deeper to create the perfect fairytale wedding, one crucial element is the wedding venue. It can be exhausting, especially in Delhi, as the city is brimming with options."} /> */}
-
-            <div className="sticky-head">
-                <div className="page-title">
-                    <h2 className="main-title">{`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality}`}</h2>
-                    <span className="count">{` Total result : ${count || 0} `}</span>
-                </div>
-
-                <div className="filter-btn" onClick={() => { setShowFilter(true) }}>
-                    <BiSlider className="filter-icon" />
-                    <span className="filter-label">Filter</span>
-                </div>
-            </div>
-
-            <div className="venue-list-container">
-                <aside className="venue-filter box">
-
-                    {/* //This filter component will not rerender when ever model open or colse, because we wrap this filter component with memo(), that means it will only re-render when the props in the filter component will change otherwise it will not re-render. */}
-                    <Filter locality={locality} filterQuery={filterQuery} localities={localities} venueCategories={venueCategories} city={city} category={category} />
-
-                </aside>
-                <main className="venues-list box">
-                    {/* <Heading text={`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality} (${count})`} /> */}
-                    <div className="d-flex">
-                        <h1 className="venue-conatiner-h1 main-title">{`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality}`} <span className="count">{`(${count || 0})`}</span></h1>
-                        <SearchBarVenue
-                            suggestions={suggestions}
-                            selectedCity={selectedCity}
-                            vendorBrandNames={vendorBrandNames}
-                            allVenues={allVenues}
-                            allVenuesSlug={allVenuesSlug}
-                            venueObject={venueObject}
-                            vendorObject={vendorObject}
-                        />
+            <Head>
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(listingPageListSchema) }}
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: jsonDataRS }}
+                />
+            </Head>
+            <Section className="section section-venue-container">
+                <div className="sticky-head">
+                    <div className="page-title">
+                        <h2 className="main-title">{`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality}`}</h2>
+                        <span className="count">{` Total result : ${count || 0} `}</span>
                     </div>
-                    {
-                        venuelists?.map((item, index) => (
-                            <>
-                                {/* <VenueCard key={index} venue={item} city={city} /> */}
+                    <div className="filter-btn" onClick={() => { setShowFilter(true) }}>
+                        <BiSlider className="filter-icon" />
+                        <span className="filter-label">Filter</span>
+                    </div>
+                </div>
+                <div className="venue-list-container">
+                    <aside className="venue-filter box">
+                        <Filter locality={locality} filterQuery={filterQuery} localities={localities} venueCategories={venueCategories} city={city} category={category} />
+                    </aside>
+                    <main className="venues-list box">
+                        <div className="d-flex">
+                            <h1 className="venue-conatiner-h1 main-title">{`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality}`} <span className="count">{`(${count || 0})`}</span></h1>
+                            <SearchBarVenue
+                                suggestions={suggestions}
+                                selectedCity={selectedCity}
+                                vendorBrandNames={vendorBrandNames}
+                                allVenues={allVenues}
+                                allVenuesSlug={allVenuesSlug}
+                                venueObject={venueObject}
+                                vendorObject={vendorObject}
+                            />
+                        </div>
+                        {
+                            venuelists?.map((item, index) => (
                                 <VenueCard2 key={index} locality={locality} category={category} venue={item} city={city} openLeadModel={openLeadModel} callConversion={callConversion} />
-                            </>
-                        ))
-                    }
-
-                    {
-                        loading ? <div style={{ textAlign: "center" }}> <Spinner2 /> </div> : null
-                    }
-                    {/* Show the button only when the data are available */}
-                    {
-                        hasMore ? (<button className="load-more-btn" onClick={fetchMoreVenue}>View More</button>) : (<center style={{ fontSize: "1.5rem" }}>You have seen it all</center>)
-                    }
-
-
-
-                </main>
-            </div>
-
-        </Section>
+                            ))
+                        }
+                        {
+                            loading && <div style={{ textAlign: "center" }}> <Spinner2 /> </div>
+                        }
+                        <div ref={lastVenueElementRef}></div>
+                        {
+                            !hasMore && <center style={{ fontSize: "1.5rem" }}>You have seen it all</center>
+                        }
+                    </main>
+                </div>
+            </Section>
         </>
-    )
+    );
 }
 
-
 export default VenueContainer;
+
 
 const Section = styled.section`
 padding-top:0px !important;

@@ -1,9 +1,7 @@
 import TopFilter from "@/components/miscellaneous/TopFilter";
-import Offer from "@/components/miscellaneous/Offer";
 import Header from "@/components/layout.js/Header";
 import { useGlobalContext } from "@/context/MyContext";
 import VenueContainer from "@/components/venue/venuelistpage/venuecontainer/VenueContainer";
-import { FilterButton } from "@/components/venue/venuelistpage/filter/FilterButton";
 import SideFilter from "./filter/SideFilter";
 import Footerdescription from "@/components/miscellaneous/pagedescription/PageDescription";
 
@@ -32,7 +30,6 @@ export default function VenueListPage({ data }) {
         locality={locality}
         filterQuery={filterQuery}
       />
-      {/* <Offer /> */}
       <VenueContainer
         lists={result.data}
         locality={locality}
@@ -45,8 +42,6 @@ export default function VenueListPage({ data }) {
         data={data}
         filterQuery={filterQuery}
       />
-      {/* <FilterButton /> */}
-
       <Footerdescription caption={result.meta?.caption} />
     </>
   );

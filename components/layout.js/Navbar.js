@@ -67,7 +67,7 @@ function Navbar() {
                                 <div className="l-content venue-dropdown-items">
                                     <ul>
                                         {
-                                            venueCategories?.slice(0, 4).map((category, i) => {
+                                            venueCategories?.slice(0, 5).map((category, i) => {
                                                 return (
 
                                                     <li className="menu-item" key={i}>
@@ -81,7 +81,7 @@ function Navbar() {
                                 <div className="r-content venue-dropdown-items">
                                     <ul>
                                         {
-                                            venueCategories?.slice(4).map((category, i) => {
+                                            venueCategories?.slice(5).map((category, i) => {
                                                 return (
                                                     <li className="menu-item" key={i}>
                                                         <Link href={`/${category.slug}/${selectedCity}/all`} className="drop-down-menu-link" >{category.name} </Link>

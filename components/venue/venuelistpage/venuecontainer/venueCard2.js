@@ -239,19 +239,14 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
 }
 export default memo(VenueCard2);
 
-// const ringingAnimation = keyframes`
-//   0% {
-//     transform: scale(1);
-//   }
-//   50% {
-//     transform: scale(1.1);
-//   }
-//   100% {
-//     transform: scale(1);
-//   }
-// `;
-
 const ringingAnimationn = keyframes`
+    0% {
+      box-shadow: 0 4px 10px rgba(23, 196, 52, 0.2), 0 0 0 0 rgba(23, 196, 52, 0.2), 0 0 0 5px rgba(23, 196, 52, 0.2), 0 0 0 0px rgba(23, 196, 52, 0.2); }
+    100% {
+      box-shadow: 0 4px 10px rgba(23, 196, 52, 0.2), 0 0 0 5px rgba(23, 196, 52, 0.2); } 
+      }
+`;
+const ringingAnimation = keyframes`
  0% {
     transform: rotateY(-25deg);
   }
@@ -269,6 +264,8 @@ const ringingAnimationn = keyframes`
   }
 `;
 
+
+
 const Wrapper = styled.div`
   .whatsapp-icon {
     font-size: 2.5rem;
@@ -278,9 +275,7 @@ const Wrapper = styled.div`
     cursor: pointer;
     color: white;
     font-size: 3.5rem;
-        animation: ${ringingAnimationn} 1s ease-in-out infinite;
-
-
+        animation: ${ringingAnimation} 1s ease-in-out infinite;
   }
   .phone {
     border: 1px solid var(--phone);
@@ -331,6 +326,7 @@ const Wrapper = styled.div`
     transition: all 0.3s linear;
     background: var(--phone);
     color: white;
+    animation: ${ringingAnimationn} 1s ease-in-out infinite;
   }
 
   .action-btns {

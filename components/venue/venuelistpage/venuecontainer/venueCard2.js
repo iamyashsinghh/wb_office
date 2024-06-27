@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useMemo, useState } from "react";
 import { IoIosPeople, IoLogoWhatsapp, IoIosCall } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
@@ -35,7 +35,7 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
 
   function shareViaWhatsApp(e) {
     const venueUrl = `https://weddingbanquets.in/${selectedCity}/${venue.slug}`;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(venueUrl)}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=918882198989&text=${encodeURIComponent(venueUrl)}`;
     window.open(whatsappUrl, "_blank");
     e.stopPropagation();
   }
@@ -239,6 +239,36 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
 }
 export default memo(VenueCard2);
 
+// const ringingAnimation = keyframes`
+//   0% {
+//     transform: scale(1);
+//   }
+//   50% {
+//     transform: scale(1.1);
+//   }
+//   100% {
+//     transform: scale(1);
+//   }
+// `;
+
+const ringingAnimationn = keyframes`
+ 0% {
+    transform: rotateY(-25deg);
+  }
+  25% {
+    transform: rotateX(-25deg);
+  }
+  50% {
+    transform: rotateY(-25deg);
+  }
+  75% {
+    transform: rotateX(-25deg);
+  }
+  100% {
+    transform: rotateY(-25deg);
+  }
+`;
+
 const Wrapper = styled.div`
   .whatsapp-icon {
     font-size: 2.5rem;
@@ -248,6 +278,9 @@ const Wrapper = styled.div`
     cursor: pointer;
     color: white;
     font-size: 3.5rem;
+        animation: ${ringingAnimationn} 1s ease-in-out infinite;
+
+
   }
   .phone {
     border: 1px solid var(--phone);

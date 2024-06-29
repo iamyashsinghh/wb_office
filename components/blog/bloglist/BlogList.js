@@ -83,6 +83,7 @@ const BlogList = memo(({ data }) => {
   );
 });
 
+BlogList.displayName = "BlogList";
 export default BlogList;
 
 const Wrapper = styled.div`

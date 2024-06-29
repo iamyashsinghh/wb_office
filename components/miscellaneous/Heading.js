@@ -24,11 +24,9 @@ gap: 1rem;
 
 
 .heading-text{
-
     text-transform: capitalize;
     font-size: 3rem; 
     text-align:center;
-
 }
 
 .desc{

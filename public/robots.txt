@@ -1,6 +1,8 @@
 User-agent: *
 Disallow: 
 Disallow: /cgi-bin/
+Disallow: /yash
+Disallow: /yash/*     
 
 Sitemap: https://weddingbanquets.in/sitemap.xml
 Sitemap: https://weddingbanquets.in/sitemap_venue_vendor_list.xml

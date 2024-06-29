@@ -69,7 +69,10 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
             let newLists = await fetch(url);
             newLists = await newLists.json();
             newLists = newLists.data;
-            setVenueList(prev => [...prev, ...newLists]);
+            const filteredLists = newLists.filter(newItem => {
+                return !venuelists.some(existingItem => existingItem.id === newItem.id);
+            });
+            setVenueList(prev => [...prev, ...filteredLists]);
         } catch (error) {
             console.log(error);
         } finally {
@@ -151,18 +154,10 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                                 vendorObject={vendorObject}
                             />
                         </div>
-                        {
-                            venuelists?.map((item, index) => (
-                                <VenueCard2 key={index} locality={locality} category={category} venue={item} city={city} openLeadModel={openLeadModel} callConversion={callConversion} />
-                            ))
-                        }
-                        {
-                            loading && <div style={{ textAlign: "center" }}> <Spinner2 /> </div>
-                        }
+                        { venuelists?.map((item, index) => ( <VenueCard2 key={index} locality={locality} category={category} venue={item} city={city} openLeadModel={openLeadModel} callConversion={callConversion} /> )) }
+                        { loading && <div style={{ textAlign: "center" }}> <Spinner2 /> </div> }
                         <div ref={lastVenueElementRef}></div>
-                        {
-                            !hasMore && <center style={{ fontSize: "1.5rem" }}>You have seen it all</center>
-                        }
+                        { !hasMore && <center style={{ fontSize: "1.5rem" }}>You have seen it all</center> }
                     </main>
                 </div>
             </Section>
@@ -171,7 +166,6 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
 }
 
 export default VenueContainer;
-
 
 const Section = styled.section`
 padding-top:0px !important;
@@ -329,12 +323,9 @@ background-color: var(--bg-color);
         background-color: var(--secoundary-color);
         color: white;
         border-radius: 5rem;
-
         /* &:hover{
             color: var(--para);
         } */
-
-        
     }
 
    
@@ -357,7 +348,6 @@ background-color: var(--bg-color);
         
 
         .filters{
-
             /* border: 1px solid black; */
             display: flex;
             flex-direction: column;

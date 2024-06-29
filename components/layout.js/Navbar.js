@@ -63,13 +63,11 @@ function Navbar() {
                         <div className="dropdown">
                             <div className="dropdown-content">
                                 <div className="caret"></div>
-
                                 <div className="l-content venue-dropdown-items">
                                     <ul>
                                         {
                                             venueCategories?.slice(0, 5).map((category, i) => {
                                                 return (
-
                                                     <li className="menu-item" key={i}>
                                                         <Link href={`/${category.slug}/${selectedCity}/all`} className="drop-down-menu-link" >{category.name} </Link>
                                                     </li>
@@ -98,23 +96,19 @@ function Navbar() {
                         <div className="dropdown">
                             <div className="dropdown-content">
                                 <div className="caret"></div>
-
                                 <div className="l-content vendors-dropdown-items">
                                     <ul>
                                         {
                                             vendorCategories?.slice(0, 5).map((category, i) => {
                                                 return (
-
                                                     <li className="menu-item" key={i}>
                                                         <Link href={`/${category.slug}/${selectedCity}/all`} className="drop-down-menu-link" >{category.name} </Link>
                                                     </li>
                                                 )
                                             })
                                         }
-
                                     </ul>
                                 </div>
-
                                 <div className="r-content vendors-dropdown-items">
                                     <ul>
                                         {
@@ -160,10 +154,8 @@ function Navbar() {
                 </div>
             )}
         </div>
-
     </Nav>)
 }
-
 export default Navbar;
 
 const Nav = styled.nav`

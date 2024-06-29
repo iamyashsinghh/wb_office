@@ -108,7 +108,7 @@ function Footer() {
                 </div>
                 <div className="hr-line"> </div>
                 <div className="f-icons">
-                    <Link href={"https://api.whatsapp.com/send?phone=919625016998&text=Hi"} className='f-icon' passHref target='_blank' aria-label="icon">
+                    <Link href={"https://api.whatsapp.com/send?phone=918882198989&text=Hi"} className='f-icon' passHref target='_blank' aria-label="icon">
                         <span><RiWhatsappFill size={25} className='social-icon' /> </span>
                     </Link>
                 

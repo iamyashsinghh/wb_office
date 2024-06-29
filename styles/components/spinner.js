@@ -5,7 +5,7 @@ export function Spinner1() {
 
     return (
         <Spinner1Style>
-            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
         </Spinner1Style>
     )
 }
@@ -28,7 +28,6 @@ const Spinner1Style = styled.div`
   height: 20px; */
   width: 100%;
   height: 100%;
-
   border: 3px solid #B88A24;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
@@ -58,7 +57,7 @@ const Spinner1Style = styled.div`
 export function Spinner2(){
     return(
         <Spinner2Style>
-            <div class="lds-facebook"><div></div><div></div><div></div></div>
+            <div className="lds-facebook"><div></div><div></div><div></div></div>
         </Spinner2Style>
     )
 }

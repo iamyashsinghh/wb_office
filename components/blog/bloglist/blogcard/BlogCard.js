@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaUser } from "react-icons/fa";
 import { BsCalendarDateFill } from "react-icons/bs";
-import Router from 'next/router'; // Import Router from Next.js
+import Router from 'next/router';
 import { keyframes } from 'styled-components';
 
 
-function BlogCard({ image, heading, excerpt, publish_date, author_id, slug, image_alt }) {
+function BlogCard({ image, heading, excerpt, publish_date, slug, image_alt, author_name }) {
   const handleCardClick = () => {
     Router.push(`yash/${slug}`); 
   };
@@ -19,7 +19,7 @@ function BlogCard({ image, heading, excerpt, publish_date, author_id, slug, imag
         <Description>{excerpt}...<span className='read-more-btn'>Read More</span></Description>
         <Meta>
           <Date><BsCalendarDateFill />&nbsp;{publish_date}</Date>
-          <Author><FaUser />&nbsp;By {author_id}</Author>
+          <Author><FaUser />&nbsp;By {author_name}</Author>
         </Meta>
       </Content>
     </Card>

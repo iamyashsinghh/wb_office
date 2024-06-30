@@ -4,22 +4,29 @@
   import PopularPost from "./sidebar/PopularPost";
   import LatestPost from "./sidebar/LatestPost";
   import Ad from "./sidebar/Ad";
+  import AuthorCard from "./authorcard/AuthorCard";
 
   const BlogDetail = ({ data }) => {
+    const blog = data.data;
+    const popular = data.popular;
+    const latest = data.latest;
+    const author = data.author;
+
     return (
       <Wrapper>
         <Container>
           <Description>
-            <Heading>{data.heading}</Heading>
-            <FetureImg image={data.image} image_alt={data.image_alt} />
+            <Heading>{blog.heading}</Heading>
+            <FetureImg image={blog.image} image_alt={blog.image_alt} />
             <div
               className="description"
-              dangerouslySetInnerHTML={{ __html: data.summary }}
+              dangerouslySetInnerHTML={{ __html: blog.summary }}
             />
+            <AuthorCard {...author} />
           </Description>
           <RightSidebar>
-            <PopularPost />
-            <LatestPost />
+            <PopularPost popular={popular}/>
+            <LatestPost latest={latest} />
             <Ad />
           </RightSidebar>
         </Container>
@@ -49,6 +56,7 @@
 
   const Description = styled.div`
     margin-top: 10rem;
+    
     @media (max-width: 768px) {
       margin-top: 6rem;
     }
@@ -57,6 +65,7 @@
   const RightSidebar = styled.aside`
     padding: 1rem;
     margin-top: 10rem;
+
     @media (max-width: 768px) {
       margin-top: 1rem;
     }
@@ -66,7 +75,8 @@
     margin: 1rem;
     font-size: 4rem;
     text-align: center;
-      color: var(--primary-color);
+    color: var(--primary-color);
+
     @media (max-width: 768px) {
       font-size: 2.5rem;
     }

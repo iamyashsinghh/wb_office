@@ -74,7 +74,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
             });
             setVenueList(prev => [...prev, ...filteredLists]);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         } finally {
             setLoading(false);
         }

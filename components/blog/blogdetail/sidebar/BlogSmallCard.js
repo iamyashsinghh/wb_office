@@ -1,33 +1,35 @@
-import Image from "next/image";
 import React from "react";
-import { BsCalendarDateFill } from "react-icons/bs";
-import { FaUser } from "react-icons/fa";
 import styled from "styled-components";
+import Image from "next/image";
+import Router from 'next/router';
 
-function BlogSmallCard() {
 
+import { FaUser } from "react-icons/fa";
+import { BsCalendarDateFill } from "react-icons/bs";
+
+function BlogSmallCard({heading, image, image_alt, publish_date, author_name, slug}) {
     const handleCardClick = () => {
-        Router.push(`yash/${slug}`); 
+        Router.push(`/yash/${slug}`); 
       };
-      
+
   return (
     <Wrapper >
       <Row onClick={handleCardClick}>
         <Heading>
-          A Guide to Picking the Perfect Bindi to Match Your Face Shape.
+          {heading}
         </Heading>
         <ImageContainer>
           <Image
-            src={`https://cms.wbcrm.in/storage/images/flora/1719474054.jpg`}
+            src={`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/${image}`}
             width={100}
             height={70}
-            alt="Blog image"
+            alt={image_alt}
           />
         </ImageContainer>
       </Row>
       <Row2>
-        <Date><BsCalendarDateFill />&nbsp;15/June/2024</Date>
-        <Author><FaUser />&nbsp;By Author</Author>
+        <Date><BsCalendarDateFill />&nbsp;{publish_date}</Date>
+        <Author><FaUser />&nbsp;By {author_name}</Author>
       </Row2>
     </Wrapper>
   );

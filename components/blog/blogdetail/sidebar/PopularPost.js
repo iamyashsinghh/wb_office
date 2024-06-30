@@ -2,15 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import BlogSmallCard from "./BlogSmallCard";
 
-function PopularPost() {
+function PopularPost({popular}) {
   return (
     <>
       <Heading>Some Popular Post</Heading>
       <PopularBlogContainer>
-        <BlogSmallCard />
-        <BlogSmallCard />
-        <BlogSmallCard />
-        <BlogSmallCard />
+      {popular.map((data, index) => (
+        <BlogSmallCard key={index} {...data} />
+      ))}
       </PopularBlogContainer>
     </>
   );

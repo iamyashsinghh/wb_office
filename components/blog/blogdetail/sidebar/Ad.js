@@ -18,8 +18,7 @@ function Ad() {
             <Image
                 src="/common/venue.jpg"
                 alt="An example image"
-                height={400}
-                width={400}
+                fill={true}
                 />
         </div>
     </Wrapper>
@@ -82,7 +81,7 @@ z-index: 1;
     }
 
     .bannar-img{
-        // position: relative;
+        position: relative;
         width: 100%;
         height: 400px;
         z-index: 0;

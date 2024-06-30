@@ -1,15 +1,28 @@
-import BlogDeatil from "@/components/blog/blogdetail/BlogDeatil";
-import Header from "@/components/layout.js/Header";
 import React from "react";
 import styled from "styled-components";
+import Header from "@/components/layout.js/Header";
+import BlogDeatil from "@/components/blog/blogdetail/BlogDeatil";
+import { useRouter } from "next/router";
+import Head from "next/head";
 
 function BlogDetailPage({ data }) {
+  const router = useRouter();
+  const blog = data.data;
   return (
     <Wrapper>
+      <Head>
+        <title>{blog.meta_title}</title>
+        <meta name="description" content={blog.meta_description} />
+        <meta name="keywords" content={blog.meta_keywords} />
+        <meta name="og:image" content={`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/${blog.image}`} />
+        <meta property="og:title" content={blog.og_title} />
+        <meta property="og:description" content={blog.og_description} />
+        <meta property="og:url" content={`https://weddingbanquets.in${router.asPath}`} />
+      </Head>
       <div className="position">
         <Header />
       </div>
-      <BlogDeatil data={data.data} />
+      <BlogDeatil data={data} />
     </Wrapper>
   );
 }
@@ -24,6 +37,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       data,
+      params,
     },
   };
 }

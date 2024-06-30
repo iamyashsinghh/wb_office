@@ -2,15 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import BlogSmallCard from "./BlogSmallCard";
 
-function LatestPost() {
+function LatestPost({latest}) {
   return (
     <>
       <Heading>Some Latest Post</Heading>
       <LatestBlogContainer>
-        <BlogSmallCard />
-        <BlogSmallCard />
-        <BlogSmallCard />
-        <BlogSmallCard />
+      {latest.map((data, index) => (
+        <BlogSmallCard key={index} {...data} />
+      ))}
       </LatestBlogContainer>
     </>
   );
@@ -23,7 +22,6 @@ const Heading = styled.h3`
   font-weight: 600;
   font-size: 2.5rem;
   color: var(--primary-color);
-
   @media (max-width: 768px) {
     font-size: 2rem;
   }

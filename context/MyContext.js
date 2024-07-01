@@ -1,9 +1,8 @@
-import React, { createContext, useContext, useState } from "react";
-import { useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-import { useRef } from "react";
 import getLocalities from "@/lib/request/getlocalities/getLocalities";
 import { userAgentFromString } from "next/server";
+
 const MyContext = createContext();
 
 export const MyContextProvider = ({ children }) => {
@@ -30,7 +29,7 @@ export const MyContextProvider = ({ children }) => {
   const [userIP, setUserIP] = useState('');
   const [userAgent, setUserAgent] = useState('');
   const [searchSuggestions, setSearchSuggestions] = useState("");
-  
+
   const getUserIP = async () => {
     try {
       const response = await fetch("https://api.ipify.org?format=json");
@@ -51,7 +50,6 @@ export const MyContextProvider = ({ children }) => {
     fetchIP();
   }, []);
 
-
   useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;
@@ -68,21 +66,11 @@ export const MyContextProvider = ({ children }) => {
         let context_data = await fetch(url);
         context_data = await context_data.json();
 
-        const searchurl2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
-        let vendorList = await fetch(searchurl2);
-        vendorList = await vendorList.json();
-
-        const searchurl3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
-
-        let venueList = await fetch(searchurl3);
-        venueList = await venueList.json();
-
-        setVendor_list(vendorList);
-        setVenue_list(venueList);
         setCities(context_data.data.cities);
         setVendorsCategories(context_data.data.vendor_categories);
         setVenuesCategories(context_data.data.venue_categories);
       } catch (error) {
+        console.error("Error fetching context data:", error);
       }
     }
     getLists();
@@ -97,7 +85,7 @@ export const MyContextProvider = ({ children }) => {
     }
     fetchLocalities();
   }, [selectedCity]);
-  
+
   useEffect(() => {
     try {
       let user = localStorage.getItem("@UserApp");
@@ -117,11 +105,33 @@ export const MyContextProvider = ({ children }) => {
       localStorage.setItem('utm_source_expiry', expiryTimestamp);
     }
     const expiryTimestamp = localStorage.getItem('utm_source_expiry');
-  if (expiryTimestamp && parseInt(expiryTimestamp) > Date.now()) {
-    localStorage.setItem('utm_source_active', '1');
-  } else {
-    localStorage.setItem('utm_source_active', '0');
-  }
+    if (expiryTimestamp && parseInt(expiryTimestamp) > Date.now()) {
+      localStorage.setItem('utm_source_active', '1');
+    } else {
+      localStorage.setItem('utm_source_active', '0');
+    }
+  }, []);
+
+  useEffect(() => {
+    const fetchDataAfterLoad = async () => {
+      try {
+        const searchurl2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
+        let vendorList = await fetch(searchurl2);
+        vendorList = await vendorList.json();
+        setVendor_list(vendorList);
+
+        const searchurl3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
+        let venueList = await fetch(searchurl3);
+        venueList = await venueList.json();
+        setVenue_list(venueList);
+      } catch (error) {
+        console.error("Error fetching vendor or venue lists:", error);
+      }
+    };
+
+    if (typeof window !== 'undefined') {
+      fetchDataAfterLoad();
+    }
   }, []);
 
   return (
@@ -164,6 +174,7 @@ export const MyContextProvider = ({ children }) => {
     </MyContext.Provider>
   );
 };
+
 export default MyContext;
 export function useGlobalContext() {
   return useContext(MyContext);

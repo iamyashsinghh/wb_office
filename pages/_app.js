@@ -67,7 +67,7 @@ export default function App({ Component, pageProps }) {
           id="my-script"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-M8J8X27');,`
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-M8J8X27');`
           }}
         />
         {/* End Google Tag Manager */}
@@ -88,15 +88,6 @@ export default function App({ Component, pageProps }) {
         `}
         </Script>
 
-        {/* <Script id="my-script2" async src="https://www.googletagmanager.com/gtag/js?id=AW-11325854315">
-        </Script>
-        <Script>
-          {`window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'AW-11325854315')`}
-        </Script> */}
-        {/* End Google tag (gtag.js) */}
         <a
           href="https://api.whatsapp.com/send?phone=918882198989&text=Hi"
           className="whatsapp-button"

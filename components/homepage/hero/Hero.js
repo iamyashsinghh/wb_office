@@ -61,7 +61,7 @@ function Hero({ venueCategogies}) {
           fill={true}
           priority={true} 
           quality={60}
-          sizes="(100vw)"
+          // sizes="(100vw)"
         />
         <div className="overlay"></div>
         <div className="hero-title-container">

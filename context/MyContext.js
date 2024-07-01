@@ -40,6 +40,7 @@ export const MyContextProvider = ({ children }) => {
       return null;
     }
   };
+
   useEffect(() => {
     async function fetchIP() {
       const getuserip = await getUserIP();
@@ -49,6 +50,7 @@ export const MyContextProvider = ({ children }) => {
     setUserAgent(requestt);
     fetchIP();
   }, []);
+
 
   useEffect(() => {
     if (firstRender.current) {
@@ -71,8 +73,10 @@ export const MyContextProvider = ({ children }) => {
         vendorList = await vendorList.json();
 
         const searchurl3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
+
         let venueList = await fetch(searchurl3);
         venueList = await venueList.json();
+
         setVendor_list(vendorList);
         setVenue_list(venueList);
         setCities(context_data.data.cities);
@@ -93,6 +97,7 @@ export const MyContextProvider = ({ children }) => {
     }
     fetchLocalities();
   }, [selectedCity]);
+  
   useEffect(() => {
     try {
       let user = localStorage.getItem("@UserApp");

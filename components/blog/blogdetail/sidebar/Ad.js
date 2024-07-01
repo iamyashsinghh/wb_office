@@ -1,15 +1,36 @@
+import { useGlobalContext } from '@/context/MyContext';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React from 'react'
 import { IoIosCall } from 'react-icons/io';
 import styled from 'styled-components';
 
 function Ad() {
+    const router = useRouter();
+    const { setLeadFormData, setIsLeadsModelOpen } = useGlobalContext();
+
+    const openLeadsModel = (e, type = 'click') => {
+        if (e) e.stopPropagation();
+
+        const pathSegments = router.asPath.split('/').filter((segment) => segment.length > 0);
+        let venue_slug = pathSegments.length === 2 ? pathSegments[1] : router.asPath;
+
+        const leadData = {
+            url: router.asPath,
+            venue_slug: venue_slug,
+            type: type,
+            request_handle_by: 'form',
+        };
+
+        setLeadFormData(leadData);
+        setIsLeadsModelOpen(true);
+    };
   return (
     <Wrapper>
        <div className="action-btns">
-            <button className="venue-card-btn" >Get Quotation</button>
+            <button className="venue-card-btn" onClick={(e) => openLeadsModel(e)}>Get Quotation</button>
             <span className="call-btn">
-                <a href={`tel:919565676128`} aria-label="call icon">
+                <a href={`tel:07969071909`} aria-label="call icon">
                     <IoIosCall className="call-icon" size={30} />
                 </a>
             </span>

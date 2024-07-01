@@ -67,7 +67,7 @@ function Hero({ venueCategogies, cities }) {
           alt="Wedding Banquets, Banquet halls, Wedding Venues"
           fill={true}
           priority={true} 
-          quality={100}
+          quality={60}
           sizes="(100vw)"
         />
         <div className="overlay"></div>

@@ -18,7 +18,7 @@ function Hero({ venueCategogies, cities }) {
   let allVenuesSlug = venue_list.map((category) => category.slug);
   let allVendorsSlug = vendor_list.map((category) => category.slug);
   
-  const [backgroundImage, setBackgroundImage] = useState("/banner/delhi.webp");
+  const [backgroundImage, setBackgroundImage] = useState("/banner/delhi.avif");
 
   const suggestions = [
     ...venueNames,
@@ -38,9 +38,9 @@ function Hero({ venueCategogies, cities }) {
     obj[vendorBrandNames[i]] = allVendorsSlug[i];
     vendorObject.push(obj);
   }
-  
+
   useEffect(() => {
-    const cityImagePath = `/banner/${selectedCity.toLowerCase()}.webp`;
+    const cityImagePath = `/banner/${selectedCity.toLowerCase()}.avif`;
 
     async function checkImageExists(url) {
       try {
@@ -54,16 +54,13 @@ function Hero({ venueCategogies, cities }) {
     checkImageExists(cityImagePath).then((imageExists) => {
       const backgroundImage = imageExists
         ? cityImagePath
-        : "/banner/delhi.webp";
+        : "/banner/delhi.avif";
       setBackgroundImage(backgroundImage);
     });
   }, [selectedCity, setBackgroundImage]);
 
   return (
     <Section className="section-hero">
-      <Head>
-      <link rel="preload" href={backgroundImage} as="image" />
-      </Head>
       <div className="hero-container">
         <Image
           src={backgroundImage}

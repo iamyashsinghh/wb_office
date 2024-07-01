@@ -4,12 +4,10 @@ import Offer from "@/components/miscellaneous/Offer";
 import SearchBar3 from "@/components/miscellaneous/SearchBar3";
 import { useGlobalContext } from "@/context/MyContext";
 import { useEffect, useState } from "react";
-import Head from "next/head";
 
-function Hero({ venueCategogies, cities }) {
+function Hero({ venueCategogies}) {
   let venueObject = [];
   let vendorObject = [];
-
   const { venue_list, vendor_list, vendorCategories, selectedCity } = useGlobalContext();
   let venueNames = venueCategogies.map((category) => category.name);
   let vendorNames = vendorCategories.map((category) => category.name);
@@ -17,30 +15,25 @@ function Hero({ venueCategogies, cities }) {
   let allVenues = venue_list.map((category) => category.name);
   let allVenuesSlug = venue_list.map((category) => category.slug);
   let allVendorsSlug = vendor_list.map((category) => category.slug);
-  
-  const [backgroundImage, setBackgroundImage] = useState("/banner/delhi.avif");
-
+  const [backgroundImage, setBackgroundImage] = useState("/banner/delhi.webp");
   const suggestions = [
     ...venueNames,
     ...vendorNames,
     ...vendorBrandNames,
     ...allVenues,
   ];
-
   for (let i = 0; i < allVenues.length; i++) {
     let obj = {};
     obj[allVenues[i]] = allVenuesSlug[i];
     venueObject.push(obj);
   }
-
   for (let i = 0; i < vendorBrandNames.length; i++) {
     let obj = {};
     obj[vendorBrandNames[i]] = allVendorsSlug[i];
     vendorObject.push(obj);
   }
-
   useEffect(() => {
-    const cityImagePath = `/banner/${selectedCity.toLowerCase()}.avif`;
+    const cityImagePath = `/banner/${selectedCity.toLowerCase()}.webp`;
 
     async function checkImageExists(url) {
       try {
@@ -54,7 +47,7 @@ function Hero({ venueCategogies, cities }) {
     checkImageExists(cityImagePath).then((imageExists) => {
       const backgroundImage = imageExists
         ? cityImagePath
-        : "/banner/delhi.avif";
+        : "/banner/delhi.webp";
       setBackgroundImage(backgroundImage);
     });
   }, [selectedCity, setBackgroundImage]);
@@ -72,6 +65,7 @@ function Hero({ venueCategogies, cities }) {
         />
         <div className="overlay"></div>
         <div className="hero-title-container">
+          {/* <h1 className="title">10,000 + Venues & Vendors Get Everything You Need Here!</h1> */}
           <h1 className="title">Weddings are for Life
           <br /> Make it Larger than Life!</h1>
           <p className="description">
@@ -79,6 +73,12 @@ function Hero({ venueCategogies, cities }) {
             more.
           </p>
         </div>
+
+        {/* <SearchBar
+          venueCategogies={venueCategogies}
+          vendorCategories={vendorCategories}
+          cities={cities}
+        /> */}
         <SearchBar3
           suggestions={suggestions}
           selectedCity={selectedCity}
@@ -98,6 +98,7 @@ export default Hero;
 
 const Section = styled.section`
   width: 100%;
+  /* border: 5px solid black; */
   height: auto;
 
   .hero-container {
@@ -111,6 +112,7 @@ const Section = styled.section`
       width: 100%;
       height: 100%;
       background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+      // z-index: ;
     }
 
     .hero-title-container {
@@ -119,9 +121,11 @@ const Section = styled.section`
       right: 50%;
       transform: translate(50%, -50%);
       min-width: 70rem;
+      /* padding: 0rem 1rem; */
 
       h1 {
         text-align: center;
+        /* font-style: italic; */
         color: white;
         font-size: 4rem;
         font-family: "Montserrat";
@@ -129,6 +133,7 @@ const Section = styled.section`
       p {
         text-align: center;
         color: white;
+        /* color: var(--secoundary-color); */
         font-size: 2rem;
         font-weight: 500;
         margin-top: 1rem;

@@ -11,7 +11,7 @@ import SearchBarVenue from "@/components/miscellaneous/SearchBarVenue";
 import Head from "next/head";
 
 function VenueContainer({ city, lists, locality, category, count, localities, venueCategories, vendorCategories, data, filterQuery }) {
-    const { setShowFilter, selectedCity, cities, venue_list, vendor_list } = useGlobalContext();
+    const { setShowFilter, selectedCity, venue_list, vendor_list } = useGlobalContext();
     const { openLeadModel } = useLeadModel();
     const { callConversion } = useCallConversion();
     const [loading, setLoading] = useState(false);
@@ -20,7 +20,6 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
     const observer = useRef();
 
     const venueNames = venueCategories.map(category => category.name);
-    const cityNames = cities.map(city => city.name);
     const vendorNames = vendorCategories.map(category => category.name);
     const vendorBrandNames = vendor_list.map(category => category.brand_name);
     const allVenues = venue_list.map(category => category.name);
@@ -62,6 +61,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
             setLoading(true);
             if (venuelists.length >= count) {
                 setHasMore(false);
+                setLoading(false);
                 return;
             }
             page.current += 1;
@@ -69,10 +69,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
             let newLists = await fetch(url);
             newLists = await newLists.json();
             newLists = newLists.data;
-            const filteredLists = newLists.filter(newItem => {
-                return !venuelists.some(existingItem => existingItem.id === newItem.id);
-            });
-            setVenueList(prev => [...prev, ...filteredLists]);
+            setVenueList(prev => [...prev, ...newLists]);
         } catch (error) {
             // console.log(error);
         } finally {

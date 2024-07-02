@@ -10,7 +10,7 @@ import useCallConversion from "@/lib/hook/useCallConversion";
 import SearchBarVenue from "@/components/miscellaneous/SearchBarVenue";
 import Head from "next/head";
 
-function VenueContainer({ city, lists, locality, category, count, localities, venueCategories, vendorCategories, data, filterQuery }) {
+function VenueContainer({ city, lists, locality, category, count, localities, venueCategories, vendorCategories, filterQuery }) {
     const { setShowFilter, selectedCity, venue_list, vendor_list } = useGlobalContext();
     const { openLeadModel } = useLeadModel();
     const { callConversion } = useCallConversion();
@@ -46,7 +46,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
         vendorObject.push(obj);
     }
 
-    let page = useRef(1);
+    let page = 1;
 
     useEffect(() => {
         setVenueList(lists);
@@ -64,8 +64,8 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                 setLoading(false);
                 return;
             }
-            page.current += 1;
-            const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}/${page.current}?guest=${filterQuery.guest}&per_budget=${filterQuery.per_budget}&per_plate=${filterQuery.per_plate}&multi_localities=${filterQuery.multi_localities}`;
+            page += 1;
+            const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}/${page}?guest=${filterQuery.guest}&per_budget=${filterQuery.per_budget}&per_plate=${filterQuery.per_plate}&multi_localities=${filterQuery.multi_localities}`;
             let newLists = await fetch(url);
             newLists = await newLists.json();
             newLists = newLists.data;
@@ -378,25 +378,4 @@ background-color: var(--bg-color);
     }
     
 }
-
-/* @media (max-width:1050px) {
-    
- .venue-filter{
-    display: none;
- }   
- .venues-list{
-    grid-column: 1/-1;
-    border: 1px solid green;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background-color: white;
-    /* display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 3rem; */
-    
-/* } */
-    
-/* } */
-
-`
+`;

@@ -112,6 +112,7 @@ export async function getServerSideProps({ query, req, res }) {
       per_budget: per_budget || "",
       multi_localities: multi_localities || "",
       serch_value: serch_value || "",
+      locality: locality || "",
     };
 
     const url = `${process.env.SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}?guest=${filterQuery.guest}&per_plate=${filterQuery.per_plate}&per_budget=${filterQuery.per_budget}&multi_localities=${filterQuery.multi_localities}&serch_value=${filterQuery.serch_value}`;

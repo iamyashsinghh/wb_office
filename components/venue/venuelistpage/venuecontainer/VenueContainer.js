@@ -65,7 +65,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                 return;
             }
             page += 1;
-            const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}/${page}?guest=${filterQuery.guest}&per_budget=${filterQuery.per_budget}&per_plate=${filterQuery.per_plate}&multi_localities=${filterQuery.multi_localities}`;
+            const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${filterQuery.locality}/${page}?guest=${filterQuery.guest}&per_budget=${filterQuery.per_budget}&per_plate=${filterQuery.per_plate}&multi_localities=${filterQuery.multi_localities}`;
             let newLists = await fetch(url);
             newLists = await newLists.json();
             newLists = newLists.data;

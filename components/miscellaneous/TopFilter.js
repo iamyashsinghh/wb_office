@@ -58,16 +58,12 @@ export default function TopFilter({ locality, city, category, venueCategories, f
     }
 
     function handleCityChange(e) {
-
         //when city city, setting the locality to "all"
         setFilterLocality("all")
-
-
         router.push(`/banquet-halls/${e.target.value}/all`)
     }
 
     return (
-
         <Div>
             <Wrapper className='container'>
                 <div className="city-wrapper filter-item ">
@@ -142,12 +138,10 @@ export default function TopFilter({ locality, city, category, venueCategories, f
                         <AiFillCaretDown className="down-arrow" size={15} />
 
                     </div>
-
                 </div>
                 <div className="budget-wrapper filter-item">
                     <div className="dropdown guest-dropdown">
                         <BiRupee className='icon' />
-
                         <select name='budget' onChange={(e) => setFilterBudget(e.target.value)}>
                             <option value={""}>Budget</option>
                             <option value="0,100000">Less than 1 Lakh</option>
@@ -159,11 +153,8 @@ export default function TopFilter({ locality, city, category, venueCategories, f
                             <option value="600000,700000">6-7 Lakh</option>
                             <option value="600000,700000">More than 7 lakh</option>
                         </select>
-
                         <AiFillCaretDown className="down-arrow" size={15} />
-
                     </div>
-
                 </div>
                 <div className="btn-wrapper  filter-item">
                     <button className='search-btn' onClick={handleApplyFilter}>Search</button>

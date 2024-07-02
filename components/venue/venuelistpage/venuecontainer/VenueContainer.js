@@ -52,9 +52,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
         setVenueList(lists);
     }, [lists]);
 
-    useEffect(() => {
-        setHasMore(venuelists.length < count);
-    }, [venuelists]);
+    useEffect(() => { setHasMore(venuelists.length < count) }, [venuelists]);
 
     const fetchMoreVenue = async () => {
         try {
@@ -70,6 +68,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
             newLists = await newLists.json();
             newLists = newLists.data;
             setVenueList(prev => [...prev, ...newLists]);
+
         } catch (error) {
             // console.log(error);
         } finally {

@@ -10,7 +10,6 @@ export default function VenueListPage({ data }) {
 
   const { venueCategories, vendorCategories } = useGlobalContext();
 
-
   return (
     <>
       <SideFilter
@@ -39,7 +38,6 @@ export default function VenueListPage({ data }) {
         localities={localities}
         venueCategories={venueCategories}
         vendorCategories={vendorCategories}
-        data={data}
         filterQuery={filterQuery}
       />
       <Footerdescription caption={result.meta?.caption} />

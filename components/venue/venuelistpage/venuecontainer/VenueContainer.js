@@ -17,8 +17,8 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
     const [loading, setLoading] = useState(false);
     const [venuelists, setVenueList] = useState(lists || []);
     const [hasMore, setHasMore] = useState(true);
+    const [page, setPage] = useState(1);
     const observer = useRef();
-    let page = 1;
 
     const venueNames = venueCategories.map(category => category.name);
     const vendorNames = vendorCategories.map(category => category.name);
@@ -34,39 +34,28 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
         ...allVenues,
     ];
 
-    let venueObject = [];
-    let vendorObject = [];
-    for (let i = 0; i < allVenues.length; i++) {
-        let obj = {};
-        obj[allVenues[i]] = allVenuesSlug[i];
-        venueObject.push(obj);
-    }
-    for (let i = 0; i < vendorBrandNames.length; i++) {
-        let obj = {};
-        obj[vendorBrandNames[i]] = allVendorsSlug[i];
-        vendorObject.push(obj);
-    }
+    const venueObject = allVenues.map((name, i) => ({ [name]: allVenuesSlug[i] }));
+    const vendorObject = vendorBrandNames.map((name, i) => ({ [name]: allVendorsSlug[i] }));
 
     useEffect(() => {
         setVenueList(lists);
     }, [lists]);
 
-    useEffect(() => { 
+    useEffect(() => {
         setHasMore(venuelists.length < count);
-    }, [venuelists]);
+    }, [venuelists, count]);
 
     useEffect(() => {
-        // Fetch new data when filterQuery changes
         const fetchFilteredVenue = async () => {
+            setLoading(true);
             try {
-                setLoading(true);
-                const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${filterQuery.locality}/${page}?guest=${filterQuery.guest}&per_budget=${filterQuery.per_budget}&per_plate=${filterQuery.per_plate}&multi_localities=${filterQuery.multi_localities}`;
-                let newLists = await fetch(url);
-                newLists = await newLists.json();
-                newLists = newLists.data;
-                setVenueList(newLists);
+                const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${filterQuery.locality}/1?guest=${filterQuery.guest}&per_budget=${filterQuery.per_budget}&per_plate=${filterQuery.per_plate}&multi_localities=${filterQuery.multi_localities}`;
+                const response = await fetch(url);
+                const newLists = await response.json();
+                setVenueList(newLists.data);
+                setPage(1); // Reset page to 1 after new filter applied
             } catch (error) {
-                // Handle the error
+                console.error(error);
             } finally {
                 setLoading(false);
             }
@@ -75,26 +64,22 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
         fetchFilteredVenue();
     }, [filterQuery, category, city]);
 
-    const fetchMoreVenue = async () => {
+    const fetchMoreVenue = useCallback(async () => {
+        if (loading || !hasMore) return;
+        setLoading(true);
         try {
-            setLoading(true);
-            if (venuelists.length >= count) {
-                setHasMore(false);
-                setLoading(false);
-                return;
-            }
-            page += 1;
-            const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${filterQuery.locality}/${page}?guest=${filterQuery.guest}&per_budget=${filterQuery.per_budget}&per_plate=${filterQuery.per_plate}&multi_localities=${filterQuery.multi_localities}`;
-            let newLists = await fetch(url);
-            newLists = await newLists.json();
-            newLists = newLists.data;
-            setVenueList(prev => [...prev, ...newLists]);
+            const nextPage = page + 1;
+            const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${filterQuery.locality}/${nextPage}?guest=${filterQuery.guest}&per_budget=${filterQuery.per_budget}&per_plate=${filterQuery.per_plate}&multi_localities=${filterQuery.multi_localities}`;
+            const response = await fetch(url);
+            const newLists = await response.json();
+            setVenueList(prev => [...prev, ...newLists.data]);
+            setPage(nextPage);
         } catch (error) {
-            // Handle the error
+            console.error(error);
         } finally {
             setLoading(false);
         }
-    };
+    }, [loading, hasMore, page, filterQuery, category, city]);
 
     const lastVenueElementRef = useCallback(node => {
         if (loading) return;
@@ -105,9 +90,9 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
             }
         });
         if (node) observer.current.observe(node);
-    }, [loading, hasMore]);
+    }, [loading, hasMore, fetchMoreVenue]);
 
-    let listingPageListSchema = {
+    const listingPageListSchema = {
         "@context": "https://schema.org",
         "@type": "ItemList",
         "itemListElement": venuelists.map((item, index) => ({
@@ -170,7 +155,17 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                                 vendorObject={vendorObject}
                             />
                         </div>
-                        { venuelists?.map((item, index) => ( <VenueCard2 key={index} locality={locality} category={category} venue={item} city={city} openLeadModel={openLeadModel} callConversion={callConversion} /> )) }
+                        { venuelists?.map((item, index) => (
+                            <VenueCard2
+                                key={index}
+                                locality={locality}
+                                category={category}
+                                venue={item}
+                                city={city}
+                                openLeadModel={openLeadModel}
+                                callConversion={callConversion}
+                            />
+                        )) }
                         { loading && <div style={{ textAlign: "center" }}> <Spinner2 /> </div> }
                         <div ref={lastVenueElementRef}></div>
                         { !hasMore && <center style={{ fontSize: "1.5rem" }}>You have seen it all</center> }

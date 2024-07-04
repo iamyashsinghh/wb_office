@@ -11,7 +11,7 @@ export default function AreaCapacity({ venue, openAvailableCheck }) {
   return (
     <Wrapper>
       <div className="row">
-      <h1 className="openavilable" style={{padding: '0 0 1rem 0'}}>We have have live availability for this venue now !</h1>
+      <h3 className="openavilable" style={{padding: '0 0 1rem 0'}}>We have live availability for this venue now !</h3>
       <button className="openavilableCheckbtn"
         onClick={() => {
           openAvailableCheck();

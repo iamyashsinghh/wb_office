@@ -6,6 +6,7 @@
   width: 5px !important;
   border-radius: 20px;
 }
+
 body{
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -30,5 +31,5 @@ body{
 /* on hover */
 ::-webkit-scrollbar-thumb:hover {
   transition: 5s all ease-in-out;
-  background: #ecbc56;
+  background: #ecbc56;  
 }

@@ -8,7 +8,6 @@ export default function DiscountCard({openLeadsModel}) {
 
     const today = new Date().toISOString().split('T')[0];
 
-
     return (<Wrapper>
         <div className="card-header">
             <Image
@@ -211,18 +210,13 @@ select {
     border: 0px;
     font-size: 1.8rem;
     color: white;
-
     &:hover{
-
     }
-
 }
-
 }
 
 
 @media (max-width:600px) {
-
     .card-body{
         grid-template-columns:repeat(6,1fr);
     }
@@ -234,11 +228,8 @@ select {
     }
     .btn-wrapper{
         grid-column: 1/-1;
-
-    }
-
-
-    
+        margin-top: 5px;
+    }    
 }
     
 `

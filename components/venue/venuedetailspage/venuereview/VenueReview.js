@@ -11,7 +11,6 @@ function VenueReview({ venue, reviews }) {
   const [isOffCanvasOpen, setIsOffCanvasOpen] = useState(false);
   const [isOffCanvasReviewOpen, setIsOffCanvasReviewOpen] = useState(false);
   const venueData = venue;
-  console.log(reviews)
   const toggleFullText = (index) => {
     setShowFullText((prevState) => {
       const newState = [...prevState];

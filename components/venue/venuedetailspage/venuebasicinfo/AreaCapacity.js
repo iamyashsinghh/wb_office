@@ -6,22 +6,19 @@ import { useGlobalContext } from "@/context/MyContext";
 export default function AreaCapacity({ venue, openAvailableCheck }) {
   const { isAvailableCheckShow, isAvailableCheckID } = useGlobalContext();
   const areaCapacityArray = JSON.parse(venue.area_capacity);
- 
 
   return (
     <Wrapper>
       <div className="row">
-      <h3 className="openavilable" style={{padding: '0 0 1rem 0'}}>We have live availability for this venue now !</h3>
-      <button className="openavilableCheckbtn"
-        onClick={() => {
-          openAvailableCheck();
-        }}
-      >
-        Check Availability
-      </button>
+        <h3 className="openavilable" style={{ padding: "0 0 1rem 0" }}>
+          We have live availability for this venue now !
+        </h3>
       </div>
       <div className="maincard">
-        <table className="responsive-table" style={{boxShadow: '4px 4px 10px rgba(0,0,0,0.08)'}}>
+        <table
+          className="responsive-table"
+          style={{ boxShadow: "4px 4px 10px rgba(0,0,0,0.08)" }}
+        >
           <thead className="responsive-table__head">
             <tr className="responsive-table__row">
               <th className="responsive-table__head__title responsive-table__head__title--name">
@@ -29,6 +26,9 @@ export default function AreaCapacity({ venue, openAvailableCheck }) {
               </th>
               <th className="responsive-table__head__title responsive-table__head__title--capacity">
                 Capacity
+              </th>
+              <th className="responsive-table__head__title responsive-table__head__title--floating">
+                Floating
               </th>
               <th className="responsive-table__head__title responsive-table__head__title--types">
                 Type
@@ -57,6 +57,12 @@ export default function AreaCapacity({ venue, openAvailableCheck }) {
                   data-title="Capacity"
                 >
                   {area.seating !== null ? area.seating : "Not specified"}
+                </td>
+                <td
+                  className="responsive-table__body__text responsive-table__body__text--floating"
+                  data-title="Floating"
+                >
+                  {area.floating !== null ? area.floating : "Not specified"}
                 </td>
                 <td
                   className="responsive-table__body__text responsive-table__body__text--types"
@@ -90,29 +96,43 @@ export default function AreaCapacity({ venue, openAvailableCheck }) {
             ))}
           </tbody>
         </table>
+        <Row>
+          <button
+            className="openavilableCheckbtn"
+            onClick={() => {
+              openAvailableCheck();
+            }}
+          >
+            Check Availability
+          </button>
+        </Row>
       </div>
     </Wrapper>
   );
 }
 
-const Wrapper = styled.div`
+const Row = styled.div`
+  display: flex;
+  justify-content: end;
+`;
 
+const Wrapper = styled.div`
   * {
     font-size: 16px;
     font-family: "Poppins";
   }
-  
-  .openavilable{
+
+  .openavilable {
     font-family: "Montserrat";
     font-size: 2.5rem !important;
     font-weight: 700;
     color: var(--primary-color);
     cursor: pointer;
   }
-  .openavilableCheckbtn{
-    width: 100%;
+  .openavilableCheckbtn {
+      width: 300px;
     height: 100%;
-    height: 4.5rem;
+    // height: 4.5rem;
     cursor: pointer;
     background-color: var(--secoundary-color);
     border: none;
@@ -120,13 +140,22 @@ const Wrapper = styled.div`
     border: 0px;
     font-size: 1.8rem;
     color: white;
-  }
+    padding 8px 0; 
+    border-radius: 5px;
+      @media (max-width: 768px) {
+      width: 100%;
+    font-size: 2.2rem;
+    font-weight:500;
+    padding 10px 0; 
+
+}
+
+  }   
   .table-icon-check {
     display: flex;
     justify-content: space-around;
   }
   .responsive-table {
-
     background-color: #fff;
     border-collapse: collapse;
     border-radius: 10px;
@@ -141,13 +170,13 @@ const Wrapper = styled.div`
     padding: 0 1.5rem;
   }
   @media (min-width: 768px) {
-    .row{
+    .row {
       display: grid;
       grid-template-columns: 7fr 5fr;
       align-items: center;
     }
     .responsive-table__row {
-      grid-template-columns: 2fr 2fr 2fr 1fr;
+      grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
     }
   }
   @media (min-width: 768px) and (max-width: 991px) {
@@ -167,12 +196,14 @@ const Wrapper = styled.div`
       display: none;
     }
   }
+
   .responsive-table__head__title {
     display: flex;
     align-items: center;
     font-weight: 500;
     text-transform: capitalize;
   }
+
   .responsive-table__body .responsive-table__row {
     padding: 2.5rem 1rem;
     transition: 0.1s linear;

@@ -1,19 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { FaUser } from "react-icons/fa";
 import { BsCalendarDateFill } from "react-icons/bs";
 import Router from 'next/router';
-import { keyframes } from 'styled-components';
-
+import Image from 'next/image';
 
 function BlogCard({ image, heading, excerpt, publish_date, slug, image_alt, author_name }) {
   const handleCardClick = () => {
-    Router.push(`yash/${slug}`); 
+    Router.push(`/yash/${slug}`); // Corrected the route path
   };
   
   return (
     <Card onClick={handleCardClick}>
-      <Image src={`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/${image}`} alt={image_alt} />
+      <ImgWrapper>
+        <Img src={`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}${image}`} 
+        alt={image_alt} 
+        fill={true}
+        quality={50}
+        sizes="(max-width: 600px) 100vw, 600px" 
+         />
+      </ImgWrapper>
       <Content>
         <Title>{heading}</Title>
         <Description>{excerpt}...<span className='read-more-btn'>Read More</span></Description>
@@ -39,7 +45,6 @@ const fadeIn = keyframes`
   }
 `;
 
-
 const Card = styled.div`
   box-sizing: border-box;
   border: 1px solid #ddd;
@@ -56,28 +61,30 @@ const Card = styled.div`
   }
 `;
 
-
-const Image = styled.img`
+const ImgWrapper = styled.div`
+  position: relative;
   width: 100%;
-  height: 230px;  // Ensure this height works well with your design
-  object-fit: cover;  // Keeps the aspect ratio and covers the area
+  height: 230px; /* Adjust height as per your design */
+`;
+
+const Img = styled(Image)`
+  border-radius: 8px 8px 0 0; /* Ensure rounded corners at the top */
   transition: transform 0.3s ease;
   &:hover {
     transform: scale(1.1);
   }
 `;
 
-
 const Content = styled.div`
   padding: 15px;
 `;
 
 const Title = styled.h3`
-   font-size: 1.8rem;
+  font-size: 1.8rem;
   margin-bottom: 10px;
   transition: color 0.3s ease;
   color: var(--primary-color);
-]`;
+`;
 
 const Description = styled.p`
   font-size: 1.2rem;

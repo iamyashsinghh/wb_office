@@ -123,6 +123,15 @@ export async function getServerSideProps({ query, req, res }) {
         },
       };
     }
+    // console.log(response.is_redirect)
+    if(response.is_redirect == 1){
+      return {
+        redirect: {
+          permanent: true,
+          destination: `/${response.redirect_url}`,
+        },
+      };
+    }
 
     return { props: { response } };
   } catch (error) {

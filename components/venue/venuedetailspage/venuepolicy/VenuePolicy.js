@@ -20,7 +20,7 @@ export default function VenuePolicy({venue}) {
 
                 <PolicyCard  img_url={"/vpolicy/advance.png"} name={"Advance"} data={venue?.advance || "30% at the time of booking"}/>
 
-                <PolicyCard  img_url={"/vpolicy/alcohol.png"} name={"Alcohal"} data={venue?.alcohol}/>
+                <PolicyCard  img_url={"/vpolicy/alcohol.png"} name={"Alcohol"} data={venue?.alcohol}/>
 
                 <PolicyCard  img_url={"/vpolicy/food.png"} name={"Food"} data={venue?.food}/>
 

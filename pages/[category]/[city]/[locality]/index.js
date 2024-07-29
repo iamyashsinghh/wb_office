@@ -104,18 +104,32 @@ function Venue(props) {
 export async function getServerSideProps({ query, req, res }) {
   try {
     const { category, city, locality } = query;
-    const { guest, per_plate, per_budget, multi_localities, serch_value } = query;
+    const { guest, per_plate, per_budget, multi_localities, search_value, makeup_bridal_budget, makeup_engagement_budget, photographer_service, photographer_service_budget, mehndi_package_budget, banquet_decor_package_budget, home_decor_package_budget, band_baja_ghodiwala_budget, photographer_occation, makeup_service, experience, events_completed, days} = query;
 
     const filterQuery = {
       guest: guest || "",
       per_plate: per_plate || "",
       per_budget: per_budget || "",
       multi_localities: multi_localities || "",
-      serch_value: serch_value || "",
+      search_value: search_value || "",
       locality: locality || "",
+      makeup_service: makeup_service || "",
+      makeup_bridal_budget: makeup_bridal_budget || "",
+      makeup_engagement_budget: makeup_engagement_budget || "",
+      photographer_service: photographer_service || "",
+      photographer_service_budget: photographer_service_budget || "",
+      mehndi_package_budget: mehndi_package_budget || "",
+      banquet_decor_package_budget: banquet_decor_package_budget || "",
+      home_decor_package_budget: home_decor_package_budget || "",
+      band_baja_ghodiwala_budget: band_baja_ghodiwala_budget || "",
+      photographer_occation: photographer_occation || "",
+      experience: experience || "",
+      events_completed: events_completed || "",
+      days: days || ""
     };
+    
 
-    const url = `${process.env.SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}?guest=${filterQuery.guest}&per_plate=${filterQuery.per_plate}&per_budget=${filterQuery.per_budget}&multi_localities=${filterQuery.multi_localities}&serch_value=${filterQuery.serch_value}`;
+    const url = `${process.env.SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}?guest=${filterQuery.guest}&per_plate=${filterQuery.per_plate}&per_budget=${filterQuery.per_budget}&multi_localities=${filterQuery.multi_localities}&search_value=${filterQuery.search_value}&locality=${filterQuery.locality}&makeup_service=${filterQuery.makeup_service}&makeup_bridal_budget=${filterQuery.makeup_bridal_budget}&makeup_engagement_budget=${filterQuery.makeup_engagement_budget}&photographer_service=${filterQuery.photographer_service}&photographer_service_budget=${filterQuery.photographer_service_budget}&mehndi_package_budget=${filterQuery.mehndi_package_budget}&banquet_decor_package_budget=${filterQuery.banquet_decor_package_budget}&home_decor_package_budget=${filterQuery.home_decor_package_budget}&band_baja_ghodiwala_budget=${filterQuery.band_baja_ghodiwala_budget}&photographer_occation=${filterQuery.photographer_occation}&experience=${filterQuery.experience}&events_completed=${filterQuery.events_completed}&days=${filterQuery.days}`;
     const getlocalitiesURL = `${process.env.SERVER_DOMAIN}/api/locations/${city}`;
 
     const fetchData = async (url) => {

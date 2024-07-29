@@ -24,7 +24,7 @@ export default function CylenderFilter({ name, items, value, setValue, handleApp
 
             <div className="header-title">
 
-                <h2>{name}</h2>
+                <h4>{name}</h4>
                 <span className="clear-btn" onClick={handleClear}>Clear</span>
             </div>
 
@@ -57,8 +57,9 @@ gap: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    h2{
-        font-size: 2rem !important  ;
+    h4{
+        font-size: 2rem !important;
+        font-weight: 500;
     }
     /* padding: 1rem; */
 }

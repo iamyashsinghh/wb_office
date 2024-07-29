@@ -94,7 +94,7 @@ function Filter({ filterQuery, localities, venueCategories, city, category, loca
 
     function handleApplyFilter() {
         const localitiesFilterArray = selectedLocalities.join(",")
-        router.push(`/${selectedCategories[0] || "banquet-halls"}/${city}/${localities.length >= 1 ? "all" : locality}?guest=${guest || ""}&per_budget=${perBudget.join(",")}&per_plate=${perPlate.toString()}&multi_localities=${localitiesFilterArray}&food_type=${selectedFoodPreferance[0]}&serch_value=${searchValue.toString()}`)
+        router.push(`/${selectedCategories[0] || "banquet-halls"}/${city}/${localities.length >= 1 ? "all" : locality}?guest=${guest || ""}&per_budget=${perBudget.join(",")}&per_plate=${perPlate.toString()}&multi_localities=${localitiesFilterArray}&food_type=${selectedFoodPreferance[0]}}`)
 
     }
 

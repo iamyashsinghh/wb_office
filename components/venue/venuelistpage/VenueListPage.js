@@ -4,6 +4,7 @@ import { useGlobalContext } from "@/context/MyContext";
 import VenueContainer from "@/components/venue/venuelistpage/venuecontainer/VenueContainer";
 import SideFilter from "./filter/SideFilter";
 import Footerdescription from "@/components/miscellaneous/pagedescription/PageDescription";
+import Offer from "@/components/miscellaneous/Offer";
 
 export default function VenueListPage({ data }) {
   const { city, locality, category, localities, result, filterQuery } = data;
@@ -29,6 +30,8 @@ export default function VenueListPage({ data }) {
         locality={locality}
         filterQuery={filterQuery}
       />
+            <Offer/>
+
       <VenueContainer
         lists={result.data}
         locality={locality}

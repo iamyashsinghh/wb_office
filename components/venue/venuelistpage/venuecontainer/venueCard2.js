@@ -16,7 +16,6 @@ import Image from "next/image";
 import CallingRequest from "@/lib/request/callingrequest/CallingRequest";
 import Assured from "@/components/miscellaneous/Assured";
 import { useGlobalContext } from "@/context/MyContext";
-import Head from "next/head";
 import RatingCardDynamic from "@/components/miscellaneous/RatingCardDynamic";
 
 function VenueCard2({venue, city, openLeadModel, locality, category, callConversion, index }) {
@@ -56,19 +55,6 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
 
   return (
     <Wrapper>
-      <Head>
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Weddingbanquets" />
-        <meta name="twitter:url" content="https://weddingbanquets.in" />
-        <meta
-          name="twitter:description"
-          content="Your one-stop shop for all of your wedding needs. Browse 1000+ party halls & wedding banquets. Get budget-friendly photographers, mehndi artists, makeup artists, & more..."
-        />
-        <meta
-          name="twitter:image"
-          content="https://weddingbanquets.in/twitter-img.png"
-        />
-      </Head>
       <div className="image-slider">
         <Swiper
           style={{
@@ -91,14 +77,7 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
                 src={`${process.env.NEXT_PUBLIC_MEDIA_PREFIX}/${image}`}
                 fill
                 sizes="(100vw)"
-                alt={
-                  locality === "all"
-                    ? ""
-                    : `${category.replaceAll(
-                        "-",
-                        " "
-                      )} in ${locality.replaceAll("-", " ")}`
-                }
+                alt={locality === "all" ? `${category.replaceAll( "-", " ")} in ${city.replaceAll("-", " ")}` : `${category.replaceAll("-", " ")} in ${locality.replaceAll("-", " ")}`}
               />
             </SwiperSlide>
           ))}

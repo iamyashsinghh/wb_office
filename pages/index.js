@@ -90,27 +90,35 @@ export default function Home({
 
 export async function getStaticProps() {
   try {
+    //Fetch Blog Post
+    // let homePageData = await fetch("http://192.168.29.128/wedding_benquets/website/api/home_page/");
 
     const url = `${process.env.SERVER_DOMAIN}/api/home_page/`;
+
+    // const headers = { 'Authorization': process.env.SECRATE_TOKEN };
+    // console.log(url)
 
     let homePageData = await fetch(url);
 
     homePageData = await homePageData.json();
+    // console.log(homePageData)
 
     let blogposts;
     try {
-      // const sql = `select wp_posts.ID, wp_posts.post_title, wp_posts.post_name as
-      // post_slug, DATE_FORMAT(wp_posts.post_date, '%Y-%m-%d %T.%f') as post_date, (select for_image.guid from wp_posts as
-      // for_image where for_image.post_parent = wp_posts.ID and for_image.post_type =
-      // "attachment" limit 1) as post_thumbnail from wp_posts where
-      // (wp_posts.post_type = 'post' and wp_posts.post_status = 'publish') order by
-      // wp_posts.ID desc limit 3`;
-      
-      // blogposts = await query(sql);
-      blogposts = [];
+      const sql = `select wp_posts.ID, wp_posts.post_title, wp_posts.post_name as
+      post_slug, DATE_FORMAT(wp_posts.post_date, '%Y-%m-%d %T.%f') as post_date, (select for_image.guid from wp_posts as
+      for_image where for_image.post_parent = wp_posts.ID and for_image.post_type =
+      "attachment" limit 1) as post_thumbnail from wp_posts where
+      (wp_posts.post_type = 'post' and wp_posts.post_status = 'publish') order by
+      wp_posts.ID desc limit 3`;
+
+      blogposts = await query(sql);
+      // console.log("Blog data fetched");
     } catch (error) {
+      // console.log("Blog data not fetched");
       blogposts = [];
     }
+
     return {
       props: {
         venueCategogies: homePageData.data.venue_categories || null,

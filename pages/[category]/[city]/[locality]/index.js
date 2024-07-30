@@ -75,9 +75,6 @@ function Venue(props) {
           } 
         />
         <meta property="og:url" content={`https://weddingbanquets.in${router.asPath}`} />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Wedding Banquets" />
-        <meta property="og:locale" content="en_US" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={props.result.meta?.meta_title} />
         <meta name="twitter:description" content={props.result.meta?.meta_description} />

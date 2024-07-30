@@ -1,8 +1,11 @@
 import VendorDetailsPage from "@/components/vendor/vendordetailspage/VendorDetailsPage";
 import VenueDetailsPage from "@/components/venue/venuedetailspage/VenueDetailsPage";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function Page({ response }) {
+  const router = useRouter();
+
   if (response.tag === 'venue') {
     const jsonLdData = {
       "@context": "https://schema.org",
@@ -44,6 +47,7 @@ export default function Page({ response }) {
           />
           <meta property="og:title" content={response.data.venue.meta_title} />
           <meta property="og:description" content={response.data.venue.meta_description} />
+          <meta property="og:url" content={`https://weddingbanquets.in${router.asPath}`} />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
@@ -94,6 +98,7 @@ export default function Page({ response }) {
           />
           <meta property="og:title" content={response.data.vendor.meta_title} />
           <meta property="og:description" content={response.data.vendor.meta_description} />
+          <meta property="og:url" content={`https://weddingbanquets.in${router.asPath}`} />
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}

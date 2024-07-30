@@ -108,7 +108,7 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
                 src={`${process.env.NEXT_PUBLIC_MEDIA_PREFIX}/${image}`}
                 fill
                 sizes="(100vw)"
-                alt={locality === "all" ? "" : `${category} in ${locality}`}
+                alt={locality === "all" ? `${category.replaceAll( "-", " ")} in ${city.replaceAll("-", " ")}` : `${category} in ${locality}`}
               />
             </SwiperSlide>
           ))}

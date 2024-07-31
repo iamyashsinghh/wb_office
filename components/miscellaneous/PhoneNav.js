@@ -136,7 +136,7 @@ function PhoneNav() {
   };
 
   return (
-    <>
+    <MainComp>
       <Wrapper>
         <input
           type="radio"
@@ -198,7 +198,7 @@ function PhoneNav() {
           </div>
         </div>
       </Wrapper>
-    </>
+    </MainComp>
   );
 }
 
@@ -352,5 +352,11 @@ const Wrapper = styled.div`
     display: none;
   }
 `;
+const MainComp = styled.div`
+ display: none;
+
+     @media (max-width: 1000px) {
+      display: block;
+    }`;
 
 export default PhoneNav;

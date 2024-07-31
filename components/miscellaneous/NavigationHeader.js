@@ -29,6 +29,7 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 1rem 2rem;
+    height: 30px;
 
     .icon-container {
         display: flex;

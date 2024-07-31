@@ -71,8 +71,9 @@ visibility: hidden;
 transition: all .3s linear;
 bottom:30px ; right :30px;
 cursor: pointer;
-z-index: 99;
-bottom:80px ; left:10%;
+z-index: 9999;
+bottom:100px ; 
+left:10%;
 
 
 /* background:var(--secoundary-color);   fallback for old browsers */

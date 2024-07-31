@@ -12,36 +12,52 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
 
   const occationList = [
     {
-      name: "Wedding & engagement",
-      slug: "wedding-engagement"
+      name: "Roka",
+      slug: "roka"
     },
     {
-      name: "Engagement photography",
-      slug: "engagement-photography"
+      name: "Sagan",
+      slug: "sagan"
     },
     {
-      name: "Mehndi & sangeet",
-      slug: "mehndi-sangeet"
+      name: "Engagement",
+      slug: "engagement"
     },
     {
-      name: "Couple pre-wedding",
-      slug: "couple-pre-wedding"
+      name: "Haldi & Mehndi",
+      slug: "haldi-mehndi"
     },
     {
-      name: "Parties",
-      slug: "parties"
+      name: "Cocktail",
+      slug: "cocktail"
     },
     {
-      name: "Corporate events",
-      slug: "corporate-events"
+      name: "Wedding",
+      slug: "wedding"
     },
     {
-      name: "Maternity shoot",
-      slug: "maternity-shoot"
+      name: "Reception",
+      slug: "reception"
     },
     {
-      name: "Baby shoot",
-      slug: "baby-shoot"
+      name: "Anniversary",
+      slug: "anniversary"
+    },
+    {
+      name: "Mata ki Chowki",
+      slug: "mata-ki-chowki"
+    },
+    {
+      name: "Birthday",
+      slug: "birthday"
+    },
+    {
+      name: "Corporate Event",
+      slug: "corporate-event"
+    },
+    {
+      name: "Baby Shower",
+      slug: "baby-shower"
     },
   ];
 

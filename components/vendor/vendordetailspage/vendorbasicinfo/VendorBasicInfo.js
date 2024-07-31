@@ -1,130 +1,319 @@
 import styled from "styled-components";
-import { IoIosCall } from 'react-icons/io'
+import { IoIosCall } from "react-icons/io";
 import { useState } from "react";
-import { BiRupee } from 'react-icons/bi'
+import { BiRupee } from "react-icons/bi";
 import CallingRequest from "@/lib/request/callingrequest/CallingRequest";
 import Image from "next/image";
 import TabsComponent from "../tabsComponent/TabsComponent";
 import Tabs from "../tabs/Tabs";
 import Head from "next/head";
+import { BsFillSuitcaseLgFill } from "react-icons/bs";
+import { MdEventAvailable } from "react-icons/md";
 
 export default function VendorBasicInfo({ vendor, openLeadsModel }) {
+  const [showSummary, setShowSummary] = useState(false);
+  const [openIndex, setOpenIndex] = useState(1);
 
-    const [showSummary, setShowSumary] = useState(true);
-    async function handleAnchorClick(e, slug) {
-        e.stopPropagation();
-        await CallingRequest(slug);
-    }
+  const toggleAccordion = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+  
+  const packages = vendor.package_option
+    ?.split(",")
+    .map((item) => item.trim())
+    .filter((item) => item);
 
-    return (<>
-  <Head>
-    
-  </Head>
-    <Wrapper className="section-venue-basic_info info-section">
+  async function handleAnchorClick(e, slug) {
+    e.stopPropagation();
+    await CallingRequest(slug);
+  }
 
+  return (
+    <>
+      <Wrapper className="section-venue-basic_info info-section">
         <div className="container-l">
-        <div className="info-container">
-                <div className="card info-card">
-                    <h1 className="v-name">{vendor.brand_name}</h1>
+          <div className="info-container">
+            <div className="card info-card">
+              <div className="v-header">
+                <div>
+                  <h2 className="v-name">{vendor.brand_name}</h2>
+                  <p className="address">{vendor.vendor_address || " "}</p>
                 </div>
+                <div className="action-btns">
+                  <a
+                    href={`tel:+${vendor.phone}`}
+                    onClick={(e) => handleAnchorClick(e, vendor?.slug)}
+                    className="call-btn-header"
+                    aria-label="call icon"
+                  >
+                    <IoIosCall className="call-icon" />
+                  </a>
+                  <button
+                    className="venue-card-btn-header"
+                    onClick={(e) => openLeadsModel()}
+                  >
+                    Get Quotation
+                  </button>
                 </div>
-                <Tabs vendor={vendor} openLeadsModel={openLeadsModel} />
-            <div className="info-container">
+              </div>
+              <div className="vendor-aditional-info">
+                <div className="detail-circle">
+                  <BsFillSuitcaseLgFill className="icon" />
+                  <p>
+                    Exp.{" "}
+                    {`${vendor?.yrs_exp != undefined &&
+                      vendor?.yrs_exp != null &&
+                      vendor?.yrs_exp != 0
+                      ? vendor.yrs_exp
+                      : "5+"
+                      } Yr's`}
+                  </p>
+                </div>
+                <div className="detail-circle">
+                  <MdEventAvailable className="icon" />
+                  <p>
+                  Event Completed:
+                <span className="price">
+                  &nbsp;
+                  {`${vendor?.event_completed != undefined &&
+                    vendor?.event_completed != null &&
+                    vendor?.event_completed != 0
+                    ? vendor.event_completed
+                    : 150
+                    }+`}
+                </span>
+                  </p>
+                </div>
+              </div>
+              <div className="card info-card info-cardd">
+                <h3 className="v-name">About</h3>
+                <div
+                  className="v-desc"
+                  dangerouslySetInnerHTML={{
+                    __html: showSummary
+                      ? vendor.summary
+                      : `${vendor.summary.slice(0, 500)}...`,
+                  }}
+                ></div>
+                <span
+                  className="read-more-btn"
+                  onClick={() => {
+                    setShowSummary(!showSummary);
+                  }}
+                >
+                  {showSummary ? "Read less" : "Read more"}
+                </span>
+              </div>
+              <div className="info-cardd">
                 <TabsComponent images={vendor.images} />
-                <div className="package-card card">
-                    <h2 className="price"><BiRupee className="rupee-icon" /><div className='cut-price'>{vendor.package_price}</div></h2>
-                    <span className="price-label">Package price</span>
-                    <div className="action-btns">
-                        <button className="venue-card-btn" onClick={(e) => openLeadsModel()} >Get Quatation</button>
-                        <a href={`tel:0${vendor.phone}`} onClick={(e) => handleAnchorClick(e, vendor?.slug)} className="call-btn" aria-label="call icon ">
-                            <IoIosCall className="call-icon" />
-                        </a>
-                    </div>
-
-                    <div className="bannar-img">
-                        <Image
-                            src="/common/vendor.jpg"
-                            alt="An example image"
-                            fill={true}
-                            sizes="(10vw)"
-                        />
-                    </div>
-                </div>
+              </div>
             </div>
-            <div className="info-container" id="vendor_basic_desc">
-            <div className="card  info-card info-cardd">
-                    <h2 className="v-name">About {vendor.brand_name}</h2>
-                    <div className="v-desc" dangerouslySetInnerHTML={{ __html: showSummary ? vendor.summary : vendor.summary.slice(0, 500) }}></div>
+            <div className="vendor-ad">
+              <AccordionContainer>
+                <AccordionItem>
+                  <AccordionTitle onClick={() => toggleAccordion(1)}>
+                    <div className="d-flex">
+                      <div>Packages</div>
+                      {openIndex === 1 ? (
+                        <div className="see-pricing">Hide Pricing</div>
+                      ) : (
+                        <div className="see-pricing">See Pricing</div>
+                      )}
+                    </div>
+                  </AccordionTitle>
+                  <AccordionContent isOpen={openIndex === 1}>
+                    {packages?.map((price_package, i) => (
+                      <p key={i}>{price_package}</p>
+                    ))}
+                  </AccordionContent>
+                </AccordionItem>
+              </AccordionContainer>
+              <div className="package-card card">
+                <h2 className="price">
+                  <BiRupee className="rupee-icon" />
+                  <div className="cut-price">
+                    {vendor?.package_price ? (
+                      <del>{vendor.package_price}</del>
+                    ) : (
+                      "On Demand"
+                    )}
+                  </div>
+                </h2>
+                <div className="action-btns">
+                  <button
+                    className="venue-card-btn"
+                    onClick={(e) => openLeadsModel()}
+                  >
+                    Get Quotation
+                  </button>
+                  <a
+                    href={`tel:+${vendor.phone}`}
+                    onClick={(e) => handleAnchorClick(e, vendor?.slug)}
+                    className="call-btn"
+                    aria-label="call icon"
+                  >
+                    <IoIosCall className="call-icon" />
+                  </a>
                 </div>
+                <div className="banner-img">
+                  <Image
+                    src="/common/vendor.jpg"
+                    alt="An example image"
+                    layout="fill"
+                  />
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </Wrapper>
-    </>)
+      </Wrapper>
+    </>
+  );
 }
-
 
 const Wrapper = styled.section`
+  background-color: var(--bg-color);
+  position: relative;
+  padding: 2rem 0;
 
-background-color: var(--bg-color);
-position: relative;
-padding: 2rem 0;
-.info-cardd{
-    margin-top:50px;
-}
-.cut-price{
-    text-decoration: line-through;
-}
-.info-container{
-    padding: 0rem 1rem;
+  .info-cardd {
+    margin-top: 25px;
+  }
+
+  .v-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+    .vendor-aditional-info {
+    margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      .location {
+        margin: 0 20px 0 0;
+        p,
+        .icon {
+          color: var(--info-color);
+        }
+      }
+      .detail-circle {
+        display: flex;
+        gap: 3px;
+        align-items: center;
+        padding: 3px 7px;
+        border-radius: 5px;
+        color: var(--para);
+        margin-right: 20px;
+        background-color: #f1f5fa;
+        .icon {
+          font-size: 2.2rem;
+        }
+        p {
+          font-family: "Poppins";
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+  .vendor-ad {
+    position: sticky;
+    top: 0;
+  }
+
+  .venue-card-btn-header {
+    border: none;
+    white-space: nowrap;
+    background: none;
+    border: 1px solid #f33232;
+    padding: 1rem 2.5rem;
+    text-transform: uppercase;
+    border-radius: 0.5rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: all 0.3s linear;
+    color: #f33232;
+    display: none;
+
+    &:hover {
+      background-color: #f33232;
+      color: white;
+    }
+    @media (min-width: 1100px) {
+      display: block;
+    }
+  }
+
+  .call-btn-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid green;
+    padding: 0.2rem 0.8rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: none;
+
+    .call-icon {
+      font-size: 30px;
+      color: var(--phone);
+    }
+
+    &:hover {
+      background-color: var(--phone);
+      .call-icon {
+        color: white;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      display: block;
+    }
+  }
+
+  .info-container {
     display: grid;
     grid-template-columns: 7fr 3fr;
     align-items: start;
     gap: 2rem;
-
-    .card{
-        padding: 1rem;
+    .info-card {
+      display: flex;
+      flex-direction: column;
+      .v-name {
+        font-family: "Montserrat";
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+      .address {
+        font-family: "Poppins";
+        font-size: 1.7rem;
+        color: var(--primary-color) !important;
+        font-weight: 400;
+      }
+      .v-desc,
+      p,
+      span {
+        font-family: "Poppins" !important;
+        font-size: 1.8rem !important;
+        color: var(--para) !important;
+      }
+      .v-desc {
+        ul li {
+          list-style-type: disc;
+          margin-left: 3rem;
+        }
+      }
+      .read-more-btn {
+        font-family: "Poppins" !important;
+        font-size: 1.8rem !important;
+        font-weight: 400;
+        color: var(--info-color) !important;
+        cursor: pointer;
+      }
     }
+  }
 
-    .info-card{
-        display: flex;
-        flex-direction:column;
-        gap: 1rem;
-
-        .v-name{
-            font-family: "Montserrat";
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        .address{
-            font-family: "Poppins";
-            font-size: 1.7rem;
-            color: var(--primary-color);
-            font-weight: 400;
-        }
-        .v-desc,p,span{
-            font-family: "Poppins" !important;
-            font-size: 1.8rem !important;
-            color: var(--para) !important;
-        }
-        .v-desc{
-            ul li{
-                list-style-type: disc;
-                margin-left: 3rem;
-            }
-        }
-        .read-more-btn{
-            color: var(--info-color);
-            cursor: pointer;
-            font-family: "Poppins" !important;
-            font-size: 1.8rem !important;
-            font-weight: 400 !important;
-        }
-    }
-}
-
-.package-card{
+  .package-card {
     padding-top: 2rem !important;
     max-width: 50rem;
     background-color: white;
@@ -134,99 +323,136 @@ padding: 2rem 0;
     justify-content: center;
     gap: 1rem;
 
-    .price{
-            font-family: "Montserrat";
-            display: flex;
-            align-items: center;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            font-weight: 700;
+    .price {
+      font-family: "Montserrat";
+      display: flex;
+      align-items: center;
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      font-weight: 700;
 
-            .rupee-icon{
-                font-size: 3rem;
-                /* color: black; */
-            }
-        }
-    
-    .price-label{
-        /* font-style: italic; */
-        font-size: 1.6rem;
-        line-height: normal;
-        font-family: "Poppins";
-        font-weight: 500;
-        color: var(--para);
-
+      .rupee-icon {
+        font-size: 3rem;
+      }
     }
 
-    .action-btns{
-        /* padding: 2rem 1rem; */
-        margin-top: 1rem;
-        /* padding-right: 3rem; */
+    .price-label {
+      font-size: 1.6rem;
+      line-height: normal;
+      font-family: "Poppins";
+      font-weight: 500;
+      color: var(--para);
+    }
+
+    .action-btns {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0rem 2rem 1rem 2rem;
+      width: 100%;
+
+      .venue-card-btn {
+        border: none;
+        white-space: nowrap;
+        background: none;
+        border: 1px solid #f33232;
+        padding: 1rem 2.5rem;
+        text-transform: uppercase;
+        border-radius: 0.5rem;
+        font-size: 1.8rem;
+        cursor: pointer;
+        transition: all 0.3s linear;
+        color: #f33232;
+
+        &:hover {
+          background-color: #f33232;
+          color: white;
+        }
+      }
+      .call-btn {
         display: flex;
-        justify-content: space-around;
         align-items: center;
-        padding: 0rem 2rem 1rem 2rem ;
-        width: 100%;
-
-        .venue-card-btn{
-            border: none;
-            white-space: nowrap;
-            background:none;
-            border: 1px solid #F33232;
-            padding: 1rem 2.5rem;
-            text-transform: uppercase;
-            border-radius:.5rem;
-            font-size: 1.8rem;
-            /* width: 100%; */
-            cursor: pointer;
-            transition: all .3s linear;
-            color: #F33232;
-
-            &:hover{
-                background-color: #F33232;
-                color: white;
-            }
-
-        }
-        .call-btn{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid green;
-            padding: .2rem .8rem;
-            border-radius: .5rem;
-            cursor: pointer;
-            .call-icon{
-
-                font-size: 30px;
-                color: var(--phone);
-            }
-
-            &:hover{
-                background-color:  var(--phone);
-
-                .call-icon{
-                    color: white;
-                }
-            }
-
+        justify-content: center;
+        border: 1px solid green;
+        padding: 0.2rem 0.8rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        .call-icon {
+          font-size: 30px;
+          color: var(--phone);
         }
 
+        &:hover {
+          background-color: var(--phone);
+          .call-icon {
+            color: white;
+          }
+        }
+      }
     }
-    .bannar-img{
-        position: relative;
-        width: 100%;
-        height: 400px;
+    .banner-img {
+      position: relative;
+      width: 100%;
+      height: 400px;
     }
-}
+  }
 
-@media (max-width:800px) {
-
-        
-    .info-container{
-        padding: 0rem 1rem;
-        display: grid;
-        grid-template-columns: 1fr;
+  @media (max-width: 800px) {
+    .info-container {
+      padding: 0rem 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
     }
-}
-`
+  }
+`;
+
+const AccordionContainer = styled.div`
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 5px;
+  overflow: hidden;
+`;
+
+const AccordionItem = styled.div`
+  &:first-of-type {
+    border-top: none;
+  }
+`;
+
+const AccordionTitle = styled.div`
+  width: 100%;
+  padding: 15px;
+  text-align: left;
+  background: #f7f7f7;
+  border: none;
+  cursor: pointer;
+  font-size: 1.9rem;
+  font-weight: bold;
+  &:focus {
+    outline: none;
+  }
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .see-pricing {
+    font-size: 1.6rem;
+    color: var(--info-color);
+  }
+`;
+
+const AccordionContent = styled.div`
+  max-height: ${({ isOpen }) => (isOpen ? "500px" : "0")};
+  overflow: hidden;
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  transition: max-height 0.6s ease-in;
+  padding: 5px 15px;
+  background: #fff;
+  p {
+    margin-top: 4px;
+  }
+`;

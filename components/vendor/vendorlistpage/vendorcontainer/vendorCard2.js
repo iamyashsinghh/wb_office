@@ -166,46 +166,65 @@ function VenueCard2({
           {`${vendor_summary?.slice(0, 100)} `}
           <span className="read-more-btn">read more...</span>
         </p>
-
         <div className="venue-category">
-          {vendor['wedding-engagement'] && (
+          {vendor['roka'] && (
             <div className="category">
-              <p>Wedding & engagement</p>
+              <p>Roka</p>
             </div>
           )}
-          {vendor['engagement-photography'] && (
+          {vendor['sagan'] && (
             <div className="category">
-              <p>Engagement photography</p>
+              <p>Sagan</p>
             </div>
           )}
-          {vendor['mehndi-sangeet'] && (
+          {vendor['engagement'] && (
             <div className="category">
-              <p>Mehndi & sangeet</p>
+              <p>Engagement</p>
             </div>
           )}
-          {vendor['couple-pre-wedding'] && (
+          {vendor['haldi-mehndi'] && (
             <div className="category">
-              <p>Couple pre-wedding</p>
+              <p>Haldi & Mehndi</p>
             </div>
           )}
-          {vendor['parties'] && (
+          {vendor['cocktail'] && (
             <div className="category">
-              <p>Parties</p>
+              <p>Cocktail</p>
             </div>
           )}
-          {vendor['corporate-events'] && (
+          {vendor['wedding'] && (
             <div className="category">
-              <p>Corporate events</p>
+              <p>Wedding</p>
             </div>
           )}
-          {vendor['maternity-shoot'] && (
+          {vendor['reception'] && (
             <div className="category">
-              <p>Maternity shoot</p>
+              <p>Reception</p>
             </div>
           )}
-          {vendor['baby-shoot'] && (
+          {vendor['anniversary'] && (
             <div className="category">
-              <p>Baby shoot</p>
+              <p>Anniversary</p>
+            </div>
+          )}
+          {vendor['mata-ki-chowki'] && (
+            <div className="category">
+              <p>Mata ki Chowki</p>
+            </div>
+          )}
+          {vendor['birthday'] && (
+            <div className="category">
+              <p>Birthday</p>
+            </div>
+          )}
+          {vendor['corporate-event'] && (
+            <div className="category">
+              <p>Corporate Event</p>
+            </div>
+          )}
+          {vendor['baby-shower'] && (
+            <div className="category">
+              <p>Baby Shower</p>
             </div>
           )}
           {vendor['traditional'] && (

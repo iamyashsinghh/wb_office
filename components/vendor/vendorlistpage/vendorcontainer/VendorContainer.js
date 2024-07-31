@@ -91,14 +91,17 @@ function VendorContainer({ city, lists, locality, category, count, localities, v
         });
         if (node) observer.current.observe(node);
     }, [loading, hasMore, fetchMoreVendor]);
+    
+    // Ensure vendorlists is converted to an array before mapping
+    const vendorArray = Array.isArray(vendorlists) ? vendorlists : Object.values(vendorlists);
 
     const listingPageListSchema = {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "itemListElement": vendorlists.map((item, index) => ({
+        "itemListElement": vendorArray?.map((item, index) => ({
             "@type": "ListItem",
             "position": index + 1,
-            "name": item?.name,
+            "name": item?.brand_name,
             "url": `https://weddingbanquets.in/${selectedCity}/${item?.slug}`
         }))
     };
@@ -156,7 +159,7 @@ function VendorContainer({ city, lists, locality, category, count, localities, v
                             />
                         </div>
 
-                        { vendorlists?.map((item, index) => (
+                        {vendorArray?.map((item, index) => (
                             <VendorCard2
                                 key={index}
                                 locality={locality}
@@ -166,10 +169,10 @@ function VendorContainer({ city, lists, locality, category, count, localities, v
                                 openLeadModel={openLeadModel}
                                 callConversion={callConversion}
                             />
-                        )) }
-                        { loading && <div style={{ textAlign: "center" }}> <Spinner2 /> </div> }
+                        ))}
+                        {loading && <div style={{ textAlign: "center" }}> <Spinner2 /> </div>}
                         <div ref={lastVenueElementRef}></div>
-                        { !hasMore && <center style={{ fontSize: "1.5rem" }}>You have seen it all</center> }
+                        {!hasMore && <center style={{ fontSize: "1.5rem" }}>You have seen it all</center>}
                     </main>
                 </div>
             </Section>
@@ -191,57 +194,57 @@ background-color: var(--bg-color);
     font-weight: 500;
 }
 .sticky-head{
-        position: sticky;
-        top: 8rem;
-        z-index: 2;
+    position: sticky;
+    top: 8rem;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding:1.5rem 2rem;
+    box-shadow:var(--shadow);
+    display: none;
+
+    .page-title{
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: white;
-        padding:1.5rem 2rem;
-        box-shadow:var(--shadow);
-        display: none;
-
-        .page-title{
-            display: flex;
-            flex-direction: column;
-            gap: .5rem;
-            .main-title{
-                font-family: "Montserrat";
-                font-size:2rem ;
-                text-transform: capitalize;
-            }
-            .count{
-                color: var(--para);
-                font-size: 1.5rem;
-                font-family: "Poppins";
-            }
+        flex-direction: column;
+        gap: .5rem;
+        .main-title{
+            font-family: "Montserrat";
+            font-size:2rem ;
+            text-transform: capitalize;
         }
-
-        .filter-btn{
-            cursor: pointer;
-            border: 1px solid var(--para);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: .5rem;
-            width: 100px;
-            padding: 1rem;
-            border-radius: 3rem;
-
-            .filter-icon{
-                color: var(--para);
-                font-size: 2.5rem;
-            }
-
-            .filter-label{
-                font-family: "Poppins";
-                font-weight: 500;
-                color: var(--para);
-                font-size: 1.8rem;
-            }
+        .count{
+            color: var(--para);
+            font-size: 1.5rem;
+            font-family: "Poppins";
         }
     }
+
+    .filter-btn{
+        cursor: pointer;
+        border: 1px solid var(--para);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        width: 100px;
+        padding: 1rem;
+        border-radius: 3rem;
+
+        .filter-icon{
+            color: var(--para);
+            font-size: 2.5rem;
+        }
+
+        .filter-label{
+            font-family: "Poppins";
+            font-weight: 500;
+            color: var(--para);
+            font-size: 1.8rem;
+        }
+    }
+}
 
 .vendor-list-container{
     margin: auto;

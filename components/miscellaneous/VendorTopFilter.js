@@ -324,14 +324,18 @@ export default function VendorTopFilter({
                   value={filterPhotographerService}
                 >
                   <option value="">Occasion</option>
-                  <option value="traditional">Wedding & engagement</option>
-                  <option value="candid">Engagement photography</option>
-                  <option value="cinematographic">Mehndi & sangeet</option>
-                  <option value="drone-shoots">Couple pre-wedding</option>
-                  <option value="photobooth">Parties</option>
-                  <option value="livescreening">Corporate events</option>
-                  <option value="livescreening">Maternity shoot</option>
-                  <option value="livescreening">Baby shoot</option>
+                  <option value="roka">Roka</option>
+                  <option value="sagan">Sagan</option>
+                  <option value="engagement">Engagement</option>
+                  <option value="haldi-mehndi">Haldi & Mehndi</option>
+                  <option value="cocktail">Cocktail</option>
+                  <option value="wedding">Wedding</option>
+                  <option value="reception">Reception</option>
+                  <option value="anniversary">Anniversary</option>
+                  <option value="mata-ki-chowki">Mata ki Chowki</option>
+                  <option value="birthday">Birthday</option>
+                  <option value="corporate-event">Corporate Event</option>
+                  <option value="baby-shower">Baby Shower</option>
                 </select>
                 <AiFillCaretDown className="down-arrow" size={15} />
               </div>

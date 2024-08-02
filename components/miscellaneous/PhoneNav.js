@@ -208,7 +208,7 @@ const Wrapper = styled.div`
   z-index: 999;
   color: #fff;
   width: 100%;
-  height: 260px;
+  height: 85px;
   margin: auto;
   display: flex;
   align-items: flex-end;
@@ -274,7 +274,7 @@ const Wrapper = styled.div`
     height: 45px;
     background: var(--primary-color);
     position: absolute;
-    top: 175px;
+    top: 0;
     z-index: 1;
     border-radius: 50%;
     left: 0;

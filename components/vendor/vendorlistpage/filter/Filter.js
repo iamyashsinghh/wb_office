@@ -196,6 +196,8 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
   // makeup artist
   const [selectedServiceListMakeup, setSelectedServiceListMakeup] = useState(filterQuery.makeup_service?.split(",") || []);
   const [filterMakeupBridalBudget, setFilterMakeupBridalBudget] = useState(filterQuery.makeup_bridal_budget || "");
+  const [selectedOccasionListMakeup, setSelectedOccasionListMakeup] = useState(filterQuery.makeup_occasion?.split(",") || []);
+
 
   // mehndi artist
   const [filterMehndiPackageBudget, setFilterMehndiPackageBudget] = useState(filterQuery.mehndi_package_budget || "");
@@ -259,7 +261,7 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
     let query = `?multi_localities=${localitiesFilterArray}&experience=${experienceRange.join(",")}&events_completed=${eventsCompletedRange.join(",")}`;
 
     if (category === "top-makeup-artists") {
-      query += `&makeup_bridal_budget=${filterMakeupBridalBudget || ""}&makeup_service=${selectedServiceListMakeup.join(",") || ""}`;
+      query += `&makeup_bridal_budget=${filterMakeupBridalBudget || ""}&makeup_service=${selectedServiceListMakeup.join(",") || ""}&makeup_occasion=${selectedOccasionListMakeup || ""}`;
     } else if (category === "best-wedding-photographers") {
       query += `&photographer_occation=${filterPhotographerOccation || ""}&photographer_service=${selectedServiceListPhotographers.join(",") || ""}&photographer_service_budget=${filterPhotographerServiceBudget || ""}&days=${days}`;
     } else if (category === "best-mehndi-artists") {
@@ -290,6 +292,7 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
           {category === "top-makeup-artists" && (
             <>
               <CheckFilter items={serviceListMakeup} name={"Services"} list={selectedServiceListMakeup} setList={setSelectedServiceListMakeup} handleApplyFilter={handleApplyFilter} />
+              <CylenderFilter name={"Occasion"} items={occationList} value={selectedOccasionListMakeup} setValue={setSelectedOccasionListMakeup} handleApplyFilter={handleApplyFilter} />
               <CylenderFilter name={"Makeup Artist Budget"} items={makeupBridalBudget} value={filterMakeupBridalBudget} setValue={setFilterMakeupBridalBudget} handleApplyFilter={handleApplyFilter} />
             </>
           )}

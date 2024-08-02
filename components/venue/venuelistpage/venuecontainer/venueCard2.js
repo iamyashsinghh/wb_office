@@ -137,7 +137,7 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
         <div className="venue-aditional-info">
           <div className="location detail-circle">
             <IoLocationSharp className="icon" />
-            <p>{`${venue?.location_name} , ${venue?.city_name}`}</p>
+            <p>{`${venue?.get_locality.name} , ${venue?.get_city.name}`}</p>
           </div>
           <div className="guests detail-circle">
             <IoIosPeople className="icon" />

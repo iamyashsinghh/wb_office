@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { AiFillCaretDown } from "react-icons/ai";
 import { BiSearch, BiCategoryAlt } from "react-icons/bi";
-import { MdCurrencyRupee, MdOutlineLocationOn } from "react-icons/md";
+import { MdCurrencyRupee, MdFaceRetouchingNatural, MdOutlineFaceRetouchingNatural, MdOutlineLocationOn } from "react-icons/md";
 import { BsPeople } from "react-icons/bs";
 import { SlCalender } from "react-icons/sl";
 import { useGlobalContext } from "@/context/MyContext";
@@ -27,13 +27,13 @@ export default function VendorTopFilter({
     { name: "More than ₹ 1,00,000", slug: "100000,9999999999" },
   ];
 
-  const makeupEngagementBudget = [
-    { name: "Upto ₹ 6,000", slug: "0,6000" },
-    { name: "₹ 6,000-₹ 16,000", slug: "6000,16000" },
-    { name: "₹ 16,000-₹ 30,000", slug: "16000,30000" },
-    { name: "₹ 30,000-₹ 50,000", slug: "30000,50000" },
-    { name: "More than ₹ 50,000", slug: "50000,9999999999" },
-  ];
+  // const makeupEngagementBudget = [
+  //   { name: "Upto ₹ 6,000", slug: "0,6000" },
+  //   { name: "₹ 6,000-₹ 16,000", slug: "6000,16000" },
+  //   { name: "₹ 16,000-₹ 30,000", slug: "16000,30000" },
+  //   { name: "₹ 30,000-₹ 50,000", slug: "30000,50000" },
+  //   { name: "More than ₹ 50,000", slug: "50000,9999999999" },
+  // ];
 
   const initialPhotoVideoPackageBudget = [
     { name: "Upto ₹ 50,000", slug: "0,50000" },
@@ -77,6 +77,88 @@ export default function VendorTopFilter({
     { name: "More than ₹ 1,00,000", slug: "100000,9999999999" },
   ];
 
+  const occationList = [
+    {
+      name: "Roka",
+      slug: "roka"
+    },
+    {
+      name: "Sagan",
+      slug: "sagan"
+    },
+    {
+      name: "Engagement",
+      slug: "engagement"
+    },
+    {
+      name: "Haldi & Mehndi",
+      slug: "haldi-mehndi"
+    },
+    {
+      name: "Cocktail",
+      slug: "cocktail"
+    },
+    {
+      name: "Wedding",
+      slug: "wedding"
+    },
+    {
+      name: "Reception",
+      slug: "reception"
+    },
+    {
+      name: "Anniversary",
+      slug: "anniversary"
+    },
+    {
+      name: "Mata ki Chowki",
+      slug: "mata-ki-chowki"
+    },
+    {
+      name: "Birthday",
+      slug: "birthday"
+    },
+    {
+      name: "Corporate Event",
+      slug: "corporate-event"
+    },
+    {
+      name: "Baby Shower",
+      slug: "baby-shower"
+    },
+  ];
+
+  const serviceListMakeup = [
+    {
+      id: "airbrush-makeup",
+      name: "Airbrush Makeup",
+    },
+    {
+      id: "party-makeup",
+      name: "Party Makeup",
+    },
+    {
+      id: "hd-makeup",
+      name: "HD Makeup",
+    },
+    {
+      id: "birdal-makeup",
+      name: "Birdal Makeup",
+    },
+    {
+      id: "engagement-makeup",
+      name: "Engagement Makeup",
+    },
+    {
+      id: "outstation-makeup",
+      name: "Outstation Makeup",
+    },
+    {
+      id: "haldimakeup-mehndi-cocktail-roka",
+      name: "Haldi Makeup/ Mehndi / Cocktail / Roka",
+    },
+  ];
+
   const { cities } = useGlobalContext();
   const router = useRouter();
 
@@ -88,8 +170,9 @@ export default function VendorTopFilter({
   const [filterMakeupBridalBudget, setFilterMakeupBridalBudget] = useState(
     filterQuery.makeup_bridal_budget || ""
   );
-  const [filterMakeupEngagementBudget, setFilterMakeupEngagementBudget] =
-    useState(filterQuery.makeup_engagement_budget || "");
+  const [selectedServiceListMakeup, setSelectedServiceListMakeup] = useState(filterQuery.makeup_service?.split(",") || []);
+  const [selectedOccasionListMakeup, setSelectedOccasionListMakeup] = useState(filterQuery.makeup_occasion?.split(",") || []);
+
 
   // Photographer filter
   const [filterPhotographerService, setFilterPhotographerService] = useState(
@@ -151,20 +234,20 @@ export default function VendorTopFilter({
       setPhotoVideoPackageBudget(updatedBudget);
     }
   }, [days, category]);
-    
+
 
   async function handleApplyFilter() {
     const baseUrl = `/${filterCategory}/${city}/${filterLocality}`;
     let query = "";
     if (category === "top-makeup-artists") {
-      query = `?makeup_bridal_budget=${filterMakeupBridalBudget || ""}&makeup_engagement_budget=${filterMakeupEngagementBudget || ""}`;
+      query = `?makeup_bridal_budget=${filterMakeupBridalBudget || ""}&makeup_service=${selectedServiceListMakeup || ""}&makeup_occasion=${selectedOccasionListMakeup || ""}`;
     } else if (category === "best-wedding-photographers") {
       query = `?photographer_occation=${filterPhotographerService || ""}&photographer_service_budget=${filterPhotographerServiceBudget || ""}&days=${days}`;
     } else if (category === "best-mehndi-artists") {
       query = `?mehndi_package_budget=${filterMehndiPackageBudget || ""}`;
     } else if (category === "band-baja-ghodiwala") {
       query = `?band_baja_ghodiwala_budget=${filterBandBajaGhodiwalaBudget || ""}`;
-    }else if(category === "best-decorators"){
+    } else if (category === "best-decorators") {
       query = `?banquet_decor_package_budget=${filterBanquetDecorPackageBudget || ""}&home_decor_package_budget=${filterHomeDecorPackageBudget || ""}`;
     }
     router.push(baseUrl + query);
@@ -174,12 +257,12 @@ export default function VendorTopFilter({
     setFilterLocality("all");
     router.push(`/${category}/${e.target.value}/all`);
   }
-  
+
   function handleLocalityChange(e) {
     setFilterLocality(e.target.value);
     router.push(`/${category}/${city}/${e.target.value}`);
   }
-  
+
   function handleCategoryChange(e) {
     setFilterCategory(e.target.value);
     router.push(`/${e.target.value}/${city}/${locality}`);
@@ -229,40 +312,41 @@ export default function VendorTopFilter({
             <AiFillCaretDown className="down-arrow" size={15} />
           </div>
         </div>
-        
-        {category !== "best-wedding-photographers" && (
-        <div className="category-wrapper filter-item">
-          <div className="dropdown category-dropdown">
-            <BiCategoryAlt className="icon" />
-            <select
-              name="category"
-              onChange={(e) => handleCategoryChange(e)}
-              value={category}
-            >
-              <option value={null} disabled>Category</option>
-              {vendorCategories.map((cat) => (
-                <option value={cat.slug} key={cat.id}>
-                  {cat.name}
-                </option>
-              ))}
-            </select>
-            <AiFillCaretDown className="down-arrow" size={15} />
+
+        {category !== "best-wedding-photographers" && category !== "top-makeup-artists" && (
+          <div className="category-wrapper filter-item">
+            <div className="dropdown category-dropdown">
+              <BiCategoryAlt className="icon" />
+              <select
+                name="category"
+                onChange={(e) => handleCategoryChange(e)}
+                value={category}
+              >
+                <option value={null} disabled>Category</option>
+                {vendorCategories.map((cat) => (
+                  <option value={cat.slug} key={cat.id}>
+                    {cat.name}
+                  </option>
+                ))}
+              </select>
+              <AiFillCaretDown className="down-arrow" size={15} />
+            </div>
           </div>
-        </div>
         )}
+
 
         {category === "top-makeup-artists" && (
           <>
-            <div className="makeupBridalBudget-wrapper filter-item">
-              <div className="dropdown makeupBridalBudget-dropdown">
-                <MdCurrencyRupee className="icon" />
+            <div className="occationList-wrapper filter-item">
+              <div className="dropdown occationList-dropdown">
+                <SlCalender className="icon" />
                 <select
-                  name="makeupBridalBudget"
-                  onChange={(e) => setFilterMakeupBridalBudget(e.target.value)}
-                  value={filterMakeupBridalBudget}
+                  name="occationList"
+                  onChange={(e) => setSelectedOccasionListMakeup(e.target.value)}
+                  value={selectedOccasionListMakeup}
                 >
-                  <option value="">Makeup Budget (Bridal)</option>
-                  {makeupBridalBudget.map((item, i) => (
+                  <option value="">Occasion</option>
+                  {occationList.map((item, i) => (
                     <option value={item.slug} key={i}>
                       {item.name}
                     </option>
@@ -271,18 +355,36 @@ export default function VendorTopFilter({
                 <AiFillCaretDown className="down-arrow" size={15} />
               </div>
             </div>
-            <div className="makeupEngagementBudget-wrapper filter-item">
-              <div className="dropdown makeupEngagementBudget-dropdown">
+
+            <div className="serviceListMakeup-wrapper filter-item">
+              <div className="dropdown serviceListMakeup-dropdown">
+                <MdOutlineFaceRetouchingNatural className="icon" />
+                <select
+                  name="serviceListMakeup"
+                  onChange={(e) => setSelectedServiceListMakeup(e.target.value)}
+                  value={selectedServiceListMakeup}
+                >
+                  <option value="">Services</option>
+                  {serviceListMakeup.map((item, i) => (
+                    <option value={item.id} key={i}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+                <AiFillCaretDown className="down-arrow" size={15} />
+              </div>
+            </div>
+
+            <div className="makeupBridalBudget-wrapper filter-item">
+              <div className="dropdown makeupBridalBudget-dropdown">
                 <MdCurrencyRupee className="icon" />
                 <select
-                  name="makeupEngagementBudget"
-                  onChange={(e) =>
-                    setFilterMakeupEngagementBudget(e.target.value)
-                  }
-                  value={filterMakeupEngagementBudget}
+                  name="makeupBridalBudget"
+                  onChange={(e) => setFilterMakeupBridalBudget(e.target.value)}
+                  value={filterMakeupBridalBudget}
                 >
-                  <option value="">Makeup (Engagement)</option>
-                  {makeupEngagementBudget.map((item, i) => (
+                  <option value="">Makeup Budget</option>
+                  {makeupBridalBudget.map((item, i) => (
                     <option value={item.slug} key={i}>
                       {item.name}
                     </option>

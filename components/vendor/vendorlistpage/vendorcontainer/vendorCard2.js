@@ -147,7 +147,7 @@ function VenueCard2({
         <div className="venue-aditional-info">
           <div className="location detail-circle">
             <IoLocationSharp className="icon" />
-            <p>{`${vendor?.location_name} , ${vendor?.city_name}`}</p>
+            <p>{`${vendor?.get_locality.name} , ${vendor?.get_city.name}`}</p>
           </div>
           <div className="guests detail-circle">
             <BsFillSuitcaseLgFill className="icon" />
@@ -298,7 +298,6 @@ function VenueCard2({
             </div>
           )}
         </div>
-
         <div className="d-flex">
           <div className="price-contianer">
             <div className="veg-price">

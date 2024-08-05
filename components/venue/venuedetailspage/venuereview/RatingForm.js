@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
-import Swal from 'sweetalert2'
 import ReCAPTCHA from "react-google-recaptcha";
 
 
@@ -31,12 +30,7 @@ const RatingForm = ({venue_id, onCloseOffCanvas }) => {
         });
         if (response.ok) {
             onCloseOffCanvas();
-            Swal.fire({
-                title: 'Saved',
-                text: 'Verification Pending',
-                icon: 'success',
-                confirmButtonText: 'Ok'
-              })
+            alert('Review Verification Pending')
         } else {
             console.error("Failed to save rating and form data");
         }

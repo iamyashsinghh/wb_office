@@ -17,21 +17,19 @@ import { vendor_signup_validation } from "@/lib/formvalidation/formValidation";
 
 
 export default function SignUpPage() {
-
+   const { userIP } = useGlobalContext();
+   
     const router = useRouter();
     const cookies = parseCookies()
 
 
-    //If vendor is already login then redirect to the dashboard page.
     if (cookies["@VendorApp"]) {
         router.push('/business/dashboard')
     }
 
-
     const { cities, vendorCategories,venueCategories} = useGlobalContext();
     const [isLoading, setIsLoading] = useState(false)
     const [businessCategory,setBusinessCategory] = useState([]);
-
 
     const formik = useFormik({
         initialValues: {
@@ -42,7 +40,8 @@ export default function SignUpPage() {
             email: "",
             phone: "",
             city: "",
-            address: ""
+            address: "",
+            user_ip: userIP,
         },
         onSubmit: handleSignUp,
         validate: vendor_signup_validation,
@@ -68,7 +67,6 @@ export default function SignUpPage() {
     async function handleSignUp(values) {
         try {
             setIsLoading(true);
-            // console.log("All okay")
             const data = JSON.stringify(values);
 
             const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/business/signup`

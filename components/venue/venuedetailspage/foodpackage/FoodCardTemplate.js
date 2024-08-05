@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Veg from "@/components/miscellaneous/Veg";
+import { ImCross } from "react-icons/im";
+import { FaCheck } from "react-icons/fa";
 
 export default function FoodCardTemplate({ type, title,foods }) {
 
@@ -42,7 +44,7 @@ export default function FoodCardTemplate({ type, title,foods }) {
                     {foods?.map((food, index) => (
                         <tr key={index} >
                             <td>{food.name}</td>
-                            <td className="center">{food.package}</td>
+                            <td className="center">{food.package ? food.package : <ImCross className="red" />}</td>
                         </tr>
                     ))}
 
@@ -61,6 +63,13 @@ const Div = styled.div`
 box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.2);
 padding-bottom: 5rem;
 background: white;
+
+     .red {
+            color: #F33232;
+     }
+            .green{
+            color: green;
+            }
     .header{
         padding: 1rem 2rem;
         display: flex;

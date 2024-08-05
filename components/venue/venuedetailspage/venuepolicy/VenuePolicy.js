@@ -16,21 +16,21 @@ export default function VenuePolicy({venue}) {
 
             <div className="policy-container">
 
-                <PolicyCard  img_url={"/vpolicy/timing.png"} name={"Morning/Evening"} data={`<ul><li>${venue.start_time_morning}-${venue?.end_time_morning}</li><li>${venue?.start_time_evening}-${venue?.end_time_evening}</li> </ul>`}/>
+                <PolicyCard  img_url={"/vpolicy/timing.png"} name={"Timming"} data={`<ul><li>Morning : ${venue.start_time_morning || '11:00:00'}-${venue?.end_time_morning || '16:00:00'}</li><li>Evening : ${venue?.start_time_evening || '19:00:00'}-${venue?.end_time_evening || '23:59:59'}</li> </ul>`}/>
 
-                <PolicyCard  img_url={"/vpolicy/advance.png"} name={"Advance"} data={venue?.advance || "30% at the time of booking"}/>
+                <PolicyCard  img_url={"/vpolicy/advance.png"} name={"Advance"} data={"25% at the time of booking"}/>
 
-                <PolicyCard  img_url={"/vpolicy/alcohol.png"} name={"Alcohol"} data={venue?.alcohol}/>
+                <PolicyCard  img_url={"/vpolicy/alcohol.png"} name={"Alcohol"} data={`<p style="text-align: center;">Alcohol not allowed at the venue&nbsp;</p><p style="text-align: center;">Outside Alcohol allowed at the venue after getting the P-10 licence</p>`}/>
 
-                <PolicyCard  img_url={"/vpolicy/food.png"} name={"Food"} data={venue?.food}/>
+                <PolicyCard  img_url={"/vpolicy/food.png"} name={"Food"} data={`<p style="text-align: center;">Food provided by the venue&nbsp;</p><p style="text-align: center;">No outside food/caterer is allowed at the venue&nbsp;</p>`}/>
 
-                <PolicyCard  img_url={"/vpolicy/tax.png"} name={"Tax"} data={venue?.tax || "Taxes on F&B 18.00%"}/>
+                <PolicyCard  img_url={"/vpolicy/tax.png"} name={"Tax"} data={"Taxes on F&B 5.00%"}/>
 
-                <PolicyCard  img_url={"/vpolicy/parking.png"} name={"Parking"} data={venue?.parking_at}/>
+                <PolicyCard  img_url={"/vpolicy/parking.png"} name={"Parking"} data={`<p style="text-align: center;">Valet provided by the Venue&nbsp;</p> <p style="text-align: center;">Parking Space available for ${venue?.parking_space || "approx 50 - 100"} vehicles</p>`}/>
 
-                <PolicyCard  img_url={"/vpolicy/cancellation.png"} name={"Cancellation"} data={venue?.cancellation_policy}/>
+                <PolicyCard  img_url={"/vpolicy/cancellation.png"} name={"Cancellation"} data={`<div style="text-align: center;"><span>Non-cancellation</span></div>`}/>
 
-                <PolicyCard  img_url={"/vpolicy/decoration.png"} name={"Decoration"} data={venue?.decoration}/>
+                <PolicyCard  img_url={"/vpolicy/decoration.png"} name={"Decoration"} data={`<p style="text-align: center;">Decorators allowed at the venue without royalty&nbsp;</p><p style="text-align: center;">Decor provided by the venue&nbsp;</p>`}/>
 
 
 

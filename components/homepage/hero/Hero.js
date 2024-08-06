@@ -66,8 +66,8 @@ function Hero({ venueCategogies}) {
         <div className="overlay"></div>
         <div className="hero-title-container">
           {/* <h1 className="title">10,000 + Venues & Vendors Get Everything You Need Here!</h1> */}
-          <h1 className="title">Weddings are for Life
-          <br /> Make it Larger than Life!</h1>
+          <h1 className="title">Find The Perfect Wedding Banquet 
+          <br />Hall For Your Dream Day!</h1>
           <p className="description">
             Explore over 50,000+ Venues and Vendors with reviews, pricing and
             more.

@@ -44,7 +44,7 @@ export default function SimilarVendors({vendors}) {
                         spaceBetween: 20,
                     },
                     1200: {
-                        slidesPerView:3,
+                        slidesPerView: 3,
                         spaceBetween: 20,
                     },
                 }}

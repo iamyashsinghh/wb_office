@@ -67,7 +67,7 @@ export default function Home({
       <Head>
         <link rel="canonical" href="https://weddingbanquets.in" />
         <meta name="og:image" content="https://weddingbanquets.in/twitter-img.png" />
-        <meta property="og:title" content="Best Banquet Halls And Wedding Venues, at 40% Discount" />
+        <meta property="og:title" content="Best Banquet Halls And Wedding Venues at 40% Discount" />
         <meta property="og:description" content="Wedding Banquet To Plan Your Wedding And Make Sure It is a Memorable Occasion. Look Over 10000+ Indian Wedding Venues For Corporate Events, Weddings And Parties" />
         <meta property="og:url" content="https://weddingbanquets.in" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}></script>

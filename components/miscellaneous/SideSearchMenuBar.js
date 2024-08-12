@@ -113,7 +113,7 @@ ${({ isActive }) =>
 const Div = styled.div`
 box-shadow: 0 0 10px  2000px rgba(0, 0, 0, .5);
 transition: all .3s linear;
-z-index: 10;
+z-index: 1000;
 margin-left: auto;
 background-color: white;
 width: 100%;

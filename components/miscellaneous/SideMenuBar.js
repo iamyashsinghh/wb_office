@@ -140,7 +140,7 @@ min-height: 100vh;
 max-height: 100vh;
 overflow-x: hidden;
 overflow-y:scroll;
-z-index: 10;
+z-index: 1000;
 visibility: hidden;
 opacity: 0;
 transition: all .3s linear;

@@ -54,7 +54,7 @@ transform: translateX(-100%);
 /* background-color: white; */
 visibility: hidden;
 opacity: 0;
-z-index: 10;
+z-index: 1000;
 position: relative;
 position: fixed;
 transform: translateX(-100);

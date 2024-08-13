@@ -158,7 +158,7 @@ export default function LeadForm() {
                   </label>
                   {/* <AiFillCalendar className="placeholder-icon" /> */}
                 </div>
-                <div className="form-item">
+                {/* <div className="form-item">
                   <div className="dropdown locality-dropdown">
                     <select>
                       <option value="null">Select Location</option>
@@ -170,11 +170,9 @@ export default function LeadForm() {
                         );
                       })}
                     </select>
-
-                    {/* <label htmlFor="location" className="label">Select Location</label> */}
                   </div>
                   <AiFillCaretDown className="down-arrow" size={15} />
-                </div>
+                </div> */}
                 <div>
                   {/* <CustomReCAPTCHA
                     sitekey="6LfVFGcpAAAAAO606P0XnI79hWitIwuF4HPhB_nR"

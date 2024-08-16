@@ -87,7 +87,7 @@ function Filter({ filterQuery, localities, venueCategories, city, category, loca
     const [facilities, setFacilities] = useState([]);
     const [guest, setGuest] = useState(filterQuery.guest || "")
     const [perBudget, setPerBudget] = useState([100000, 1000000])
-    const [perPlate, setPerPlate] = useState([100, 5000])
+    const [perPlate, setPerPlate] = useState([800, 5000])
     const [selectedFoodPreferance, setSelectedFoodPreferance] = useState([""])
     const [searchValue, setSearchValue] = useState(filterQuery.serch_value);
 

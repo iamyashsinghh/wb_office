@@ -14,7 +14,7 @@ export default function BudgetRangeSlider({ perBudget, setPerBudget, perPlate, s
 
     function handleClear(){
         setPerBudget([100000,1000000])
-        setPerPlate([100,5000])
+        setPerPlate([800,5000])
     }
     const updatePerPlate = (value) => {
         // setPerDayValue(value)
@@ -35,15 +35,15 @@ export default function BudgetRangeSlider({ perBudget, setPerBudget, perPlate, s
         </div>
         <div className="tabs">
             <span className={`tabs-btn ${toggleTab && "selected"}`} onClick={() => setToggleTab(true)}>Per plate</span>
-            <span className={`tabs-btn ${!toggleTab && "selected"}`} onClick={() => setToggleTab(false)}>Per day</span>
+            {/* <span className={`tabs-btn ${!toggleTab && "selected"}`} onClick={() => setToggleTab(false)}>Per day</span> */}
         </div>
         {
             toggleTab ? (
                 <div key={0}>
                     <StyledSlider
                         defaultValue={perPlate}
-                        minDistance={100}
-                        min={100}
+                        minDistance={800}
+                        min={800}   
                         max={5000}
                         onChange={updatePerPlate}
                         renderTrack={Track}

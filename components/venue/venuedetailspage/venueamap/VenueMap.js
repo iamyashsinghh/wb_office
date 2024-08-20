@@ -122,7 +122,7 @@ export default function VenueMap({ location_map }) {
                 /> */}
                 <div className="contant">
 
-                    <h2 className="title">Schedule your visit here</h2>
+                    <h2 className="title">Schedule your visit for food testing experience</h2>
 
                     <div className="card-vector-container">
 
@@ -201,7 +201,7 @@ border: 0;
     background-color: white;
     position: relative;
     border-radius: 5px;
-    height:530px;
+    height:430px;
 
     /* border: 1px solid red; */
 
@@ -212,7 +212,7 @@ border: 0;
     .contant{
         display: flex;
         height: 100%;
-        padding: 3rem;
+        padding: 4rem;
         z-index: 1;
         flex-direction: column;
         align-items: center;
@@ -245,7 +245,7 @@ border: 0;
             position: relative;
             width: 150px;
             height: 150px;
-            margin: auto;
+            margin: 0 auto;
 
         }
         .schedule-btn{

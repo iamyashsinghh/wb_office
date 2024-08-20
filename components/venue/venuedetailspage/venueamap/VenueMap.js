@@ -186,7 +186,7 @@ background-color: var(--bg-color);
 
 iframe{
 width: 100%;
-height:430px;
+height:450px;
 border: 0;
 }
 
@@ -201,7 +201,7 @@ border: 0;
     background-color: white;
     position: relative;
     border-radius: 5px;
-    height:430px;
+    height:450px;
 
     /* border: 1px solid red; */
 

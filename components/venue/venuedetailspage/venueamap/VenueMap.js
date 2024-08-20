@@ -186,7 +186,7 @@ background-color: var(--bg-color);
 
 iframe{
 width: 100%;
-height:530px;
+height:430px;
 border: 0;
 }
 
@@ -212,7 +212,7 @@ border: 0;
     .contant{
         display: flex;
         height: 100%;
-        padding: 4rem;
+        padding: 3rem;
         z-index: 1;
         flex-direction: column;
         align-items: center;

@@ -11,116 +11,38 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
   const router = useRouter();
 
   const occationList = [
-    {
-      name: "Roka",
-      slug: "roka"
-    },
-    {
-      name: "Sagan",
-      slug: "sagan"
-    },
-    {
-      name: "Engagement",
-      slug: "engagement"
-    },
-    {
-      name: "Haldi & Mehndi",
-      slug: "haldi-mehndi"
-    },
-    {
-      name: "Cocktail",
-      slug: "cocktail"
-    },
-    {
-      name: "Wedding",
-      slug: "wedding"
-    },
-    {
-      name: "Reception",
-      slug: "reception"
-    },
-    {
-      name: "Anniversary",
-      slug: "anniversary"
-    },
-    {
-      name: "Mata ki Chowki",
-      slug: "mata-ki-chowki"
-    },
-    {
-      name: "Birthday",
-      slug: "birthday"
-    },
-    {
-      name: "Corporate Event",
-      slug: "corporate-event"
-    },
-    {
-      name: "Baby Shower",
-      slug: "baby-shower"
-    },
+    { name: "Roka", slug: "roka" },
+    { name: "Sagan", slug: "sagan" },
+    { name: "Engagement", slug: "engagement" },
+    { name: "Haldi & Mehndi", slug: "haldi-mehndi" },
+    { name: "Cocktail", slug: "cocktail" },
+    { name: "Wedding", slug: "wedding" },
+    { name: "Reception", slug: "reception" },
+    { name: "Anniversary", slug: "anniversary" },
+    { name: "Mata ki Chowki", slug: "mata-ki-chowki" },
+    { name: "Birthday", slug: "birthday" },
+    { name: "Corporate Event", slug: "corporate-event" },
+    { name: "Baby Shower", slug: "baby-shower" },
   ];
 
   const serviceListPhotographers = [
-    {
-      id: "traditional",
-      name: "Traditional",
-    },
-    {
-      id: "candid",
-      name: "Candid",
-    },
-    {
-      id: "pre-wedding",
-      name: "Pre-wedding",
-    },
-    {
-      id: "cinematographic",
-      name: "Cinematographic",
-    },
-    {
-      id: "drone-shoots",
-      name: "Drone Shoots",
-    },
-    {
-      id: 'photobooth',
-      name: "Photobooth",
-    },
-    {
-      id: 'live-screening',
-      name: "Live Screening",
-    }
+    { id: "traditional", name: "Traditional" },
+    { id: "candid", name: "Candid" },
+    { id: "pre-wedding", name: "Pre-wedding" },
+    { id: "cinematographic", name: "Cinematographic" },
+    { id: "drone-shoots", name: "Drone Shoots" },
+    { id: "photobooth", name: "Photobooth" },
+    { id: "live-screening", name: "Live Screening" },
   ];
 
   const serviceListMakeup = [
-    {
-      id: "airbrush-makeup",
-      name: "Airbrush Makeup",
-    },
-    {
-      id: "party-makeup",
-      name: "Party Makeup",
-    },
-    {
-      id: "hd-makeup",
-      name: "HD Makeup",
-    },
-    {
-      id: "birdal-makeup",
-      name: "Birdal Makeup",
-    },
-    {
-      id: "engagement-makeup",
-      name: "Engagement Makeup",
-    },
-    {
-      id: "outstation-makeup",
-      name: "Outstation Makeup",
-    },
-    {
-      id: "haldimakeup-mehndi-cocktail-roka",
-      name: "Haldi Makeup/ Mehndi / Cocktail / Roka",
-    },
+    { id: "airbrush-makeup", name: "Airbrush Makeup" },
+    { id: "party-makeup", name: "Party Makeup" },
+    { id: "hd-makeup", name: "HD Makeup" },
+    { id: "bridal-makeup", name: "Bridal Makeup" },
+    { id: "engagement-makeup", name: "Engagement Makeup" },
+    { id: "outstation-makeup", name: "Outstation Makeup" },
+    { id: "haldimakeup-mehndi-cocktail-roka", name: "Haldi Makeup/ Mehndi / Cocktail / Roka" },
   ];
 
   const initialPhotoVideoPackageBudget = [
@@ -144,9 +66,9 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
     { name: "Upto ₹ 8,000", slug: "0,8000" },
     { name: "₹ 8,000-₹ 20,000", slug: "8000,20000" },
     { name: "₹ 20,000-₹ 40,000", slug: "20000,40000" },
-    { name: "₹ 40,000-₹ 60,000", slug: "40000, 60000" },
-    { name: "₹ 60,000-₹ 80,000", slug: "60000, 80000" },
-    { name: "₹ 80,000-₹ 1,00,000", slug: "80000, 100000" },
+    { name: "₹ 40,000-₹ 60,000", slug: "40000,60000" },
+    { name: "₹ 60,000-₹ 80,000", slug: "60000,80000" },
+    { name: "₹ 80,000-₹ 1,00,000", slug: "80000,100000" },
     { name: "More than ₹ 1,00,000", slug: "100000,9999999999" },
   ];
 
@@ -185,7 +107,7 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
   ];
 
   const [selectedLocalities, setSelectedLocalities] = useState(filterQuery.multi_localities?.split(",") || []);
-  const [selectedCategories, serSelectedCategories] = useState([category]);
+  const [selectedCategories, setSelectedCategories] = useState([category]);
   // photographer
   const [selectedServiceListPhotographers, setSelectedServiceListPhotographers] = useState(filterQuery.photographer_service?.split(",") || []);
   const [filterPhotographerOccation, setFilterPhotographerOccation] = useState(filterQuery.photographer_occation || "");
@@ -215,6 +137,11 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
 
   // State to track when to apply the filter
   const [shouldApplyFilter, setShouldApplyFilter] = useState(false);
+
+  // Update selectedCategories when category prop changes
+  useEffect(() => {
+    setSelectedCategories([category]);
+  }, [category]);
 
   useEffect(() => {
     if (category === "best-wedding-photographers") {
@@ -334,7 +261,7 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
               updateRanges(1, values[1]);
             }}
           />
-          <RedioFilter items={vendorCategories} name={"Categories"} list={selectedCategories} setList={serSelectedCategories} handleApplyFilter={handleApplyFilter} />
+          <RedioFilter items={vendorCategories} name={"Categories"} list={selectedCategories} setList={setSelectedCategories} handleApplyFilter={handleApplyFilter} />
         </div>
       </Wrapper>
     );
@@ -372,3 +299,4 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
       overflow-x: hidden;
     }
   `;
+

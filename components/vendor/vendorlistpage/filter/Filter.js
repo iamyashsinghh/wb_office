@@ -299,4 +299,3 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
       overflow-x: hidden;
     }
   `;
-

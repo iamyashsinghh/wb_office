@@ -5,8 +5,6 @@ import { BiRupee } from "react-icons/bi";
 import CallingRequest from "@/lib/request/callingrequest/CallingRequest";
 import Image from "next/image";
 import TabsComponent from "../tabsComponent/TabsComponent";
-import Tabs from "../tabs/Tabs";
-import Head from "next/head";
 import { BsFillSuitcaseLgFill } from "react-icons/bs";
 import { MdEventAvailable } from "react-icons/md";
 
@@ -17,16 +15,33 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
-  
+
   const packages = vendor.package_option
     ?.split(",")
     .map((item) => item.trim())
     .filter((item) => item);
 
+  const hasValidPrice =
+    vendor.albums_price ||
+    vendor.pre_wedding_photoshoot_price ||
+    vendor.traditional_video_price ||
+    vendor.traditional_photography_price ||
+    vendor.candid_photography_price ||
+    vendor.cinematography_price ||
+    vendor.party_makeup_price ||
+    vendor.engagement_makeup_price ||
+    vendor.hd_bridal_makeup_price ||
+    vendor.air_brush_makeup_price;
+
   async function handleAnchorClick(e, slug) {
     e.stopPropagation();
     await CallingRequest(slug);
   }
+  const numberFormat = (value) =>
+    new Intl.NumberFormat('en-IN', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(value);
 
   return (
     <>
@@ -61,9 +76,9 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                   <BsFillSuitcaseLgFill className="icon" />
                   <p>
                     Exp.{" "}
-                    {`${vendor?.yrs_exp != undefined &&
-                      vendor?.yrs_exp != null &&
-                      vendor?.yrs_exp != 0
+                    {`${vendor?.yrs_exp !== undefined &&
+                      vendor?.yrs_exp !== null &&
+                      vendor?.yrs_exp !== 0
                       ? vendor.yrs_exp
                       : "5+"
                       } Yr's`}
@@ -72,16 +87,16 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                 <div className="detail-circle">
                   <MdEventAvailable className="icon" />
                   <p>
-                  Event Completed:
-                <span className="price">
-                  &nbsp;
-                  {`${vendor?.event_completed != undefined &&
-                    vendor?.event_completed != null &&
-                    vendor?.event_completed != 0
-                    ? vendor.event_completed
-                    : 150
-                    }+`}
-                </span>
+                    Event Completed:
+                    <span className="price">
+                      &nbsp;
+                      {`${vendor?.event_completed !== undefined &&
+                        vendor?.event_completed !== null &&
+                        vendor?.event_completed !== 0
+                        ? vendor.event_completed
+                        : 150
+                        }+`}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -122,9 +137,84 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                     </div>
                   </AccordionTitle>
                   <AccordionContent isOpen={openIndex === 1}>
-                    {packages?.map((price_package, i) => (
-                      <p key={i}>{price_package}</p>
-                    ))}
+                    {hasValidPrice ? (
+                      <div className="venue-category">
+                        {vendor.air_brush_makeup_price && (
+                          <div className="category-item">
+                            <p>Air Brush Makeup</p>
+                            <p>₹ {numberFormat(vendor.air_brush_makeup_price)}</p>
+
+                          </div>
+                        )}
+                        {vendor.hd_bridal_makeup_price && (
+                          <div className="category-item">
+                            <p>HD Bridal Makeup</p>
+                            <p>₹ {numberFormat(vendor.hd_bridal_makeup_price)}</p>
+
+                          </div>
+                        )}
+                        {vendor.engagement_makeup_price && (
+                          <div className="category-item">
+                            <p>Engagement Makeup</p>
+                            <p>₹ {numberFormat(vendor.engagement_makeup_price)}</p>
+
+                          </div>
+                        )}
+                        {vendor.party_makeup_price && (
+                          <div className="category-item">
+                            <p>Party Makeup</p>
+                            <p>₹ {numberFormat(vendor.party_makeup_price)}</p>
+
+                          </div>
+                        )}
+                        {vendor.cinematography_price && (
+                          <div className="category-item">
+                            <p>Cinematography</p>
+                            <p>₹ {numberFormat(vendor.cinematography_price)}</p>
+
+                          </div>
+                        )}
+                        {vendor.candid_photography_price && (
+                          <div className="category-item">
+                            <p>Candid Photography</p>
+                            <p>₹ {numberFormat(vendor.candid_photography_price)}</p>
+                          </div>
+                        )}
+                        {vendor.traditional_photography_price && (
+                          <div className="category-item">
+                            <p>Traditional Photography</p>
+                            <p>₹ {numberFormat(vendor.traditional_photography_price)}</p>
+
+                          </div>
+                        )}
+                        {vendor.traditional_video_price && (
+                          <div className="category-item">
+                            <p>Traditional Videography</p>
+                            <p>₹ {numberFormat(vendor.traditional_video_price)}</p>
+
+                          </div>
+                        )}
+                        {vendor.pre_wedding_photoshoot_price && (
+                          <div className="category-item">
+                            <p>Pre Wedding Photoshoot</p>
+                            <p>₹ {numberFormat(vendor.pre_wedding_photoshoot_price)}</p>
+
+                          </div>
+                        )}
+                        {vendor.albums_price && (
+                          <div className="category-item">
+                            <p>Albums Price</p>
+                            <p>₹ {numberFormat(vendor.albums_price)}</p>
+
+                          </div>
+                        )}
+                      </div>
+
+                    ) : (
+                      packages?.map((price_package, i) => (
+                        <p key={i}>{price_package}</p>
+                      ))
+                    )}
                   </AccordionContent>
                 </AccordionItem>
               </AccordionContainer>
@@ -133,10 +223,11 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                   <BiRupee className="rupee-icon" />
                   <div className="cut-price">
                     {vendor?.package_price ? (
-                      <del>{vendor.package_price}</del>
+                      <del>{numberFormat(vendor.package_price)}</del>
                     ) : (
                       "On Demand"
                     )}
+
                   </div>
                 </h2>
                 <div className="action-btns">
@@ -180,41 +271,43 @@ const Wrapper = styled.section`
     margin-top: 25px;
   }
 
+
   .v-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-    .vendor-aditional-info {
+
+  .vendor-aditional-info {
     margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      .location {
-        margin: 0 20px 0 0;
-        p,
-        .icon {
-          color: var(--info-color);
-        }
+    display: flex;
+    flex-wrap: wrap;
+    .location {
+      margin: 0 20px 0 0;
+      p,
+      .icon {
+        color: var(--info-color);
       }
-      .detail-circle {
-        display: flex;
-        gap: 3px;
-        align-items: center;
-        padding: 3px 7px;
-        border-radius: 5px;
-        color: var(--para);
-        margin-right: 20px;
-        background-color: #f1f5fa;
-        .icon {
-          font-size: 2.2rem;
-        }
-        p {
-          font-family: "Poppins";
-          font-size: 1.5rem;
-        }
+    }
+    .detail-circle {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+      padding: 3px 7px;
+      border-radius: 5px;
+      color: var(--para);
+      margin-right: 20px;
+      background-color: #f1f5fa;
+      .icon {
+        font-size: 2.2rem;
+      }
+      p {
+        font-family: "Poppins";
+        font-size: 1.5rem;
       }
     }
   }
+
   .vendor-ad {
     position: sticky;
     top: 0;
@@ -452,7 +545,26 @@ const AccordionContent = styled.div`
   transition: max-height 0.6s ease-in;
   padding: 5px 15px;
   background: #fff;
-  p {
-    margin-top: 4px;
-  }
+
+.venue-category {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 5px;
+}
+
+.category-item {
+  flex: 1 1 calc(50% - 1rem); /* Two items per row */
+  background-color: #f1f1f1;
+  padding: 0.3rem;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.category-item p {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
 `;

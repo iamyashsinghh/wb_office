@@ -167,134 +167,54 @@ function VenueCard2({
           <span className="read-more-btn">read more...</span>
         </p>
         <div className="venue-category">
-          {vendor['roka'] && (
+          {vendor['air_brush_makeup_price'] && (
             <div className="category">
-              <p>Roka</p>
+              <p>Air Brush Makeup</p>
             </div>
           )}
-          {vendor['sagan'] && (
+          {vendor['hd_bridal_makeup_price'] && (
             <div className="category">
-              <p>Sagan</p>
+              <p>HD Bridal Makeup</p>
             </div>
           )}
-          {vendor['engagement'] && (
-            <div className="category">
-              <p>Engagement</p>
-            </div>
-          )}
-          {vendor['haldi-mehndi'] && (
-            <div className="category">
-              <p>Haldi & Mehndi</p>
-            </div>
-          )}
-          {vendor['cocktail'] && (
-            <div className="category">
-              <p>Cocktail</p>
-            </div>
-          )}
-          {vendor['wedding'] && (
-            <div className="category">
-              <p>Wedding</p>
-            </div>
-          )}
-          {vendor['reception'] && (
-            <div className="category">
-              <p>Reception</p>
-            </div>
-          )}
-          {vendor['anniversary'] && (
-            <div className="category">
-              <p>Anniversary</p>
-            </div>
-          )}
-          {vendor['mata-ki-chowki'] && (
-            <div className="category">
-              <p>Mata ki Chowki</p>
-            </div>
-          )}
-          {vendor['birthday'] && (
-            <div className="category">
-              <p>Birthday</p>
-            </div>
-          )}
-          {vendor['corporate-event'] && (
-            <div className="category">
-              <p>Corporate Event</p>
-            </div>
-          )}
-          {vendor['baby-shower'] && (
-            <div className="category">
-              <p>Baby Shower</p>
-            </div>
-          )}
-          {vendor['traditional'] && (
-            <div className="category">
-              <p>Traditional</p>
-            </div>
-          )}
-          {vendor['candid'] && (
-            <div className="category">
-              <p>Candid</p>
-            </div>
-          )}
-          {vendor['pre-wedding'] && (
-            <div className="category">
-              <p>Pre-wedding</p>
-            </div>
-          )}
-          {vendor['cinematographic'] && (
-            <div className="category">
-              <p>Cinematographic</p>
-            </div>
-          )}
-          {vendor['drone-shoots'] && (
-            <div className="category">
-              <p>Drone Shoots</p>
-            </div>
-          )}
-          {vendor['photobooth'] && (
-            <div className="category">
-              <p>Photobooth</p>
-            </div>
-          )}
-          {vendor['live-screening'] && (
-            <div className="category">
-              <p>Live Screening</p>
-            </div>
-          )}
-          {vendor['airbrush-makeup'] && (
-            <div className="category">
-              <p>Airbrush Makeup</p>
-            </div>
-          )}
-          {vendor['party-makeup'] && (
-            <div className="category">
-              <p>Party Makeup</p>
-            </div>
-          )}
-          {vendor['hd-makeup'] && (
-            <div className="category">
-              <p>HD Makeup</p>
-            </div>
-          )}
-          {vendor['birdal-makeup'] && (
-            <div className="category">
-              <p>Birdal Makeup</p>
-            </div>
-          )}
-          {vendor['engagement-makeup'] && (
+          {vendor['engagement_makeup_price'] && (
             <div className="category">
               <p>Engagement Makeup</p>
             </div>
           )}
-          {vendor['outstation-makeup'] && (
+          {vendor['party_makeup_price'] && (
             <div className="category">
-              <p>Outstation Makeup</p>
+              <p>Party Makeup</p>
             </div>
           )}
-          {vendor['haldimakeup-mehndi-cocktail-roka'] && (
+          {vendor['cinematography_price'] && (
             <div className="category">
-              <p>Haldi Makeup/ Mehndi / Cocktail / Roka</p>
+              <p>Cinematography</p>
+            </div>
+          )}
+          {vendor['candid_photography_price'] && (
+            <div className="category">
+              <p>Candid Photography</p>
+            </div>
+          )}
+          {vendor['traditional_photography_price'] && (
+            <div className="category">
+              <p>Traditional Photography</p>
+            </div>
+          )}
+          {vendor['traditional_video_price'] && (
+            <div className="category">
+              <p>Traditional Videography</p>
+            </div>
+          )}
+          {vendor['pre_wedding_photoshoot_price'] && (
+            <div className="category">
+              <p>Pre Wedding Photoshoot</p>
+            </div>
+          )}
+          {vendor['albums_price'] && (
+            <div className="category">
+              <p>Albums Price</p>
             </div>
           )}
         </div>
@@ -312,7 +232,7 @@ function VenueCard2({
                 </span>
               </p>
             </div>
-            <div className="nonveg-price">
+            <div className="price-second">
               <p>
                 Event Completed:
                 <span className="price">
@@ -471,7 +391,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
 
-    .nonveg-price,
+    .price-second,
     .veg-price {
       align-items: center;
       display: flex;

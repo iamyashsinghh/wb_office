@@ -31,7 +31,9 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
     vendor.party_makeup_price ||
     vendor.engagement_makeup_price ||
     vendor.hd_bridal_makeup_price ||
-    vendor.air_brush_makeup_price;
+    vendor.air_brush_makeup_price ||
+    vendor.bridal_mehndi_price ||
+    vendor.engagement_mehndi_price;
 
   async function handleAnchorClick(e, slug) {
     e.stopPropagation();
@@ -205,6 +207,20 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                           <div className="category-item">
                             <p>Albums Price</p>
                             <p>₹ {numberFormat(vendor.albums_price)}</p>
+
+                          </div>
+                        )}
+                        {vendor.bridal_mehndi_price && (
+                          <div className="category-item">
+                            <p>Bridal Mehndi</p>
+                            <p>₹ {numberFormat(vendor.bridal_mehndi_price)}</p>
+
+                          </div>
+                        )}
+                        {vendor.engagement_mehndi_price && (
+                          <div className="category-item">
+                            <p>Engagement Mehndi</p>
+                            <p>₹ {numberFormat(vendor.engagement_mehndi_price)}</p>
 
                           </div>
                         )}

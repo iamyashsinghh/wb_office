@@ -217,6 +217,16 @@ function VenueCard2({
               <p>Albums Price</p>
             </div>
           )}
+          {vendor['engagement_mehndi_price'] && (
+            <div className="category">
+              <p>Engagement Mehndi</p>
+            </div>
+          )}
+          {vendor['bridal_mehndi_price'] && (
+            <div className="category">
+              <p>Bridal Mehndi</p>
+            </div>
+          )}
         </div>
         <div className="d-flex">
           <div className="price-contianer">

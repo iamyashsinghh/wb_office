@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 
 import CylenderFilter from "@/components/miscellaneous/filter/CylenderFilter";
 import { RedioFilter } from "@/components/miscellaneous/filter/RedioFilter";
 import { CheckFilter } from "@/components/miscellaneous/filter/CheckFilter";
 import BudgetRangeSlider from "@/components/miscellaneous/filter/BudgetSlider";
+import getLocalitiesCat from "@/lib/request/getlocalities/getLocalitiesCat";
 
 
 function Filter({ filterQuery, localities, venueCategories, city, category, locality }) {
@@ -90,6 +91,7 @@ function Filter({ filterQuery, localities, venueCategories, city, category, loca
     const [perPlate, setPerPlate] = useState([800, 5000])
     const [selectedFoodPreferance, setSelectedFoodPreferance] = useState([""])
     const [searchValue, setSearchValue] = useState(filterQuery.serch_value);
+    const [cityLocalities,setCityLocalities] = useState([]);
 
 
     function handleApplyFilter() {
@@ -98,10 +100,25 @@ function Filter({ filterQuery, localities, venueCategories, city, category, loca
 
     }
 
+    useEffect(()=>{
+        async function fetchLocaties(){
+            
+            let response = await getLocalitiesCat(city, category);
+            if(response.success === true){
+                setCityLocalities(response.data)
+            }
+            else{
+    
+            }
+        }
+    
+        fetchLocaties();
+    },[city, category])
+
     return (<Wrapper>
         <div className="filters">
 
-            <CheckFilter items={localities} name={"Localities"} list={selectedLocalities} setList={setSelectedLocalities} handleApplyFilter={handleApplyFilter} />
+            <CheckFilter items={cityLocalities} type={'venue'} name={"Localities"} list={selectedLocalities} setList={setSelectedLocalities} handleApplyFilter={handleApplyFilter} />
 
             <BudgetRangeSlider perBudget={perBudget} setPerBudget={setPerBudget} perPlate={perPlate} setPerPlate={setPerPlate} handleApplyFilter={handleApplyFilter} />
 

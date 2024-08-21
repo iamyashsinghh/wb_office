@@ -1,152 +1,99 @@
 import styled from "styled-components";
-import { useRef, useState,useEffect } from "react";
-import {BiSearch} from  'react-icons/bi'
+import { useRef, useState, useEffect } from "react";
+import { BiSearch } from 'react-icons/bi';
 
-
-/*
-ARGUMENTS
-
-name => Label name of check filter
-
-items => This is the total items that should be list in the checkbox. 
-
-list => This is the list of selected items. When the user select any iten we append into the list
-
-setList => This is the setter basiclly use to set the value of list 
-
-handleApplyFiter => This is the function which will be called after setting the filters. This function will be called after selecting the items.
-
-
-*/ 
-export function CheckFilter({ name, items, list, setList ,handleApplyFilter}) {
-
-    // console.log(handleApplyFilter)
+export function CheckFilter({ name, items, list, setList, handleApplyFilter, type }) {
     const initialRender = useRef(true);
-
     const [show, setShow] = useState(false);
-    const [searchTerm,setSearchTerm] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
 
-    // console.log("This me check filter")
-    
     const filteredCities = items?.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    
-
-    //This useEffect will be called when the list change. List the the array of selected item. When the use selected the item that item will be append to the list state and then this useEffect will be triggered and handleApplyFunction will be called. We also skip initalRender to prevind unneccerry render, otherwise useEffect will run even first time even the user does't select any item. and handleApplyFunction will be called. To prevent this we skip the first render.
-    useEffect(()=>{
-        if(initialRender.current){
-            // console.log("INSIDE IF BLOCK")
+    useEffect(() => {
+        if (initialRender.current) {
             initialRender.current = false;
             return;
         }
-        
-        // console.log("UseEffect run ")
         handleApplyFilter();
+    }, [list]);
 
-    },[list])
-    
-
-    // This Function is a handler function when the user select any filter item then we are setting that item to the list array use setList method.
     const handleCheckChange = (event) => {
         const { value, checked } = event.target;
 
         if (checked && !list.includes(value)) {
-        // --------------------------------------------------------------
-            //Finding the index of selected city
-            const index = items.findIndex((city)=>{
-                return String(city.id) === String(value)
-            })
-            
-            // copy of seleccted city
+            const index = items.findIndex((city) => String(city.id) === String(value));
             const selectedFilterCity = items[index];
-            //deleted selected city from that position
-            items.splice(index,1);
-            //inseting on starting of array so that it appear on top
-            items.unshift(selectedFilterCity)
-        // --------------------------------------------------------------
-      
+            items.splice(index, 1);
+            items.unshift(selectedFilterCity);
             setList(prev => [...prev, value]);
-
         } else if (!checked && list.includes(value)) {
-   
             setList(prev => prev.filter(loc => loc !== value));
         }
-
     };
-
 
     const handleClear = () => {
         setList([]); // This will empty the array
     };
 
-    return (<Box show={show}>
+    return (
+        <Box show={show}>
+            <div className="header-title">
+                <h4>{name} <span className="badge-count">{`(${items.length})`}</span></h4>
+                <span className="clear-btn" onClick={handleClear}>Clear</span>
+            </div>
 
-        <div className="header-title">
-
-            <h4>{name}  <span className="badge-count">
-                {`(${items.length})`}
-            </span></h4>
-            <span className="clear-btn" onClick={handleClear}>Clear</span>
-
-
-        </div>
-
-        {/* Showing the searchbar only for localities, if we want search bar in all the checkfilter then remote this block */}
-        {
-           name == "Localities"  && (
+            {name === "Localities" && (
                 <div className="search-bar">
-                    <BiSearch className="search-icon"/>
-                    <input type="text" className="" name="search" placeholder="Search Locality"  value={searchTerm} onChange={e=>setSearchTerm(e.target.value)}/>
+                    <BiSearch className="search-icon" />
+                    <input
+                        type="text"
+                        name="search"
+                        placeholder="Search Locality"
+                        value={searchTerm}
+                        onChange={e => setSearchTerm(e.target.value)}
+                    />
                 </div>
-            )
-        }
+            )}
 
-        <div className="filter-lists">
+            <div className="filter-lists">
+                {filteredCities?.map((item, i) => {
+                    const badgeCount = type === 'vendor' ? item.vendor_count : item.venue_count;
 
-            {
-                filteredCities?.map((item, i) => {
-                    if (i < 5) {
-                        return (<div key={i}>
+                    return (
+                        <div key={i} className={i < 5 ? "" : "hide"}>
                             <div className="filter-item">
-                                <label className="main">{item.name}
-                                    <input type="checkbox" name="check-item" value={item.id} checked={list.includes(String(item.id))} onChange={(e) => handleCheckChange(e)} />
+                                <label className="main">
+                                    {item.name}
+                                    <input
+                                        type="checkbox"
+                                        name="check-item"
+                                        value={item.id}
+                                        checked={list.includes(String(item.id))}
+                                        onChange={(e) => handleCheckChange(e)}
+                                    />
                                     <span className="geekmark"></span>
                                 </label>
-                                {/* <span className="badge-count">23</span> */}
+                                {type && (
+                                    <span className="badge-count">{badgeCount}</span>
+                                )}
                             </div>
-                        </div>)
-                    }
-                    else {
-                        return (<div className="hide" key={i}>
-                            <div className="filter-item">
-                                <label className="main">{item.name}
-                                    <input type="checkbox"  name="check-item" value={item.id} checked={list.includes(String(item.id))} onChange={(e) => handleCheckChange(e)} />
-                                    <span className="geekmark"></span>
-                                </label>
-                                {/* <span className="badge-count">23</span> */}
-                            </div>
-                        </div>)
-
-                    }
-
-
-                })
-            }
-            {
-                items?.length > 5 && (
+                        </div>
+                    );
+                })}
+                {items?.length > 5 && (
                     <div className="show-more">
-                        <button className="show-more-btn" onClick={() => setShow(!show)}>{show ? "-Show Less" : "+Show More"}</button>
+                        <button
+                            className="show-more-btn"
+                            onClick={() => setShow(!show)}
+                        >
+                            {show ? "-Show Less" : "+Show More"}
+                        </button>
                     </div>
-                )
-            }
-
-        </div>
-
-
-    </Box>)
+                )}
+            </div>
+        </Box>
+    );
 }
-
-
 
 const Box = styled.div`
 

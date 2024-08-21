@@ -6,6 +6,7 @@ import CylenderFilter from "@/components/miscellaneous/filter/CylenderFilter";
 import { RedioFilter } from "@/components/miscellaneous/filter/RedioFilter";
 import { CheckFilter } from "@/components/miscellaneous/filter/CheckFilter";
 import RangeFilter from "@/components/miscellaneous/filter/RangeFilter";
+import getLocalitiesCat from "@/lib/request/getlocalities/getLocalitiesCat";
 
 function VendorFilter({ filterQuery, localities, vendorCategories, city, category, locality }) {
   const router = useRouter();
@@ -106,6 +107,8 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
     { name: "More than ₹ 1,00,000", slug: "100000,9999999999" },
   ];
 
+  const [cityLocalities,setCityLocalities] = useState([]);
+
   const [selectedLocalities, setSelectedLocalities] = useState(filterQuery.multi_localities?.split(",") || []);
   const [selectedCategories, setSelectedCategories] = useState([category]);
   // photographer
@@ -141,7 +144,24 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
   // Update selectedCategories when category prop changes
   useEffect(() => {
     setSelectedCategories([category]);
+    
   }, [category]);
+
+
+  useEffect(()=>{
+    async function fetchLocaties(){
+        
+        let response = await getLocalitiesCat(city, category);
+        if(response.success === true){
+            setCityLocalities(response.data)
+        }
+        else{
+
+        }
+    }
+
+    fetchLocaties();
+},[city, category])
 
   useEffect(() => {
     if (category === "best-wedding-photographers") {
@@ -205,7 +225,7 @@ function VendorFilter({ filterQuery, localities, vendorCategories, city, categor
   return (
     <Wrapper>
       <div className="filters">
-        <CheckFilter items={localities} name={"Localities"} list={selectedLocalities} setList={setSelectedLocalities} handleApplyFilter={handleApplyFilter} />
+        <CheckFilter items={cityLocalities} type={'vendor'} name={"Localities"} list={selectedLocalities} setList={setSelectedLocalities} handleApplyFilter={handleApplyFilter} />
         
         {category === "best-wedding-photographers" && (
           <>

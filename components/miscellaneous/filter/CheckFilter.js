@@ -73,13 +73,14 @@ export function CheckFilter({ name, items, list, setList, handleApplyFilter, typ
                                     />
                                     <span className="geekmark"></span>
                                 </label>
-                                {type && (
+                                {type && badgeCount > 0 && (
                                     <span className="badge-count">{badgeCount}</span>
                                 )}
                             </div>
                         </div>
                     );
                 })}
+
                 {items?.length > 5 && (
                     <div className="show-more">
                         <button

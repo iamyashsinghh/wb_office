@@ -77,6 +77,7 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
                 src={`${process.env.NEXT_PUBLIC_MEDIA_PREFIX}/${image}`}
                 fill
                 sizes="(100vw)"
+                loading="eager"
                 alt={locality === "all" ? `${category.replaceAll( "-", " ")} in ${city.replaceAll("-", " ")}` : `${category.replaceAll("-", " ")} in ${locality.replaceAll("-", " ")}`}
               />
             </SwiperSlide>
@@ -108,6 +109,7 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
                 src={`${process.env.NEXT_PUBLIC_MEDIA_PREFIX}/${image}`}
                 fill
                 sizes="(100vw)"
+                loading="eager"
                 alt={locality === "all" ? `${category.replaceAll( "-", " ")} in ${city.replaceAll("-", " ")}` : `${category} in ${locality}`}
               />
             </SwiperSlide>

@@ -76,7 +76,6 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
                 src={`${process.env.NEXT_PUBLIC_MEDIA_PREFIX}/${image}`}
                 fill
                 sizes="(100vw)"
-                priority={true}  // Add priority for critical images
                 alt={locality === "all" ? `${category.replaceAll( "-", " ")} in ${city.replaceAll("-", " ")}` : `${category.replaceAll("-", " ")} in ${locality.replaceAll("-", " ")}`}
               />
             </SwiperSlide>

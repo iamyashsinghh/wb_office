@@ -50,8 +50,7 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
     return categoryValues.split(',').map(category => category.trim());
   };
 
-  const categories = mapCategoryNames(categoryValues)
-
+  const categories = mapCategoryNames(categoryValues);
 
   return (
     <Wrapper>
@@ -77,7 +76,7 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
                 src={`${process.env.NEXT_PUBLIC_MEDIA_PREFIX}/${image}`}
                 fill
                 sizes="(100vw)"
-                loading="eager"
+                priority={true}  // Add priority for critical images
                 alt={locality === "all" ? `${category.replaceAll( "-", " ")} in ${city.replaceAll("-", " ")}` : `${category.replaceAll("-", " ")} in ${locality.replaceAll("-", " ")}`}
               />
             </SwiperSlide>
@@ -109,7 +108,6 @@ function VenueCard2({venue, city, openLeadModel, locality, category, callConvers
                 src={`${process.env.NEXT_PUBLIC_MEDIA_PREFIX}/${image}`}
                 fill
                 sizes="(100vw)"
-                loading="eager"
                 alt={locality === "all" ? `${category.replaceAll( "-", " ")} in ${city.replaceAll("-", " ")}` : `${category} in ${locality}`}
               />
             </SwiperSlide>

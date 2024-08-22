@@ -4,14 +4,14 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useGlobalContext } from '@/context/MyContext';
 
-const CityVenueHall = dynamic(() => import('@/components/miscellaneous/footer/CityVenueHall'));
-const FooterVendors = dynamic(() => import('@/components/miscellaneous/footer/FooterVendors'));
-const VendorListPage = dynamic(() => import('@/components/vendor/vendorlistpage/VendorListPage'));
-const VenueListPage = dynamic(() => import('@/components/venue/venuelistpage/VenueListPage'));
-const FooterLocalities = dynamic(() => import('@/components/miscellaneous/footer/FooterLocalites'));
-const FooterRelatedSearch = dynamic(() => import('@/components/miscellaneous/footer/FooterRelatedSearch'));
-const FooterKeyword = dynamic(() => import('@/components/miscellaneous/footer/FooterKeyword'));
-const Faqs = dynamic(() => import('@/components/venue/venuedetailspage/faqs/Faqs'));
+import CityVenueHall from '@/components/miscellaneous/footer/CityVenueHall';
+import FooterVendors from '@/components/miscellaneous/footer/FooterVendors';
+import VendorListPage from '@/components/vendor/vendorlistpage/VendorListPage';
+import VenueListPage from '@/components/venue/venuelistpage/VenueListPage';
+import FooterLocalities from '@/components/miscellaneous/footer/FooterLocalites';
+import FooterRelatedSearch from '@/components/miscellaneous/footer/FooterRelatedSearch';
+import FooterKeyword from '@/components/miscellaneous/footer/FooterKeyword';
+import Faqs from '@/components/venue/venuedetailspage/faqs/Faqs';
 
 function Venue(props) {
   const { setSelectedCity, localities } = useGlobalContext();

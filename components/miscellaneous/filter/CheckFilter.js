@@ -32,7 +32,7 @@ export function CheckFilter({ name, items, list, setList, handleApplyFilter, typ
     };
 
     const handleClear = () => {
-        setList([]); // This will empty the array
+        setList([]);
     };
 
     return (

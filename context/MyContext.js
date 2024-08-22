@@ -5,7 +5,14 @@ import { userAgentFromString } from "next/server";
 
 const MyContext = createContext();
 
-export const MyContextProvider = ({ children }) => {
+export const MyContextProvider = ({ 
+  children, 
+  initialVendorList, 
+  initialVenueList, 
+  initialCities, 
+  initialVendorCategories, 
+  initialVenueCategories 
+}) => {
   const router = useRouter();
 
   const firstRender = useRef(true);
@@ -19,13 +26,13 @@ export const MyContextProvider = ({ children }) => {
   const [selectedCity, setSelectedCity] = useState("delhi");
   const [loggedUser, setLoggedUser] = useState(null);
   const [leadFormData, setLeadFormData] = useState(null);
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState(initialCities || []);
   const [localities, setLocalities] = useState([]);
-  const [vendorCategories, setVendorsCategories] = useState([]);
-  const [venueCategories, setVenuesCategories] = useState([]);
+  const [vendorCategories, setVendorsCategories] = useState(initialVendorCategories || []);
+  const [venueCategories, setVenuesCategories] = useState(initialVenueCategories || []);
   const [cityRoute, setCityRoute] = useState("");
-  const [vendor_list, setVendor_list] = useState([]);
-  const [venue_list, setVenue_list] = useState([]);
+  const [vendor_list, setVendor_list] = useState(initialVendorList || []);
+  const [venue_list, setVenue_list] = useState(initialVenueList || []);
   const [userIP, setUserIP] = useState('');
   const [userAgent, setUserAgent] = useState('');
   const [searchSuggestions, setSearchSuggestions] = useState("");
@@ -41,6 +48,7 @@ export const MyContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    // Fetch IP and User Agent
     async function fetchIP() {
       const getuserip = await getUserIP();
       setUserIP(getuserip);
@@ -58,23 +66,6 @@ export const MyContextProvider = ({ children }) => {
       router.push(`/${cityRoute}`);
     }
   }, [cityRoute]);
-
-  useEffect(() => {
-    async function getLists() {
-      try {
-        const url = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/state_management`;
-        let context_data = await fetch(url);
-        context_data = await context_data.json();
-
-        setCities(context_data.data.cities);
-        setVendorsCategories(context_data.data.vendor_categories);
-        setVenuesCategories(context_data.data.venue_categories);
-      } catch (error) {
-        console.error("Error fetching context data:", error);
-      }
-    }
-    getLists();
-  }, []);
 
   useEffect(() => {
     async function fetchLocalities() {
@@ -109,28 +100,6 @@ export const MyContextProvider = ({ children }) => {
       localStorage.setItem('utm_source_active', '1');
     } else {
       localStorage.setItem('utm_source_active', '0');
-    }
-  }, []);
-
-  useEffect(() => {
-    const fetchDataAfterLoad = async () => {
-      try {
-        const searchurl2 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
-        let vendorList = await fetch(searchurl2);
-        vendorList = await vendorList.json();
-        setVendor_list(vendorList);
-
-        const searchurl3 = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
-        let venueList = await fetch(searchurl3);
-        venueList = await venueList.json();
-        setVenue_list(venueList);
-      } catch (error) {
-        console.error("Error fetching vendor or venue lists:", error);
-      }
-    };
-
-    if (typeof window !== 'undefined') {
-      fetchDataAfterLoad();
     }
   }, []);
 
@@ -176,6 +145,7 @@ export const MyContextProvider = ({ children }) => {
 };
 
 export default MyContext;
+
 export function useGlobalContext() {
   return useContext(MyContext);
 }

@@ -1,7 +1,6 @@
 import ReactSlider from "react-slider";
 import styled, { css } from "styled-components";
 import { useState} from "react";
-// import { useRef } from "react";
 
 export default function BudgetRangeSlider({ perBudget, setPerBudget, perPlate, setPerPlate,handleApplyFilter }) {
 
@@ -17,15 +16,11 @@ export default function BudgetRangeSlider({ perBudget, setPerBudget, perPlate, s
         setPerPlate([800,5000])
     }
     const updatePerPlate = (value) => {
-        // setPerDayValue(value)
         setPerPlate(value);
     }
     const updatePerDay = (value) => {
-        // setPerDayValue(value)
         setPerBudget(value)
     }
-
-
 
     return (<Wrapper show={toggleTab}>
         <div className="header-title">

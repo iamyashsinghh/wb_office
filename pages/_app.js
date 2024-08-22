@@ -12,6 +12,8 @@ export default function App({ Component, pageProps }) {
       <GlobalStyles />
 
       <Head>
+      <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Noto+Sans&family=Poppins:wght@400;500;800&family=Roboto:wght@400;700&display=swap" as="style" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Noto+Sans&family=Poppins:wght@400;500;800&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
         <title>Best Banquet Halls And Wedding Venues at 40% Discount</title>
         <meta
           name="description"

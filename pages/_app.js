@@ -6,57 +6,9 @@ import Layout from "@/components/layout.js/Layout";
 import Head from "next/head";
 import Image from "next/image";
 
-// This function will run at build time
-export async function getStaticProps() {
-  try {
-    // Fetch vendor list
-    const vendorUrl = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_vendor`;
-    const vendorRes = await fetch(vendorUrl);
-    const initialVendorList = await vendorRes.json();
-
-    // Fetch venue list
-    const venueUrl = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/search_form_result_venue`;
-    const venueRes = await fetch(venueUrl);
-    const initialVenueList = await venueRes.json();
-
-    // Fetch state management data
-    const stateManagementUrl = `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/state_management`;
-    const stateRes = await fetch(stateManagementUrl);
-    const contextData = await stateRes.json();
-
-    return {
-      props: {
-        initialVendorList,
-        initialVenueList,
-        initialCities: contextData.data.cities,
-        initialVendorCategories: contextData.data.vendor_categories,
-        initialVenueCategories: contextData.data.venue_categories,
-      },
-      revalidate: 3600, // Revalidate every hour
-    };
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: {
-        initialVendorList: [],
-        initialVenueList: [],
-        initialCities: [],
-        initialVendorCategories: [],
-        initialVenueCategories: [],
-      },
-    };
-  }
-}
-
-export default function App({ Component, pageProps, initialVendorList, initialVenueList, initialCities, initialVendorCategories, initialVenueCategories }) {
+export default function App({ Component, pageProps }) {
   return (
-    <MyContextProvider       
-      initialVendorList={initialVendorList}
-      initialVenueList={initialVenueList}
-      initialCities={initialCities}
-      initialVendorCategories={initialVendorCategories}
-      initialVenueCategories={initialVenueCategories}
-    >
+    <MyContextProvider>
       <GlobalStyles />
 
       <Head>
@@ -70,26 +22,28 @@ export default function App({ Component, pageProps, initialVendorList, initialVe
           content="Affordable Banquet Halls, Banquet Halls, Top Banquet Halls, Best Banquet Halls with price, Banquet Halls with review, Luxury Banquet Halls, Best Banquet Halls, List of Banquet Halls, Cheapest Banquet Halls, Banquet Halls near by, Banquet Halls near, Marriage Halls, Party Halls, Birthday Party Halls, Function Halls, Wedding Venues"
         />
         <meta name="author" content="y@sh" />
-        {/* Google Search Console */}
+        {/* For google search console */}
         <meta
           name="google-site-verification"
           content="4Q3RIzsSNzX4U-DYRcJMcvwuCw3Iai4zzCToI58L7gA"
         />
-        {/* Browser color */}
+        {/* For browser color */}
         <meta name="theme-color" content="#870808" />
         <meta name="msapplication-navbutton-color" content="#870808" />
         <meta name="apple-mobile-web-app-status-bar-style" content="#870808" />
-        {/* Favicon */}
+        {/* favicon */}
         <link
           rel="icon"
           type="image/png"
           href="https://weddingbanquets.in/fav-icon/favicon14.png"
         />
+
         {/* Open graph meta tag */}
         <meta property="og:site_name" content="Weddingbanquets" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
-        {/* Twitter card */}
+
+        {/* twiiter card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Weddingbanquets" />
         <meta name="twitter:url" content="https://weddingbanquets.in" />

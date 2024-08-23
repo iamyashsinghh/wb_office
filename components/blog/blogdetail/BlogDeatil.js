@@ -56,7 +56,7 @@
 
   const Description = styled.div`
     margin-top: 10rem;
-    
+    line-height: 1.6;
     @media (max-width: 768px) {
       margin-top: 6rem;
     }

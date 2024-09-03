@@ -99,7 +99,7 @@ export default function ImageSlider({ images, wb_assured, altname, rating, ratin
 
                
                     <div className="view-gellary-contianer" onClick={() => setOpen(true)}>
-                        <FaLayerGroup className="gallary-icon" /> <h2> View Gallary </h2>
+                        <FaLayerGroup className="gallary-icon" /> <h2> View Gallery </h2>
                     </div>
 
 

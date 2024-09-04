@@ -40,9 +40,9 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
     await CallingRequest(slug);
   }
   const numberFormat = (value) =>
-    new Intl.NumberFormat('en-IN', {
+    new Intl.NumberFormat("en-IN", {
       minimumFractionDigits: 0,
-      maximumFractionDigits: 0
+      maximumFractionDigits: 0,
     }).format(value);
 
   return (
@@ -78,12 +78,13 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                   <BsFillSuitcaseLgFill className="icon" />
                   <p>
                     Exp.{" "}
-                    {`${vendor?.yrs_exp !== undefined &&
+                    {`${
+                      vendor?.yrs_exp !== undefined &&
                       vendor?.yrs_exp !== null &&
                       vendor?.yrs_exp !== 0
-                      ? vendor.yrs_exp
-                      : "5+"
-                      } Yr's`}
+                        ? vendor.yrs_exp
+                        : "5+"
+                    } Yr's`}
                   </p>
                 </div>
                 <div className="detail-circle">
@@ -92,12 +93,13 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                     Event Completed:
                     <span className="price">
                       &nbsp;
-                      {`${vendor?.event_completed !== undefined &&
+                      {`${
+                        vendor?.event_completed !== undefined &&
                         vendor?.event_completed !== null &&
                         vendor?.event_completed !== 0
-                        ? vendor.event_completed
-                        : 150
-                        }+`}
+                          ? vendor.event_completed
+                          : 150
+                      }+`}
                     </span>
                   </p>
                 </div>
@@ -144,88 +146,98 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                         {vendor.air_brush_makeup_price && (
                           <div className="category-item">
                             <p>Air Brush Makeup</p>
-                            <p>₹ {numberFormat(vendor.air_brush_makeup_price)}</p>
-
+                            <p>
+                              ₹ {numberFormat(vendor.air_brush_makeup_price)}
+                            </p>
                           </div>
                         )}
                         {vendor.hd_bridal_makeup_price && (
                           <div className="category-item">
                             <p>HD Bridal Makeup</p>
-                            <p>₹ {numberFormat(vendor.hd_bridal_makeup_price)}</p>
-
+                            <p>
+                              ₹ {numberFormat(vendor.hd_bridal_makeup_price)}
+                            </p>
                           </div>
                         )}
                         {vendor.engagement_makeup_price && (
                           <div className="category-item">
                             <p>Engagement Makeup</p>
-                            <p>₹ {numberFormat(vendor.engagement_makeup_price)}</p>
-
+                            <p>
+                              ₹ {numberFormat(vendor.engagement_makeup_price)}
+                            </p>
                           </div>
                         )}
                         {vendor.party_makeup_price && (
                           <div className="category-item">
                             <p>Party Makeup</p>
                             <p>₹ {numberFormat(vendor.party_makeup_price)}</p>
-
                           </div>
                         )}
                         {vendor.cinematography_price && (
                           <div className="category-item">
                             <p>Cinematography</p>
                             <p>₹ {numberFormat(vendor.cinematography_price)}</p>
-
                           </div>
                         )}
                         {vendor.candid_photography_price && (
                           <div className="category-item">
                             <p>Candid Photography</p>
-                            <p>₹ {numberFormat(vendor.candid_photography_price)}</p>
+                            <p>
+                              ₹ {numberFormat(vendor.candid_photography_price)}
+                            </p>
                           </div>
                         )}
                         {vendor.traditional_photography_price && (
                           <div className="category-item">
                             <p>Traditional Photography</p>
-                            <p>₹ {numberFormat(vendor.traditional_photography_price)}</p>
-
+                            <p>
+                              ₹{" "}
+                              {numberFormat(
+                                vendor.traditional_photography_price
+                              )}
+                            </p>
                           </div>
                         )}
                         {vendor.traditional_video_price && (
                           <div className="category-item">
                             <p>Traditional Videography</p>
-                            <p>₹ {numberFormat(vendor.traditional_video_price)}</p>
-
+                            <p>
+                              ₹ {numberFormat(vendor.traditional_video_price)}
+                            </p>
                           </div>
                         )}
                         {vendor.pre_wedding_photoshoot_price && (
                           <div className="category-item">
                             <p>Pre Wedding Photoshoot</p>
-                            <p>₹ {numberFormat(vendor.pre_wedding_photoshoot_price)}</p>
-
+                            <p>
+                              ₹{" "}
+                              {numberFormat(
+                                vendor.pre_wedding_photoshoot_price
+                              )}
+                            </p>
                           </div>
                         )}
                         {vendor.albums_price && (
                           <div className="category-item">
                             <p>Albums Price</p>
                             <p>₹ {numberFormat(vendor.albums_price)}</p>
-
                           </div>
                         )}
                         {vendor.bridal_mehndi_price && (
                           <div className="category-item">
                             <p>Bridal Mehndi</p>
                             <p>₹ {numberFormat(vendor.bridal_mehndi_price)}</p>
-
                           </div>
                         )}
                         {vendor.engagement_mehndi_price && (
                           <div className="category-item">
                             <p>Engagement Mehndi</p>
-                            <p>₹ {numberFormat(vendor.engagement_mehndi_price)}</p>
-
+                            <p>
+                              ₹ {numberFormat(vendor.engagement_mehndi_price)}
+                            </p>
                           </div>
                         )}
                       </div>
-
                     ) : (
                       packages?.map((price_package, i) => (
                         <p key={i}>{price_package}</p>
@@ -243,7 +255,6 @@ export default function VendorBasicInfo({ vendor, openLeadsModel }) {
                     ) : (
                       "On Demand"
                     )}
-
                   </div>
                 </h2>
                 <div className="action-btns">
@@ -286,7 +297,6 @@ const Wrapper = styled.section`
   .info-cardd {
     margin-top: 25px;
   }
-
 
   .v-header {
     display: flex;
@@ -410,6 +420,15 @@ const Wrapper = styled.section`
         ul li {
           list-style-type: disc;
           margin-left: 3rem;
+        }
+        h1 {
+          font-size: 24px !important;
+        }
+        h2 {
+          font-size: 22px !important;
+        }
+        h3 {
+          font-size: 20px !important;
         }
       }
       .read-more-btn {
@@ -562,25 +581,25 @@ const AccordionContent = styled.div`
   padding: 5px 15px;
   background: #fff;
 
-.venue-category {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 5px;
-}
+  .venue-category {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 5px;
+  }
 
-.category-item {
-  flex: 1 1 calc(50% - 1rem); /* Two items per row */
-  background-color: #f1f1f1;
-  padding: 0.3rem;
-  border-radius: 5px;
-  text-align: center;
-}
+  .category-item {
+    flex: 1 1 calc(50% - 1rem); /* Two items per row */
+    background-color: #f1f1f1;
+    padding: 0.3rem;
+    border-radius: 5px;
+    text-align: center;
+  }
 
-.category-item p {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  font-size: 1.5rem;
-  color: var(--primary-color);
-}
+  .category-item p {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+  }
 `;

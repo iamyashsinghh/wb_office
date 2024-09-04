@@ -71,6 +71,18 @@ background-color: var(--bg-color);
     gap: 5rem;
 }
 
+.about-desSc {
+h1{
+font-size: 24px !important;
+}
+h2{
+font-size: 22px !important;
+}
+h3{
+font-size: 20px !important;
+}
+}
+
 .basic-venue-info-content{
     display: flex;
     flex-direction: column;

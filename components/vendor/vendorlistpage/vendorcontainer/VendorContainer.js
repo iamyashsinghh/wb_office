@@ -132,7 +132,7 @@ function VendorContainer({ city, lists, locality, category, count, localities, v
                 "@type": "LocalBusiness",
                 "name": `${item?.brand_name}`,
                 "image": imagesArray.length > 0
-                    ? `${process.env.MEDIA_PREFIX}/${imagesArray[0].trim()}`
+                    ? `https://cms.wbcrm.in/storage/uploads/${imagesArray[0].trim()}`
                     : "https://weddingbanquets.in/_next/image?url=%2Flogo.png&w=3840&q=75",         
 "priceRange": `INR${Number(item?.package_price) > 0 ? Number(item.package_price) : 20000}-INR${Number(item?.package_price) > 0 ? Number(item.package_price) + 10000 : 300000}`,
                 "telephone": `+91${item?.phone}`,
@@ -163,7 +163,7 @@ let jsonDataRS = `{
     "@type": "LocalBusiness",
     "name": "${category.replaceAll("-", " ")} in ${locality === "all" ? city : locality}",
     "image": "${imagesArray && imagesArray.length > 0
-        ? `${process.env.MEDIA_PREFIX}/${imagesArray[0].trim()}`
+        ? `https://cms.wbcrm.in/storage/uploads/${imagesArray[0].trim()}`
         : "https://weddingbanquets.in/_next/image?url=%2Flogo.png&w=3840&q=75"}",
     "url": "https://weddingbanquets.in/${category}/${city}/${filterQuery.locality}",
     "address": {

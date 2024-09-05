@@ -106,17 +106,92 @@ function VendorContainer({ city, lists, locality, category, count, localities, v
         }))
     };
 
-    const jsonDataRS = `{
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "${category.replaceAll("-", " ")} in ${locality === "all" ? city : locality}",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.5",
-            "ratingCount": "268",
-            "reviewCount": "138"
-        }
-    }`;
+
+    const organizationLocalBusinessSchema = [
+        {
+            "@context": "http://schema.org",
+            "@type": "Organization",
+            "name": "weddingbanquets.in",
+            "url": "https://weddingbanquets.in",
+            "logo": "https://weddingbanquets.in/_next/image?url=%2Flogo.png&w=3840&q=75",
+            "sameAs": [
+                "",
+                "https://www.instagram.com/weddingbanquetsindia/",
+                "https://in.linkedin.com/company/wedding-banquets/",
+                "https://www.facebook.com/WeddingBanquets/",
+                "https://in.pinterest.com/weddingbanquetsofficial/"
+            ]
+        },
+        ...vendorArray.map((item, index) => {
+            let imagesArray = Array.isArray(item?.images) && item.images !== null 
+                ? item.images 
+                : item?.images?.split(',') || [];
+        
+            return {
+                "@context": "http://schema.org",
+                "@type": "LocalBusiness",
+                "name": `${item?.name}`,
+                "image": imagesArray.length > 0
+                    ? `${process.env.MEDIA_PREFIX}/${imagesArray[0].trim()}`
+                    : "https://weddingbanquets.in/_next/image?url=%2Flogo.png&w=3840&q=75",         
+"priceRange": `INR${Number(item?.package_price) > 0 ? Number(item.package_price) : 20000}-INR${Number(item?.package_price) > 0 ? Number(item.package_price) + 10000 : 300000}`,
+                "telephone": `+91${item?.phone}`,
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": `${item?.vendor_address}`,
+                    "addressLocality": `${item?.get_locality.name}`,
+                    "addressRegion": `${item?.get_city.name}`,
+                    "postalCode": "110085",
+                    "addressCountry": "IN"
+                },
+                "url": `https://weddingbanquets.in/${item?.get_city.slug}/${item?.slug}`
+            };        
+        })
+    ];
+
+
+    const capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };    
+
+let imagesArray = Array.isArray(vendorArray[0].images) 
+    ? vendorArray[0].images 
+    : vendorArray[0].images.split(',') || [];
+
+let jsonDataRS = `{
+    "@context": "http://schema.org",
+    "@type": "LocalBusiness",
+    "name": "${category.replaceAll("-", " ")} in ${locality === "all" ? city : locality}",
+    "image": "${imagesArray && imagesArray.length > 0
+        ? `${process.env.MEDIA_PREFIX}/${imagesArray[0].trim()}`
+        : "https://weddingbanquets.in/_next/image?url=%2Flogo.png&w=3840&q=75"}",
+    "url": "https://weddingbanquets.in/${category}/${city}/${filterQuery.locality}",
+    "address": {
+        "@type": "PostalAddress",
+      "addressLocality": "${capitalizeFirstLetter(locality === 'all' ? city : locality)}",
+        "addressRegion": "${capitalizeFirstLetter(city)}",
+        "postalCode": "110085",
+        "addressCountry": "IN"
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.3",
+        "ratingCount": "28194",
+        "bestRating": "5"
+    }
+}`;
+
+    // const jsonDataRS = `{
+    //     "@context": "https://schema.org",
+    //     "@type": "Product",
+    //     "name": "${category.replaceAll("-", " ")} in ${locality === "all" ? city : locality}",
+    //     "aggregateRating": {
+    //         "@type": "AggregateRating",
+    //         "ratingValue": "4.5",
+    //         "ratingCount": "268",
+    //         "reviewCount": "138"
+    //     }
+    // }`;
 
     return (
         <>
@@ -124,6 +199,10 @@ function VendorContainer({ city, lists, locality, category, count, localities, v
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(listingPageListSchema) }}
+                />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLocalBusinessSchema) }}
                 />
                 <script
                     type="application/ld+json"

@@ -130,7 +130,7 @@ function VendorContainer({ city, lists, locality, category, count, localities, v
             return {
                 "@context": "http://schema.org",
                 "@type": "LocalBusiness",
-                "name": `${item?.name}`,
+                "name": `${item?.brand_name}`,
                 "image": imagesArray.length > 0
                     ? `${process.env.MEDIA_PREFIX}/${imagesArray[0].trim()}`
                     : "https://weddingbanquets.in/_next/image?url=%2Flogo.png&w=3840&q=75",         

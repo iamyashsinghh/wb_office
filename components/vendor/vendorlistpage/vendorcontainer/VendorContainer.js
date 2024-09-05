@@ -165,6 +165,7 @@ let jsonDataRS = `{
     "image": "${imagesArray && imagesArray.length > 0
         ? `https://cms.wbcrm.in/storage/uploads/${imagesArray[0].trim()}`
         : "https://weddingbanquets.in/_next/image?url=%2Flogo.png&w=3840&q=75"}",
+         "telephone": "+918882198989",
     "url": "https://weddingbanquets.in/${category}/${city}/${filterQuery.locality}",
     "address": {
         "@type": "PostalAddress",

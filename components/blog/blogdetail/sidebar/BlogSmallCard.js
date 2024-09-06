@@ -9,7 +9,7 @@ import { BsCalendarDateFill } from "react-icons/bs";
 
 function BlogSmallCard({heading, image, image_alt, publish_date, author_name, slug}) {
     const handleCardClick = () => {
-        Router.push(`/yash/${slug}`); 
+        Router.push(`/blog/${slug}`); 
       };
 
   return (

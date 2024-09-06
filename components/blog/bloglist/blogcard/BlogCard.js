@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 function BlogCard({ image, heading, excerpt, publish_date, slug, image_alt, author_name }) {
   const handleCardClick = () => {
-    Router.push(`/yash/${slug}`); // Corrected the route path
+    Router.push(`/blog/${slug}`); // Corrected the route path
   };
   
   return (

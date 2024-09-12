@@ -46,6 +46,6 @@ const Wrapper = styled.section`
   .position {
     position: fixed;
     width: 100%;
-    z-index: 99999;
+    z-index: 9998;
   }
 `;

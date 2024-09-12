@@ -13,8 +13,10 @@ import VendorCard from "./VendorCard";
 import NavigationButton from "@/components/miscellaneous/NavigationButton";
 import VendorGrid from "./VendorGrid";
 import ExtraCard from "./ExtraCard";
+import { useGlobalContext } from "@/context/MyContext";
 
-export default function VendorSlider({ vendorCategories }) {
+export default function VendorSlider() {
+  const { vendorCategories, } = useGlobalContext();
   return (
     <Section className="section section-vendors">
       <Heading
@@ -50,7 +52,7 @@ export default function VendorSlider({ vendorCategories }) {
           <SwiperSlide key='6257'>
             <ExtraCard img={`/vendor-vector/1.png`} data="" />
           </SwiperSlide>
-          {vendorCategories?.map((vendor, i) => {
+          {vendorCategories.map((vendor, i) => {
             return (
               <SwiperSlide key={vendor.id}>
                 <VendorCard

@@ -8,14 +8,14 @@ import { useEffect, useState } from "react";
 function Hero({ venueCategogies}) {
   let venueObject = [];
   let vendorObject = [];
-  const { venue_list, vendor_list, vendorCategories, selectedCity } = useGlobalContext();
-  let venueNames = venueCategogies.map((category) => category.name);
+  const { venue_list, vendor_list, vendorCategories, selectedCity, venueCategories } = useGlobalContext();
+  let venueNames = venueCategories.map((category) => category.name);
   let vendorNames = vendorCategories.map((category) => category.name);
   let vendorBrandNames = vendor_list.map((category) => category.brand_name);
   let allVenues = venue_list.map((category) => category.name);
   let allVenuesSlug = venue_list.map((category) => category.slug);
   let allVendorsSlug = vendor_list.map((category) => category.slug);
-  const [backgroundImage, setBackgroundImage] = useState("/banner/delhi.avif");
+  const [backgroundImage, setBackgroundImage] = useState("/banner/delhi.jpg");
   const suggestions = [
     ...venueNames,
     ...vendorNames,
@@ -33,7 +33,7 @@ function Hero({ venueCategogies}) {
     vendorObject.push(obj);
   }
   useEffect(() => {
-    const cityImagePath = `/banner/${selectedCity.toLowerCase()}.avif`;
+    const cityImagePath = `/banner/${selectedCity.toLowerCase()}.jpg`;
 
     async function checkImageExists(url) {
       try {
@@ -47,7 +47,7 @@ function Hero({ venueCategogies}) {
     checkImageExists(cityImagePath).then((imageExists) => {
       const backgroundImage = imageExists
         ? cityImagePath
-        : "/banner/delhi.avif";
+        : "/banner/delhi.jpg";
       setBackgroundImage(backgroundImage);
     });
   }, [selectedCity, setBackgroundImage]);
@@ -111,7 +111,7 @@ const Section = styled.section`
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.2) 100%);
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
       // z-index: ;
     }
 

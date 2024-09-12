@@ -213,7 +213,7 @@ let jsonDataRS = `{
             <Section className="section section-vendor-container">
                 <div className="sticky-head">
                     <div className="page-title">
-                        <h2 className="main-title">{`${category.replaceAll("-", " ")}  in ${locality === "all" ? city : locality}`}</h2>
+                        <h1 className="main-title">{`${category.replaceAll("-", " ").replace(/top|best/g, '').trim()}  in ${locality === "all" ? city : locality}`}</h1>
                         <span className="count">{` Total result : ${count || 0} `}</span>
                     </div>
                     <div className="filter-btn" onClick={() => { setShowFilter(true) }}>
@@ -227,9 +227,7 @@ let jsonDataRS = `{
                     </aside>
                     <main className="vendors-list box">
                         <div className="d-flex">
-                            <h1 className="vendor-conatiner-h1 main-title">{`${category.replaceAll("-", " ")
-        .replace(/top|best/g, '')
-        .trim()}  in ${locality === "all" ? city.replaceAll("-", " ") : locality.replaceAll("-", " ")}`} <span className="count">{`(${count || 0})`}</span></h1>
+                            <h1 className="vendor-conatiner-h1 main-title">{`${category.replaceAll("-", " ").replace(/top|best/g, '').trim()}  in ${locality === "all" ? city.replaceAll("-", " ") : locality.replaceAll("-", " ")}`} <span className="count">{`(${count || 0})`}</span></h1>
                             <SearchBarVenue
                                 suggestions={suggestions}
                                 selectedCity={selectedCity}

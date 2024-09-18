@@ -57,6 +57,26 @@
   const Description = styled.div`
     margin-top: 10rem;
     line-height: 1.6;
+    p,
+      span {
+        font-family: "Poppins" !important;
+        font-size: 1.8rem !important;
+        color: var(--para) !important;
+      }
+         ul li {
+          list-style-type: disc;
+          margin-left: 3rem;
+        }
+        h1 {
+          font-size: 32px !important;
+        }
+        h2 {
+          font-size: 28px !important;
+        }
+        h3 {
+          font-size: 24px !important;
+        }
+
     @media (max-width: 768px) {
       margin-top: 6rem;
     }

@@ -56,7 +56,6 @@ Disallow: /delhi/alpha-party-lounge-sector-61
 Disallow: /banquet-halls-in-rajouri-garden
 Disallow: /delhi/s.-n-mehandi-artist-raj-nagar
 Disallow: /hotel-dev-palace
-Disallow: /Delhi/kd-grand-banquets
 Disallow: /delhi/golden-sapphire-greater-noida
 Disallow: /golden-sapphire-greater-noida
 Disallow: /Delhi/royal-bhavan-rohini
@@ -86,7 +85,6 @@ Disallow: /delhi/the-lavanya-banquet-by-baba-sector-132
 Disallow: /the-lavanya-banquet-by-baba-sector-132
 Disallow: /rating/shree-govindam-garden-agra-road
 Disallow: /Delhi/heritage-garden-banquet
-Disallow: /rating/kd-grand-banquets
 Disallow: /sindhi-hira-nand-ghori-wala
 Disallow: /celebrations-party-planner
 Disallow: /delhi/celebrations-party-planner
@@ -141,7 +139,6 @@ Disallow: /banquet-halls-in-dwarka/devam-banquet-hall
 Disallow: /rating/devam-banquet-hall
 Disallow: /Delhi/balsons-farm-dwarka
 Disallow: /rating/balsons-farm-dwarka
-Disallow: /kd-grand-banquets
 Disallow: /victoria-grand-dwarka
 Disallow: /Delhi/drool-buzz
 Disallow: /rating/drool-buzz
@@ -1457,7 +1454,6 @@ Disallow: /Cinderella-Tohapha-Wholesale-Pure-Viscose-Pashmina-Jacquard-Winter-Su
 Disallow: /AFSANAH-CINDERELLA-UNSTITCH-AMAZING-EMBROIDERY-WORK-SALWAR-KAMEEZ
 Disallow: /delhi/shyama-banquet-tughlakabad-new-delhi
 Disallow: /77154
-Disallow: /kd-grand-banquet
 Disallow: /uttar-pradesh
 Disallow: /oyo-townhouse-010-east-of-kailash
 Disallow: /dwarkahttps

@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { BsChevronDown } from 'react-icons/bs'
 import { useState } from 'react';
-// import { useGlobalContext } from "@/context/MyContext";
+import { useGlobalContext } from "@/context/MyContext";
 import Link from "next/link";
 
 
-function VenueCity({cities}) {
+function VenueCity() {
 
  
 
@@ -15,7 +15,7 @@ function VenueCity({cities}) {
         setActiveIndex(activeIndex === index ? null : index);
     };
 
-    // const { cities } = useGlobalContext();
+    const { cities } = useGlobalContext();
 
     const data = [
         {

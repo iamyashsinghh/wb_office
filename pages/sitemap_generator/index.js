@@ -109,13 +109,13 @@ export default function SitemapGenPage() {
         //Generate url for both venue and vendor category
         if (selectedCat == "3") {
 
-            vendorCategories.forEach(cat => {
-                localites.forEach((locality) => {
-                    const url = `${baseUrl}/${cat.slug}/${selectedCity}/${locality.slug} `;
-                    const sitemap = `<url>\n<loc>${url}</loc>\n<lastmod>${getCurrentDateTime()}</lastmod>\n<priority>1.00</priority>\n</url>\n\n`;
-                    rawsitemap += sitemap;
-                })
-            });
+            // vendorCategories.forEach(cat => {
+            //     localites.forEach((locality) => {
+            //         const url = `${baseUrl}/${cat.slug}/${selectedCity}/${locality.slug} `;
+            //         const sitemap = `<url>\n<loc>${url}</loc>\n<lastmod>${getCurrentDateTime()}</lastmod>\n<priority>1.00</priority>\n</url>\n\n`;
+            //         rawsitemap += sitemap;
+            //     })
+            // });
 
             vendorCategories.forEach(cat => {
                 localites.forEach((locality) => {
@@ -124,7 +124,9 @@ export default function SitemapGenPage() {
                     rawsitemap += sitemap;
                 })
             });
-            setCount((vendorCategories.length * localites.length) + (venueCategories.length * localites.length))
+            setCount((venueCategories.length * localites.length))
+
+            // setCount((vendorCategories.length * localites.length) + (venueCategories.length * localites.length))
         }
         if (selectedCat === "4") {
             let tempSitemap = ``;

@@ -1205,25 +1205,6 @@ Disallow: /delhi/kings-court-banquet-peeragarhi-delhi
 Disallow: /delhi/lavanya-dreams-banquet-peeragarhi-delhi
 Disallow: /rating/mcd-community-hall-bhalswa
 Disallow: /bridal-wear/pall
-"Disallow: /blog/wp-content/venue/?search=bonus new member 
-50 50"
-"Disallow: /blog/wp-content/venue/?search=slot bonus new 
-member 25 25"
-"Disallow: /blog/wp-content/venue/?search=bonus new member 
-10 10"
-Disallow: /blog/wp-content/venue/?search=bonus depo 25 25
-"Disallow: /blog/wp-content/venue/?search=bonus new member 
-25 25 bebas ip"
-"Disallow: /blog/wp-content/venue/?search=25 25 bonus new 
-member"
-Disallow: /p
-"Disallow: /blog/wp-content/venue/?search=bonus new member 
-25 25 to kecil"
-Disallow: /zeus
-"Disallow: /blog/wp-content/venue/?search=heylink bonus new 
-member 25 25"
-"Disallow: /blog/wp-content/venue/?search=bonus new member 
-20 20"
 Disallow: /store
 Disallow: /cart
 Disallow: /all-prints
@@ -3764,8 +3745,6 @@ Disallow: /small-function-halls/delhi/saket
 Disallow: /wedding-resorts/delhi/all
 Disallow: /marriage-gardens/delhi/bakoli
 Disallow: /small-function-halls/jaipur/all
-"Disallow: /blog/wp-content/venue/?search=bonus new member 
-100%0Di depan"
 Disallow: /marriage-gardens/bangalore/whitefield
 Disallow: /jaipur/venues/saba-haveli-gangapole
 Disallow: /destination-weddings/lucknow/vrindavan-colony
@@ -3988,11 +3967,7 @@ Disallow: /small-function-halls/delhi/Naraina
 Disallow: /marriage-gardens/meerut/mohkam-pur
 Disallow: /cocktail-party-venue/Delhi/hauz-khas
 Disallow: /blog/wp-content/venue/?search=slot%2Bbonus%2Bnew%2Bmember%2B100%25
-"Disallow: /blog/wp-content/venue/?search=slot bonus new 
-member 100%0Di awal"
 Disallow: /marriage-gardens/udaipur/kodiyat-road
-"Disallow: /blog/wp-content/venue/?search=bonus new member 
-100%0Bebas ip"
 Disallow: /small-function-halls/delhi/khan-market
 Disallow: /marriage-gardens/delhi/mundka
 Disallow: /corporate-events/delhi/rajokri

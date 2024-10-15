@@ -3,7 +3,6 @@ Disallow:
 Disallow: /cgi-bin/
 Disallow: /yash
 Disallow: /best-wedding-photographers*
-Disallow: /top-makeup-artists*
 Disallow: /best-mehndi-artists*
 Disallow: /best-decorators*
 Disallow: /invitation-cards*

@@ -53,7 +53,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                 const response = await fetch(url);
                 const newLists = await response.json();
                 setVenueList(newLists.data);
-                setPage(1); // Reset page to 1 after new filter applied
+                setPage(1);
             } catch (error) {
                 console.error(error);
             } finally {
@@ -92,9 +92,35 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
         if (node) observer.current.observe(node);
     }, [loading, hasMore, fetchMoreVenue]);
 
-    
+
     return (
         <>
+            <Head>
+                {(category === 'banquet-halls' && city === 'delhi' && locality === 'mayapuri') && (
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                            __html: JSON.stringify({
+                                "@context": "https://schema.org",
+                                "@type": "LocalBusiness",
+                                "name": "Wedding Banquets",
+                                "image": "https://weddingbanquets.in/_next/image?url=https%3A%2F%2Fcms.wbcrm.in%2Fstorage%2Fuploads%2Fvenue_la_fo_1719475089.jpg&w=3840&q=100",
+                                "address": {
+                                    "@type": "PostalAddress",
+                                    "streetAddress": "Mayapuri Industrial Area",
+                                    "addressLocality": "Mayapuri",
+                                    "addressRegion": "Delhi",
+                                    "postalCode": "110064",
+                                    "addressCountry": "IN"
+                                },
+                                "telephone": "+917969071916",
+                                "url": "https://weddingbanquets.in/banquet-halls/delhi/mayapuri",
+                                "description": "A premier banquet hall located in Mayapuri, Delhi, ideal for weddings and events."
+                            })
+                        }}
+                    />
+                )}
+            </Head>
             <Section className="section section-venue-container">
                 <div className="sticky-head">
                     <div className="page-title">
@@ -123,7 +149,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                                 vendorObject={vendorObject}
                             />
                         </div>
-                        { venuelists?.map((item, index) => (
+                        {venuelists?.map((item, index) => (
                             <VenueCard2
                                 key={index}
                                 locality={locality}
@@ -133,10 +159,10 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                                 openLeadModel={openLeadModel}
                                 callConversion={callConversion}
                             />
-                        )) }
-                        { loading && <div style={{ textAlign: "center" }}> <Spinner2 /> </div> }
+                        ))}
+                        {loading && <div style={{ textAlign: "center" }}> <Spinner2 /> </div>}
                         <div ref={lastVenueElementRef}></div>
-                        { !hasMore && <center style={{ fontSize: "1.5rem" }}>You have seen it all</center> }
+                        {!hasMore && <center style={{ fontSize: "1.5rem" }}>You have seen it all</center>}
                     </main>
                 </div>
             </Section>

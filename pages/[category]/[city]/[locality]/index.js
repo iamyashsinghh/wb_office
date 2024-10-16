@@ -22,8 +22,6 @@ function Venue(props) {
       setSelectedCity(props.city);
     }
   }, [props.city]);
-
-
   return (
     <>
       <Head>
@@ -34,20 +32,20 @@ function Venue(props) {
         <meta property="og:title" content={props.result.meta?.meta_title} />
         <meta property="og:description" content={props.result.meta?.meta_description} />
         <meta property="og:image" content={
-            props.result && props.result.data && props.result.data.length > 0 && props.result.data[0].images
-              ? `${process.env.MEDIA_PREFIX || '/default/prefix'}/${props.result.data[0].images.split(',')[0]}`
-              : 'https://weddingbanquets.in/twitter-img.png'
-          } 
+          props.result && props.result.data && props.result.data.length > 0 && props.result.data[0].images
+            ? `${process.env.MEDIA_PREFIX || '/default/prefix'}/${props.result.data[0].images.split(',')[0]}`
+            : 'https://weddingbanquets.in/twitter-img.png'
+        }
         />
         <meta property="og:url" content={`https://weddingbanquets.in${router.asPath}`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={props.result.meta?.meta_title} />
         <meta name="twitter:description" content={props.result.meta?.meta_description} />
         <meta name="twitter:image" content={
-            props.result && props.result.data && props.result.data.length > 0 && props.result.data[0].images
-              ? `${process.env.MEDIA_PREFIX || '/default/prefix'}/${props.result.data[0].images.split(',')[0]}`
-              : 'https://weddingbanquets.in/twitter-img.png'
-          }
+          props.result && props.result.data && props.result.data.length > 0 && props.result.data[0].images
+            ? `${process.env.MEDIA_PREFIX || '/default/prefix'}/${props.result.data[0].images.split(',')[0]}`
+            : 'https://weddingbanquets.in/twitter-img.png'
+        }
         />
         <meta name="twitter:site" content="@yourtwitterhandle" />
       </Head>
@@ -77,7 +75,26 @@ function Venue(props) {
 export async function getServerSideProps({ query, req, res }) {
   try {
     const { category, city, locality } = query;
-    const { guest, per_plate, per_budget, multi_localities, search_value, makeup_bridal_budget, makeup_occasion, photographer_service, photographer_service_budget, mehndi_package_budget, banquet_decor_package_budget, home_decor_package_budget, band_baja_ghodiwala_budget, photographer_occation, makeup_service, experience, events_completed, days} = query;
+    const {
+      guest,
+      per_plate,
+      per_budget,
+      multi_localities,
+      search_value,
+      makeup_bridal_budget,
+      makeup_occasion,
+      photographer_service,
+      photographer_service_budget,
+      mehndi_package_budget,
+      banquet_decor_package_budget,
+      home_decor_package_budget,
+      band_baja_ghodiwala_budget,
+      photographer_occation,
+      makeup_service,
+      experience,
+      events_completed,
+      days
+    } = query;
 
     const filterQuery = {
       guest: guest || "",
@@ -100,7 +117,7 @@ export async function getServerSideProps({ query, req, res }) {
       events_completed: events_completed || "",
       days: days || ""
     };
-    
+
     const url = `${process.env.SERVER_DOMAIN}/api/venue_or_vendor_list/${category}/${city}/${locality}?guest=${filterQuery.guest}&per_plate=${filterQuery.per_plate}&per_budget=${filterQuery.per_budget}&multi_localities=${filterQuery.multi_localities}&search_value=${filterQuery.search_value}&locality=${filterQuery.locality}&makeup_service=${filterQuery.makeup_service}&makeup_bridal_budget=${filterQuery.makeup_bridal_budget}&makeup_occasion=${filterQuery.makeup_occasion}&photographer_service=${filterQuery.photographer_service}&photographer_service_budget=${filterQuery.photographer_service_budget}&mehndi_package_budget=${filterQuery.mehndi_package_budget}&banquet_decor_package_budget=${filterQuery.banquet_decor_package_budget}&home_decor_package_budget=${filterQuery.home_decor_package_budget}&band_baja_ghodiwala_budget=${filterQuery.band_baja_ghodiwala_budget}&photographer_occation=${filterQuery.photographer_occation}&experience=${filterQuery.experience}&events_completed=${filterQuery.events_completed}&days=${filterQuery.days}`;
     const getlocalitiesURL = `${process.env.SERVER_DOMAIN}/api/locations/${city}`;
 

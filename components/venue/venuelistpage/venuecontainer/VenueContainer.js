@@ -115,7 +115,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                                 },
                                 "telephone": "+917969071916",
                                 "url": "https://weddingbanquets.in/banquet-halls/delhi/mayapuri",
-                                "description": "A premier banquet hall located in Mayapuri, Delhi, ideal for weddings and events."
+                                "description": "Best Banquet Halls in Mayapuri Marriage Halls Party Halls 40 Off With The Best Prices, Discounts, And Great Deals in Mayapuri And Near Mayapuri"
                             })
                         }}
                     />

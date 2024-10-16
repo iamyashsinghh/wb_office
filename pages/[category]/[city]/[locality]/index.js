@@ -23,41 +23,6 @@ function Venue(props) {
     }
   }, [props.city]);
 
-  const jsonLdData2 = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": { "@id": "https://weddingbanquets.in", "name": "Wedding Banquets" }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@id": `https://weddingbanquets.in/${props.category}`,
-          "name": props.category.split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@id": `https://weddingbanquets.in/${props.city}`,
-          "name": props.city.split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "item": {
-          "@id": `https://weddingbanquets.in/${props.locality}`,
-          "name": props.locality.split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ')
-        }
-      },
-    ]
-  };
 
   return (
     <>
@@ -85,7 +50,6 @@ function Venue(props) {
           }
         />
         <meta name="twitter:site" content="@yourtwitterhandle" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData2) }} />
       </Head>
       {props.result.tag === "venues" ? (
         <>

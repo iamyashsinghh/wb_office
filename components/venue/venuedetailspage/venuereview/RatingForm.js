@@ -5,7 +5,7 @@ import styled from "styled-components";
 import ReCAPTCHA from "react-google-recaptcha";
 
 
-const RatingForm = ({venue_id, onCloseOffCanvas }) => {
+const RatingForm = ({ venue_id, onCloseOffCanvas }) => {
   const onRecaptchaChange = (value) => {
     setrecaptcha(value);
   };
@@ -18,24 +18,24 @@ const RatingForm = ({venue_id, onCloseOffCanvas }) => {
 
 
   const saveRatingAjax = async (values) => {
-      let data = { ...values, rating ,product_id, product_for, status,recaptcha }
+    let data = { ...values, rating, product_id, product_for, status, recaptcha }
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/storereview`, {
-          
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-        if (response.ok) {
-            onCloseOffCanvas();
-            alert('Review Verification Pending')
-        } else {
-            console.error("Failed to save rating and form data");
-        }
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/api/storereview`, {
+
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        onCloseOffCanvas();
+        alert('Review Verification Pending')
+      } else {
+        console.error("Failed to save rating and form data");
+      }
     } catch (error) {
-        console.error("Error while saving rating and form data", error);
+      console.error("Error while saving rating and form data", error);
     }
   };
 
@@ -59,7 +59,7 @@ const RatingForm = ({venue_id, onCloseOffCanvas }) => {
         star.firstChild.setAttribute("xlink:href", `#${svgId}`);
       });
     };
-    
+
 
     stars.forEach((star, index) => {
       star.addEventListener("mouseover", () => handleMouseOver(index));
@@ -95,19 +95,19 @@ const RatingForm = ({venue_id, onCloseOffCanvas }) => {
       }}
     >
       <StyledForm>
-      <svg style={{ display: 'none', enableBackground: 'new 0 0 50 50' }} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" xmlSpace="preserve">
-  <symbol id="star-blank" viewBox="0 0 50 50">
-    <path fill="gold" d="M50,19.4l-17.3-2.5L25,1.2l-7.7,15.7L0,19.4l12.5,12.2l-3,17.2L25,40.7l15.5,8.1l-3-17.2L50,19.4z M37.5,44.7
+        <svg style={{ display: 'none', enableBackground: 'new 0 0 50 50' }} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" xmlSpace="preserve">
+          <symbol id="star-blank" viewBox="0 0 50 50">
+            <path fill="gold" d="M50,19.4l-17.3-2.5L25,1.2l-7.7,15.7L0,19.4l12.5,12.2l-3,17.2L25,40.7l15.5,8.1l-3-17.2L50,19.4z M37.5,44.7
     L25,38.2l-12.5,6.6l2.4-13.9L4.8,20.9l14-2L25,6.2l6.3,12.7l14,2l-10.1,9.9L37.5,44.7z"/>
-  </symbol>
-  <symbol id="star-filled" viewBox="0 0 50 50">
-    <polygon fill="gold" points="50,19.4 32.7,16.9 25,1.2 17.3,16.9 0,19.4 12.5,31.6 9.5,48.8 25,40.7 40.5,48.8 37.5,31.6 "/>
-  </symbol>
-  <symbol id="star-half" viewBox="0 0 50 50">
-    <path fill="gold" d="M50,19.4l-17.3-2.5L25,1.2l-7.7,15.7L0,19.4l12.5,12.2l-3,17.2L25,40.7l15.5,8.1l-3-17.2L50,19.4z M37.5,44.7
+          </symbol>
+          <symbol id="star-filled" viewBox="0 0 50 50">
+            <polygon fill="gold" points="50,19.4 32.7,16.9 25,1.2 17.3,16.9 0,19.4 12.5,31.6 9.5,48.8 25,40.7 40.5,48.8 37.5,31.6 " />
+          </symbol>
+          <symbol id="star-half" viewBox="0 0 50 50">
+            <path fill="gold" d="M50,19.4l-17.3-2.5L25,1.2l-7.7,15.7L0,19.4l12.5,12.2l-3,17.2L25,40.7l15.5,8.1l-3-17.2L50,19.4z M37.5,44.7
     L25,38.2l0,0V6.2l0,0l6.3,12.7l14,2l-10.1,9.9L37.5,44.7z"/>
-  </symbol>
-</svg>
+          </symbol>
+        </svg>
         <Section className="fsrrw-star-wrapper">
           <svg className="fsrrw-star">
             <use xlinkHref="#star-filled" />
@@ -131,7 +131,7 @@ const RatingForm = ({venue_id, onCloseOffCanvas }) => {
             <label htmlFor="name">Name:</label>
             <Field type="text" id="name" name="name" />
             <div className="text-err">
-            <ErrorMessage name="name" />
+              <ErrorMessage name="name" />
             </div>
           </div>
 
@@ -139,7 +139,7 @@ const RatingForm = ({venue_id, onCloseOffCanvas }) => {
             <label htmlFor="number">Number:</label>
             <Field type="text" id="number" name="number" />
             <div className="text-err">
-             <ErrorMessage name="number" />
+              <ErrorMessage name="number" />
             </div>
           </div>
 
@@ -147,11 +147,11 @@ const RatingForm = ({venue_id, onCloseOffCanvas }) => {
             <label htmlFor="comment">Comment:</label>
             <Field as="textarea" id="comment" name="comment" />
             <div className="text-err">
-            <ErrorMessage name="comment"/>
+              <ErrorMessage name="comment" />
             </div>
           </div>
 
-          
+
         </ReviewForm>
         {/* <ReCAPTCHA sitekey="6LfVFGcpAAAAAO606P0XnI79hWitIwuF4HPhB_nR" onChange={onRecaptchaChange} /> */}
         {/* {recaptcha===null ?( <span className="error-text">Please Fill ReCAPTCHA</span>):(<></> )} */}

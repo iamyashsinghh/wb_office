@@ -7,30 +7,7 @@ export default function Page({ response }) {
   const router = useRouter();
 
   if (response.tag === 'venue') {
-    const jsonLdData = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": { "@id": "https://weddingbanquets.in", "name": "Wedding Banquets" }
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "item": {
-            "@id": `https://weddingbanquets.in/${response.city.slug}`,
-            "name": response.city.name
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "item": { "name": response.data.venue.name }
-        }
-      ]
-    };
+   
     return (
       <>
         <Head>
@@ -48,40 +25,13 @@ export default function Page({ response }) {
           <meta property="og:title" content={response.data.venue.meta_title} />
           <meta property="og:description" content={response.data.venue.meta_description} />
           <meta property="og:url" content={`https://weddingbanquets.in${router.asPath}`} />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
-          />
         </Head>
         <VenueDetailsPage response={response} />
       </>
     )
   }
   else {
-    const jsonLdData = {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "item": { "@id": "https://weddingbanquets.in", "name": "Wedding Banquets" }
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "item": {
-            "@id": `https://weddingbanquets.in/${response.city.slug}`,
-            "name": response.city.name
-          }
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "item": { "name": response.data.vendor.brand_name }
-        }
-      ]
-    };
+    
     return (
       <>
         <Head>
@@ -99,10 +49,6 @@ export default function Page({ response }) {
           <meta property="og:title" content={response.data.vendor.meta_title} />
           <meta property="og:description" content={response.data.vendor.meta_description} />
           <meta property="og:url" content={`https://weddingbanquets.in${router.asPath}`} />
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
-          />
         </Head>
         <VendorDetailsPage response={response} />
       </>

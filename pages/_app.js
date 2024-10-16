@@ -22,10 +22,6 @@ export default function App({ Component, pageProps }) {
         />
         <meta name="author" content="y@sh" />
         {/* For google search console */}
-        <meta
-          name="google-site-verification"
-          content="4Q3RIzsSNzX4U-DYRcJMcvwuCw3Iai4zzCToI58L7gA"
-        />
         {/* For browser color */}
         <meta name="theme-color" content="#870808" />
         <meta name="msapplication-navbutton-color" content="#870808" />

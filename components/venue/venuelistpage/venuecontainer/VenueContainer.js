@@ -127,7 +127,7 @@ function VenueContainer({ city, lists, locality, category, count, localities, ve
                                     {
                                         "@context": "https://schema.org",
                                         "@type": "LocalBusiness",
-                                        "name": "Banquet Halls in Mayapuri, Delhi",
+                                        "name": "Banquet Halls in Mayapuri",
                                         "image": "https://weddingbanquets.in/_next/image?url=https%3A%2F%2Fcms.wbcrm.in%2Fstorage%2Fuploads%2Fvenue_la_fo_1719475089.jpg&w=3840&q=100", 
                                         "description": "Find the best banquet halls in Mayapuri, Delhi with top services for weddings, receptions, and other events.",
                                         "address": {
